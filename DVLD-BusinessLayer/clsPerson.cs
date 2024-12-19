@@ -23,22 +23,24 @@ namespace DVLD_BusinessLayer
         }
         public DateTime DateOfBirth { get; set; }
         public enum enGendor { Male = 0 , Female = 1,}
+        private enGendor _Gendor;
         public enGendor Gendor 
         { 
-            get { return Gendor; }
+            get { return _Gendor; }
+
             set 
             { 
-                Gendor = value;
-                _boolGendor = (Gendor == enGendor.Female);
+                _Gendor = value;
+                _shortGendor =Convert.ToByte (Gendor == enGendor.Female);
             } 
         }
-        private bool _boolGendor;
+        private byte _shortGendor;
         public string GendorString { get { return (Gendor == enGendor.Male) ? "Male" : "Female"; } }
         public string Address { get; set; }
         public string Phone {  get; set; }
         public string Email { get; set; }
         public int NationalityCountryID { get; set; }
-        public string Country { get { return clsCountry.Find(NationalityCountryID); } }
+        public string Country { get { return clsCountryDataAccessLayer.FindCountry(NationalityCountryID); } }
         public string ImagePath {  get; set; }
 
         enum enMode { Update , AddNew}
@@ -81,9 +83,10 @@ namespace DVLD_BusinessLayer
             _Mode = enMode.AddNew;
         }
 
-        public clsPerson Find(int PersonID)
+        static public clsPerson Find(int PersonID)
         {
             string NationalityNumber = null;
+            byte _ShortGendor = 0;
             string FirstName = null;
             string SecondName = null;
             string ThirdName = null;
@@ -95,11 +98,11 @@ namespace DVLD_BusinessLayer
             int NationalityCountryID = -1;  
             string ImagePath = null;
             bool IsFound = clsPersonDataAccess.FindPerson(PersonID, out NationalityNumber, out FirstName, out SecondName, out ThirdName, out LastName
-                , out DateOfBirth, out _boolGendor, out Address, out Phone, out Email, out NationalityCountryID, out ImagePath);
+                , out DateOfBirth, out _ShortGendor, out Address, out Phone, out Email, out NationalityCountryID, out ImagePath);
 
             if(IsFound)
             {
-                enGendor eGendor = (enGendor)Convert.ToInt32(Gendor);
+                enGendor eGendor = (enGendor)Convert.ToInt32(_ShortGendor);
                 return new clsPerson(PersonID, NationalityNumber, FirstName, SecondName, ThirdName, LastName,
                     DateOfBirth, eGendor, Address, Phone, Email, NationalityCountryID, ImagePath);
             }
@@ -118,7 +121,7 @@ namespace DVLD_BusinessLayer
 
         bool _AddNew()
         {
-            _ID = clsPersonDataAccess.AddNewPerson(NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, _boolGendor, Address, Phone, Email, NationalityCountryID, ImagePath);
+            _ID = clsPersonDataAccess.AddNewPerson(NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, _shortGendor, Address, Phone, Email, NationalityCountryID, ImagePath);
             if(_ID != -1)
             {
                 _Mode = enMode.Update;
@@ -129,7 +132,7 @@ namespace DVLD_BusinessLayer
 
         bool _Update()
         {
-            return clsPersonDataAccess.UpdatePerson(_ID, NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, _boolGendor, Address, Phone, Email, NationalityCountryID, ImagePath);
+            return clsPersonDataAccess.UpdatePerson(_ID, NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, _shortGendor, Address, Phone, Email, NationalityCountryID, ImagePath);
         }
 
         public bool Save()

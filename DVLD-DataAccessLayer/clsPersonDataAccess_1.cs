@@ -60,7 +60,7 @@ namespace DVLD_DataAccessLayer
 
         static public bool FindPerson( int PersonID , out string NationalityNumberID
                                             , out string FirstName , out string SecondName , out string ThirdName , out string LastName
-                                            , out DateTime DateOfBirth , out bool Gendor , out string Address , out string Phone
+                                            , out DateTime DateOfBirth , out byte Gendor , out string Address , out string Phone
                                             , out string Email , out int NationalityCountryID , out string ImagePath)
         {
             bool IsFound = false;
@@ -76,7 +76,7 @@ namespace DVLD_DataAccessLayer
             ThirdName = "";
             LastName = "";
             DateOfBirth = DateTime.MinValue;
-            Gendor = false;
+            Gendor = 0;
             Address = "";
             Phone = "";
             Email = "";
@@ -95,7 +95,7 @@ namespace DVLD_DataAccessLayer
                     ThirdName = (string)Reader["ThirdName"];
                     LastName = (string)Reader["LastName"];
                     DateOfBirth = (DateTime)Reader["DateOfBirth"];
-                    Gendor = (bool)Reader["Gendor"];
+                    Gendor = (byte)Reader["Gendor"];
                     Address = (string)Reader["Address"];
                     Phone = (string)Reader["Phone"];
                     Email = (Reader["Email"] != DBNull.Value)?(string)Reader["Email"]:null;
@@ -120,7 +120,7 @@ namespace DVLD_DataAccessLayer
 
         static public int AddNewPerson( string NationalNumber
             , string FirstName, string SecondName, string ThirdName, string LastName
-            , DateTime DateOfBirth, bool Gendor, string Address, string Phone
+            , DateTime DateOfBirth, byte Gendor, string Address, string Phone
             , string Email, int NationalityCountryID , string ImagePath)
         {
 
@@ -201,7 +201,7 @@ namespace DVLD_DataAccessLayer
 
         static public bool UpdatePerson(int PersonID,string NationalNumber
             , string FirstName, string SecondName, string ThirdName, string LastName
-            , DateTime DateOfBirth, bool Gendor, string Address, string Phone
+            , DateTime DateOfBirth, byte Gendor, string Address, string Phone
             , string Email, int NationalityCountryID, string ImagePath)
         {
             bool IsUpdated = false;
