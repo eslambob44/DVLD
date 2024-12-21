@@ -162,7 +162,15 @@ namespace DVLD_BusinessLayer
         }
 
 
+        static public bool IsPersonExists(int PersonID)
+        {
+            return clsPersonDataAccess.IsPersonExists(PersonID);
+        }
 
+        static public bool IsPersonExists(string NationalNumber)
+        {
+            return clsPersonDataAccess.IsPersonExists(NationalNumber);
+        }
 
 
 
