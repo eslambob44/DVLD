@@ -256,5 +256,68 @@ namespace DVLD_DataAccessLayer
             }
             return IsUpdated;
         }
+
+        static public bool IsPersonExists(int PersonID)
+        {
+            bool IsFound = false;
+            SqlConnection Connection =  new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select IsFound = 
+                           Case
+                                when (Select koko From Users Where PersonID = @PersonID) = koko then 1
+                                else 0
+                            End";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@PersonID", PersonID);
+            try
+            {
+                Connection.Open();
+                object Result = Command.ExecuteScalar();
+                if (Result != null && (int.TryParse(Result.ToString(), out int TempIsFound)))
+                {
+                    IsFound = TempIsFound == 1;
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            return IsFound; 
+        }
+
+        static public bool IsPersonExists(string NationalNumber)
+        {
+            bool IsFound = false;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select IsFound = 
+                           Case
+                                when (Select koko From Users Where NationalNo = @NationalNumber) = koko then 1
+                                else 0
+                            End";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@NationalNumber", NationalNumber);
+            try
+            {
+                Connection.Open();
+                object Result = Command.ExecuteScalar();
+                if (Result != null && (int.TryParse(Result.ToString(), out int TempIsFound)))
+                {
+                    IsFound = TempIsFound == 1;
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            return IsFound;
+        }
     }
+
 }
