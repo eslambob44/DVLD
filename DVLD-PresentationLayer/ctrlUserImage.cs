@@ -17,6 +17,18 @@ namespace DVLD_PresentationLayer
         {
             InitializeComponent();
         }
+
+        public event Action<bool> EventUserImageChanged;
+
+        public void UserImageChanged(bool IsPictureExist)
+        {
+            Action<bool> Handler = EventUserImageChanged;
+            if (Handler != null)
+            {
+                Handler(IsPictureExist);
+            }
+        }
+
         private string _ImageLocation;
         public string ImageLocation { get { return _ImageLocation; } }
         
@@ -26,11 +38,13 @@ namespace DVLD_PresentationLayer
             if(pbImage.ImageLocation != null)
             {
                 _ImageLocation = imageLocation;
+                UserImageChanged(true);
             }
             else
             {
                 pbImage.Image = (Gendor == clsPerson.enGendor.Male) ? Properties.Resources.Male_512 : Properties.Resources.Female_512 ;
                 _ImageLocation = null;
+                UserImageChanged(false);
             }
         }
     }

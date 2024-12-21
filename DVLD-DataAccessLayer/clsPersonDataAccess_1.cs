@@ -127,7 +127,7 @@ namespace DVLD_DataAccessLayer
             int PersonID = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Insert Into People(NationalNo , FirstName , SecondName , ThirdName , LastName
-                            , DateOfBirth , DateOfBirth , Gendor , Address , Phone , Email 
+                            , DateOfBirth , Gendor , Address , Phone , Email 
                             , NationalityCountryID , ImagePath)
                             Values (@NationalNumber , @FirstName , @SecondName , @ThirdName , @LastName 
                             , @DateOfBirth , @Gendor , @Address , @Phone , @Email , @NationalityCountryID 
@@ -144,10 +144,10 @@ namespace DVLD_DataAccessLayer
             Command.Parameters.AddWithValue("@Gendor", Gendor);
             Command.Parameters.AddWithValue("@Address", Address);
             Command.Parameters.AddWithValue("@Phone", Phone);
-            if (Email != null) Command.Parameters.AddWithValue("@Email", Email);
+            if (!string.IsNullOrEmpty(Email)) Command.Parameters.AddWithValue("@Email", Email);
             else Command.Parameters.AddWithValue("@Email", DBNull.Value);
             Command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
-            if(ImagePath != null) Command.Parameters.AddWithValue("@ImagePath", ImagePath);
+            if(!string.IsNullOrEmpty(ImagePath)) Command.Parameters.AddWithValue("@ImagePath", ImagePath);
             else Command.Parameters.AddWithValue("@ImagePath", DBNull.Value);
 
             try
@@ -231,10 +231,10 @@ namespace DVLD_DataAccessLayer
             Command.Parameters.AddWithValue("@Gendor", Gendor);
             Command.Parameters.AddWithValue("@Address", Address);
             Command.Parameters.AddWithValue("@Phone", Phone);
-            if (Email != null) Command.Parameters.AddWithValue("@Email", Email);
+            if (!string.IsNullOrEmpty(Email)) Command.Parameters.AddWithValue("@Email", Email);
             else Command.Parameters.AddWithValue("@Email", DBNull.Value);
             Command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
-            if (ImagePath != null) Command.Parameters.AddWithValue("@ImagePath", ImagePath);
+            if (!string.IsNullOrEmpty(ImagePath)) Command.Parameters.AddWithValue("@ImagePath", ImagePath);
             else Command.Parameters.AddWithValue("@ImagePath", DBNull.Value);
 
             try
@@ -263,7 +263,7 @@ namespace DVLD_DataAccessLayer
             SqlConnection Connection =  new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Select IsFound = 
                            Case
-                                when (Select koko From Users Where PersonID = @PersonID) = koko then 1
+                                when (Select PersonID From People Where PersonID = @PersonID) is not null then 1
                                 else 0
                             End";
             SqlCommand Command = new SqlCommand(Query, Connection);
@@ -294,7 +294,7 @@ namespace DVLD_DataAccessLayer
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Select IsFound = 
                            Case
-                                when (Select koko From Users Where NationalNo = @NationalNumber) = koko then 1
+                                when (Select PersonID From People Where NationalNo = @NationalNumber) is not null then 1
                                 else 0
                             End";
             SqlCommand Command = new SqlCommand(Query, Connection);

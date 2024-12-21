@@ -1,4 +1,5 @@
 ﻿using DVLD_BusinessLayer;
+using DVLD_PresentationLayer.People;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,9 +49,13 @@ namespace DVLD_PresentationLayer
         }
 
 
-        private void ctrlShowPersonInfo_Load(object sender, EventArgs e)
+        
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            
+            frmAddEditPerson frm = new frmAddEditPerson(_Person.ID);
+            frm.DataReceived += Find;
+            frm.ShowDialog();
         }
     }
 }

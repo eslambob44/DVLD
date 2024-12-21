@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using DVLD_DataAccessLayer;
@@ -42,6 +43,7 @@ namespace DVLD_BusinessLayer
         public int NationalityCountryID { get; set; }
         public string Country { get { return clsCountryDataAccessLayer.FindCountry(NationalityCountryID); } }
         public string ImagePath {  get; set; }
+        private string _OriginalImagePath;
 
         enum enMode { Update , AddNew}
         private enMode _Mode;
@@ -62,6 +64,7 @@ namespace DVLD_BusinessLayer
             this.Email = Email ;
             this.NationalityCountryID = NationalityCountryID ;
             this.ImagePath  = ImagePath ;
+            _OriginalImagePath = ImagePath;
             _Mode = enMode.Update;
         }
 
@@ -80,6 +83,7 @@ namespace DVLD_BusinessLayer
             this.Email = null;
             this.NationalityCountryID = -1;
             this.ImagePath = null;
+            _OriginalImagePath = ImagePath;
             _Mode = enMode.AddNew;
         }
 
@@ -114,25 +118,71 @@ namespace DVLD_BusinessLayer
 
         }
 
-        public clsPerson GetAddNewObject()
+        static public clsPerson GetAddNewObject()
         {
             return new clsPerson();
         }
 
+        bool _RemoveImage(string ImagePath)
+        {
+            if (File.Exists(ImagePath))
+            {
+                File.Delete(ImagePath);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        string _SetImage(string ImagePath)
+        {
+
+
+            if (File.Exists(ImagePath))
+            {
+
+                Guid ImageName = Guid.NewGuid();
+                string DestinationImagePath = "C:\\DVLD-Images\\" + ImageName.ToString() + ".png";
+                File.Copy(ImagePath, DestinationImagePath);
+                return DestinationImagePath;
+            }
+            return null;
+        }
+
         bool _AddNew()
         {
+            if (_OriginalImagePath != ImagePath) ImagePath = _SetImage(ImagePath);
             _ID = clsPersonDataAccess.AddNewPerson(NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, _shortGendor, Address, Phone, Email, NationalityCountryID, ImagePath);
             if(_ID != -1)
             {
                 _Mode = enMode.Update;
+                if (_OriginalImagePath != ImagePath)
+                {
+                    _RemoveImage(_OriginalImagePath);
+                    _OriginalImagePath = ImagePath;
+                }
                 return true;
             }
+            if (_OriginalImagePath != ImagePath) _RemoveImage(ImagePath);
             return false;
         }
 
         bool _Update()
         {
-            return clsPersonDataAccess.UpdatePerson(_ID, NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, _shortGendor, Address, Phone, Email, NationalityCountryID, ImagePath);
+            if (_OriginalImagePath != ImagePath) ImagePath = _SetImage(ImagePath);
+             if(clsPersonDataAccess.UpdatePerson(_ID, NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, _shortGendor, Address, Phone, Email, NationalityCountryID, ImagePath))
+            {
+                if (_OriginalImagePath != ImagePath)
+                {
+                    _RemoveImage(_OriginalImagePath);
+                    _OriginalImagePath = ImagePath;
+                }
+                return true;
+            }
+            if (_OriginalImagePath != ImagePath) _RemoveImage(ImagePath);
+            return false;
         }
 
         public bool Save()

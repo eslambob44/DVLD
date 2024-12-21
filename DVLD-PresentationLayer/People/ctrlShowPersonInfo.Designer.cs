@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlShowPersonInfo));
             this.gbPersonInfo = new System.Windows.Forms.GroupBox();
+            this.ctrlUserImage1 = new DVLD_PresentationLayer.ctrlUserImage();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -57,7 +58,6 @@
             this.lblNationalNo = new System.Windows.Forms.Label();
             this.lblFullName = new System.Windows.Forms.Label();
             this.lblPersonID = new System.Windows.Forms.Label();
-            this.ctrlUserImage1 = new DVLD_PresentationLayer.ctrlUserImage();
             this.gbPersonInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -107,6 +107,15 @@
             this.gbPersonInfo.TabIndex = 0;
             this.gbPersonInfo.TabStop = false;
             this.gbPersonInfo.Text = "Person Information";
+            // 
+            // ctrlUserImage1
+            // 
+            this.ctrlUserImage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlUserImage1.Location = new System.Drawing.Point(678, 116);
+            this.ctrlUserImage1.Margin = new System.Windows.Forms.Padding(4);
+            this.ctrlUserImage1.Name = "ctrlUserImage1";
+            this.ctrlUserImage1.Size = new System.Drawing.Size(179, 168);
+            this.ctrlUserImage1.TabIndex = 29;
             // 
             // pictureBox7
             // 
@@ -197,6 +206,7 @@
             this.linkLabel1.TabIndex = 18;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Edit Person Info";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // lblAddressval
             // 
@@ -379,15 +389,6 @@
             this.lblPersonID.TabIndex = 0;
             this.lblPersonID.Text = "Person ID:";
             // 
-            // ctrlUserImage1
-            // 
-            this.ctrlUserImage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlUserImage1.Location = new System.Drawing.Point(678, 116);
-            this.ctrlUserImage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.ctrlUserImage1.Name = "ctrlUserImage1";
-            this.ctrlUserImage1.Size = new System.Drawing.Size(179, 168);
-            this.ctrlUserImage1.TabIndex = 29;
-            // 
             // ctrlShowPersonInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,7 +396,6 @@
             this.Controls.Add(this.gbPersonInfo);
             this.Name = "ctrlShowPersonInfo";
             this.Size = new System.Drawing.Size(877, 363);
-            this.Load += new System.EventHandler(this.ctrlShowPersonInfo_Load);
             this.gbPersonInfo.ResumeLayout(false);
             this.gbPersonInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
