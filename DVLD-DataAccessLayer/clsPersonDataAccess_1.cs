@@ -18,7 +18,7 @@ namespace DVLD_DataAccessLayer
         {
             DataTable dtPeople = new DataTable();
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Select PersonID , NationalNo , FirstName , SecondName , ThirdName , LastName , Gendor = 
+            string Query = @"Select PersonID , NationalNo , FirstName , SecondName , ThirdName ,LastName , Gendor = 
                             case
                             	when Gendor = 0 then 'Male'
                             	else 'Female'
@@ -27,10 +27,9 @@ namespace DVLD_DataAccessLayer
                             From People
                             inner join Countries
                             on Countries.CountryID = People.NationalityCountryID";
-            if (Filter != null) Query += " Where " + Filter + " like '%'+Value+'%'";
+            if (!string.IsNullOrEmpty(Filter)) Query += " Where " + Filter + " like '%'+Value+'%'";
             SqlCommand Command = new SqlCommand(Query, Connection);
-            if(Filter != null) Command.Parameters.AddWithValue("@Value" , Value);
-            if(Filter != null)
+            if(!string.IsNullOrEmpty(Filter)) Command.Parameters.AddWithValue("@Value" , Value);
             try
             {
                 Connection.Open();
