@@ -118,6 +118,27 @@ namespace DVLD_BusinessLayer
 
         }
 
+        static public clsPerson Find(string NationalityNumber)
+        {
+            
+            bool IsFound = clsPersonDataAccess.FindPerson(NationalityNumber,out int PersonID , out string FirstName , out string SecondName , out string ThirdName ,
+                                                          out string LastName , out DateTime DateOfBirth , out byte Gendor , out string Address , out string Phone ,
+                                                           out string Email , out int NationalityCountryID , out string ImagePath);
+
+            if (IsFound)
+            {
+                enGendor eGendor = (enGendor)Convert.ToInt32(Gendor);
+                return new clsPerson(PersonID, NationalityNumber, FirstName, SecondName, ThirdName, LastName,
+                    DateOfBirth, eGendor, Address, Phone, Email, NationalityCountryID, ImagePath);
+            }
+            else
+            {
+                return null;
+            }
+
+
+        }
+
         static public clsPerson GetAddNewObject()
         {
             return new clsPerson();
