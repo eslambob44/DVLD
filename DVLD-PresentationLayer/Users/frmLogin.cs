@@ -52,7 +52,7 @@ namespace DVLD_PresentationLayer.Users
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            int UserID = clsUser.FindUser(txtUserName.Text , txtPassword.Text);
+            int UserID = clsUser.GetUserID(txtUserName.Text , txtPassword.Text);
             if(UserID != -1)
             {
                 if(clsUser.IsUserActive(UserID))

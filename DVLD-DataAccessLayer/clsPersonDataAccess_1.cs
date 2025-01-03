@@ -115,7 +115,65 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
-        
+        static public bool FindPerson(string NationalityNumberID, out int PersonID
+                                            , out string FirstName, out string SecondName, out string ThirdName, out string LastName
+                                            , out DateTime DateOfBirth, out byte Gendor, out string Address, out string Phone
+                                            , out string Email, out int NationalityCountryID, out string ImagePath)
+        {
+            bool IsFound = false;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select * From People
+                             Where NationalNo = @NationalityNumberID";
+
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@NationalityNumberID", NationalityNumberID);
+            PersonID = -1;
+            FirstName = "";
+            SecondName = "";
+            ThirdName = "";
+            LastName = "";
+            DateOfBirth = DateTime.MinValue;
+            Gendor = 0;
+            Address = "";
+            Phone = "";
+            Email = "";
+            NationalityCountryID = -1;
+            ImagePath = "";
+            try
+            {
+                Connection.Open();
+                SqlDataReader Reader = Command.ExecuteReader();
+                if (Reader.Read())
+                {
+                    IsFound = true;
+                    PersonID = (int)Reader["PersonID"];
+                    FirstName = (string)Reader["FirstName"];
+                    SecondName = (string)Reader["SecondName"];
+                    ThirdName = (string)Reader["ThirdName"];
+                    LastName = (string)Reader["LastName"];
+                    DateOfBirth = (DateTime)Reader["DateOfBirth"];
+                    Gendor = (byte)Reader["Gendor"];
+                    Address = (string)Reader["Address"];
+                    Phone = (string)Reader["Phone"];
+                    Email = (Reader["Email"] != DBNull.Value) ? (string)Reader["Email"] : null;
+                    NationalityCountryID = (int)Reader["NationalityCountryID"];
+                    ImagePath = (Reader["ImagePath"] != DBNull.Value) ? (string)Reader["ImagePath"] : null;
+                }
+                Reader.Close();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                Connection.Close();
+
+            }
+            return IsFound;
+        }
+
+
 
         static public int AddNewPerson( string NationalNumber
             , string FirstName, string SecondName, string ThirdName, string LastName

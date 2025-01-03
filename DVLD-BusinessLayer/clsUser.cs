@@ -9,9 +9,9 @@ namespace DVLD_BusinessLayer
 {
     public class clsUser
     {
-        static public int FindUser(string UserName , string Password)
+        static public int GetUserID(string UserName , string Password)
         {
-            return clsUsersDataAccessLayer.FindUser(UserName , Password);
+            return clsUsersDataAccessLayer.GetUserID(UserName , Password);
         }
         static public bool IsUserActive(int UserId) 
         {
