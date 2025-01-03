@@ -18,16 +18,13 @@ namespace DVLD_PresentationLayer
             InitializeComponent();
         }
 
-        Form childForm;
+        
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (childForm == null)
-            {
-                childForm = new frmManagePeople();
-                childForm.MdiParent = this; 
-                childForm.Show();
-            }
+            Form childForm = new frmManagePeople();
+            childForm.MdiParent = this; 
+            childForm.Show();
         }
     }
 }
