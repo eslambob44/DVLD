@@ -31,11 +31,11 @@ namespace DVLD_BusinessLayer
             _Mode = enMode.Update;  
         }
 
-        public clsUser(string Password)
+        public clsUser(int PersonID, string Password)
         {
             this.IsActive = false;
             this._UserID = -1;
-            this._PersonID = -1;
+            this._PersonID = PersonID;
             this.UserName = null;
             this._Password = Password;
             _Mode = enMode.AddNew;
@@ -54,10 +54,11 @@ namespace DVLD_BusinessLayer
             else return null;
         }
 
-        static public clsUser GetAddNewUser(string Password)
+        static public clsUser GetAddNewUser(int PersonID ,string Password)
         {
-
-            return new clsUser(Password);
+            if (IsPersonAUser(PersonID) || !clsPerson.IsPersonExists(PersonID)) return null;
+            return new clsUser(PersonID, Password);
+           
         }
 
         static public bool DeleteUser(int UserID)
