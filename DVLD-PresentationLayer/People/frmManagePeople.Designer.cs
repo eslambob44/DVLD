@@ -62,7 +62,7 @@
             this.dgvPeople.Location = new System.Drawing.Point(12, 222);
             this.dgvPeople.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvPeople.MultiSelect = false;
-            this.dgvPeople.Name = "dgvPeople";
+            this.dgvPeople.Name = "dgvUsers";
             this.dgvPeople.ReadOnly = true;
             this.dgvPeople.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;

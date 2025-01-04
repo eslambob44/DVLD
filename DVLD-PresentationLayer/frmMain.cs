@@ -1,4 +1,5 @@
 ﻿using DVLD_PresentationLayer.People;
+using DVLD_PresentationLayer.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +25,13 @@ namespace DVLD_PresentationLayer
         {
             Form childForm = new frmManagePeople();
             childForm.MdiParent = this; 
+            childForm.Show();
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form childForm = new frmManageUsers();
+            childForm.MdiParent = this;
             childForm.Show();
         }
     }
