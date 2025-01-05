@@ -58,6 +58,12 @@
     <Compile Include="frmTest.Designer.cs">
       <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="People\ctrlFilterPerson.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="People\ctrlFilterPerson.Designer.cs">
+      <DependentUpon>ctrlFilterPerson.cs</DependentUpon>
+    </Compile>
     <Compile Include="People\ctrlShowPersonInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\ctrlFilterPerson.resx">
+      <DependentUpon>ctrlFilterPerson.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People\ctrlShowPersonInfo.resx">
       <DependentUpon>ctrlShowPersonInfo.cs</DependentUpon>

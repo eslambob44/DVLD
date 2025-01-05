@@ -21,15 +21,48 @@ namespace DVLD_PresentationLayer
             
         }
 
+        public int PersonID { get; set; } = -1;
+
         public void Find(int PersonID)
         {
             _Person = clsPerson.Find(PersonID);
             if (_Person == null)
             {
+                _LoadEmptyForm();
                 MessageBox.Show("The person not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
+                _LoadForm();
+                this.PersonID = PersonID;
+            }
+        }
+
+        void _LoadEmptyForm()
+        {
+            lblPersonIDval.Text = "??";
+            lblFullNameval.Text = "??";
+            lblEmailval.Text = "??";
+            lblPhoneval.Text = "??";
+            lblGendorval.Text = "??";
+            lblNationalNoval.Text = "??";
+            lblDateOfBirthval.Text = "??";
+            lblCountryval.Text = "??";
+            lblAddressval.Text = "??";
+            ctrlUserImage1.SetImage(null, clsPerson.enGendor.Male);
+        }
+
+        public void Find(string NationalNo)
+        {
+            _Person = clsPerson.Find(NationalNo);
+            if (_Person == null)
+            {
+                _LoadEmptyForm();
+                MessageBox.Show("The person not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                this.PersonID = _Person.ID;
                 _LoadForm();
             }
         }
@@ -43,7 +76,7 @@ namespace DVLD_PresentationLayer
             lblGendorval.Text = _Person.GendorString;
             lblAddressval.Text = _Person.Address;
             lblDateOfBirthval.Text = _Person.DateOfBirth.ToString("yyyy/MMMM/dd");
-            lblCountyval.Text = _Person.Country;
+            lblCountryval.Text = _Person.Country;
             ctrlUserImage1.SetImage(_Person.ImagePath, _Person.Gendor);
 
         }
@@ -53,9 +86,12 @@ namespace DVLD_PresentationLayer
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frmAddEditPerson frm = new frmAddEditPerson(_Person.ID);
-            frm.DataReceived += Find;
-            frm.ShowDialog();
+            if (_Person != null)
+            {
+                frmAddEditPerson frm = new frmAddEditPerson(_Person.ID);
+                frm.DataReceived += Find;
+                frm.ShowDialog();
+            }
         }
     }
 }

@@ -46,7 +46,7 @@
             this.lblEmailval = new System.Windows.Forms.Label();
             this.lblDateOfBirthval = new System.Windows.Forms.Label();
             this.lblPhoneval = new System.Windows.Forms.Label();
-            this.lblCountyval = new System.Windows.Forms.Label();
+            this.lblCountryval = new System.Windows.Forms.Label();
             this.lblCountry = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblDateOfBirth = new System.Windows.Forms.Label();
@@ -87,7 +87,7 @@
             this.gbPersonInfo.Controls.Add(this.lblEmailval);
             this.gbPersonInfo.Controls.Add(this.lblDateOfBirthval);
             this.gbPersonInfo.Controls.Add(this.lblPhoneval);
-            this.gbPersonInfo.Controls.Add(this.lblCountyval);
+            this.gbPersonInfo.Controls.Add(this.lblCountryval);
             this.gbPersonInfo.Controls.Add(this.lblCountry);
             this.gbPersonInfo.Controls.Add(this.lblPhone);
             this.gbPersonInfo.Controls.Add(this.lblDateOfBirth);
@@ -270,13 +270,13 @@
             // 
             // lblCountyval
             // 
-            this.lblCountyval.AutoSize = true;
-            this.lblCountyval.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCountyval.Location = new System.Drawing.Point(544, 262);
-            this.lblCountyval.Name = "lblCountyval";
-            this.lblCountyval.Size = new System.Drawing.Size(21, 16);
-            this.lblCountyval.TabIndex = 11;
-            this.lblCountyval.Text = "??";
+            this.lblCountryval.AutoSize = true;
+            this.lblCountryval.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountryval.Location = new System.Drawing.Point(544, 262);
+            this.lblCountryval.Name = "lblCountryval";
+            this.lblCountryval.Size = new System.Drawing.Size(21, 16);
+            this.lblCountryval.TabIndex = 11;
+            this.lblCountryval.Text = "??";
             // 
             // lblCountry
             // 
@@ -431,7 +431,7 @@
         private System.Windows.Forms.Label lblEmailval;
         private System.Windows.Forms.Label lblDateOfBirthval;
         private System.Windows.Forms.Label lblPhoneval;
-        private System.Windows.Forms.Label lblCountyval;
+        private System.Windows.Forms.Label lblCountryval;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pbGendor;
