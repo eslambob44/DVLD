@@ -19,7 +19,6 @@ namespace DVLD_PresentationLayer
 
         private void frmTest_Load(object sender, EventArgs e)
         {
-            ctrlShowPersonInfo1.Find(1023);
         }
     }
 }

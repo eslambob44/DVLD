@@ -162,7 +162,7 @@ namespace DVLD_DataAccessLayer
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Update Users
                             set UserName = @UserName,
-	                        IsActive = @IsActive ,
+	                        IsActive = @IsActive 
 	                        where UserID = @UserID ";
             SqlCommand Command = new SqlCommand(Query ,Connection);
             Command.Parameters.AddWithValue("@UserID", UserID);
@@ -309,7 +309,7 @@ namespace DVLD_DataAccessLayer
                 object Result = Command.ExecuteScalar();
                 if (Result != null && int.TryParse(Result.ToString() , out int Temp))
                 {
-                    IsUsed = (Temp == 0);
+                    IsUsed = (Temp != 0);
                 }
             }
             catch

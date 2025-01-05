@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlFilterPerson));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbFilter = new System.Windows.Forms.ComboBox();
-            this.mtxt = new System.Windows.Forms.MaskedTextBox();
-            this.btnFind = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
+            this.btnFind = new System.Windows.Forms.Button();
+            this.mtxt = new System.Windows.Forms.MaskedTextBox();
+            this.cbFilter = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.ctrlShowPersonInfo1 = new DVLD_PresentationLayer.ctrlShowPersonInfo();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -54,15 +54,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filter";
             // 
-            // label1
+            // btnAddNew
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Filter By:";
+            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNew.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNew.Image")));
+            this.btnAddNew.Location = new System.Drawing.Point(481, 22);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(39, 33);
+            this.btnAddNew.TabIndex = 3;
+            this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            // 
+            // btnFind
+            // 
+            this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
+            this.btnFind.Location = new System.Drawing.Point(436, 22);
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(39, 33);
+            this.btnFind.TabIndex = 2;
+            this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
+            // 
+            // mtxt
+            // 
+            this.mtxt.Location = new System.Drawing.Point(260, 27);
+            this.mtxt.Name = "mtxt";
+            this.mtxt.Size = new System.Drawing.Size(170, 22);
+            this.mtxt.TabIndex = 1;
             // 
             // cbFilter
             // 
@@ -74,44 +93,26 @@
             this.cbFilter.Location = new System.Drawing.Point(94, 26);
             this.cbFilter.Name = "cbFilter";
             this.cbFilter.Size = new System.Drawing.Size(160, 24);
-            this.cbFilter.TabIndex = 1;
+            this.cbFilter.TabIndex = 0;
             this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // mtxt
+            // label1
             // 
-            this.mtxt.Location = new System.Drawing.Point(260, 27);
-            this.mtxt.Name = "mtxt";
-            this.mtxt.Size = new System.Drawing.Size(170, 22);
-            this.mtxt.TabIndex = 2;
-            // 
-            // btnFind
-            // 
-            this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
-            this.btnFind.Location = new System.Drawing.Point(436, 22);
-            this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(39, 33);
-            this.btnFind.TabIndex = 3;
-            this.btnFind.UseVisualStyleBackColor = true;
-            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
-            // 
-            // btnAddNew
-            // 
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddNew.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNew.Image")));
-            this.btnAddNew.Location = new System.Drawing.Point(481, 22);
-            this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(39, 33);
-            this.btnAddNew.TabIndex = 4;
-            this.btnAddNew.UseVisualStyleBackColor = true;
-            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(20, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Filter By:";
             // 
             // ctrlShowPersonInfo1
             // 
             this.ctrlShowPersonInfo1.Location = new System.Drawing.Point(3, 85);
             this.ctrlShowPersonInfo1.Name = "ctrlShowPersonInfo1";
+            this.ctrlShowPersonInfo1.PersonID = -1;
             this.ctrlShowPersonInfo1.Size = new System.Drawing.Size(870, 360);
-            this.ctrlShowPersonInfo1.TabIndex = 0;
+            this.ctrlShowPersonInfo1.TabIndex = 4;
             // 
             // ctrlFilterPerson
             // 

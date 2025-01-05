@@ -28,24 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlShowPersonInfo1 = new DVLD_PresentationLayer.ctrlShowPersonInfo();
+            this.ctrlFilterPerson1 = new DVLD_PresentationLayer.People.ctrlFilterPerson();
             this.SuspendLayout();
             // 
-            // ctrlShowPersonInfo1
+            // ctrlFilterPerson1
             // 
-            this.ctrlShowPersonInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlShowPersonInfo1.Location = new System.Drawing.Point(13, 14);
-            this.ctrlShowPersonInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ctrlShowPersonInfo1.Name = "ctrlShowPersonInfo1";
-            this.ctrlShowPersonInfo1.Size = new System.Drawing.Size(877, 363);
-            this.ctrlShowPersonInfo1.TabIndex = 0;
+            this.ctrlFilterPerson1.BackColor = System.Drawing.Color.White;
+            this.ctrlFilterPerson1.FilterEnabled = true;
+            this.ctrlFilterPerson1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlFilterPerson1.Location = new System.Drawing.Point(88, 36);
+            this.ctrlFilterPerson1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ctrlFilterPerson1.Name = "ctrlFilterPerson1";
+            this.ctrlFilterPerson1.PersonID = 0;
+            this.ctrlFilterPerson1.Size = new System.Drawing.Size(882, 452);
+            this.ctrlFilterPerson1.TabIndex = 0;
             // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 620);
-            this.Controls.Add(this.ctrlShowPersonInfo1);
+            this.Controls.Add(this.ctrlFilterPerson1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmTest";
@@ -57,6 +60,6 @@
 
         #endregion
 
-        private ctrlShowPersonInfo ctrlShowPersonInfo1;
+        private People.ctrlFilterPerson ctrlFilterPerson1;
     }
 }

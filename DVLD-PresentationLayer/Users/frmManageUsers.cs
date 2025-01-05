@@ -36,5 +36,13 @@ namespace DVLD_PresentationLayer.Users
         {
             this.Close();
         }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+            frmAddEditUser frm = new frmAddEditUser(-1);
+            frm.ShowDialog();
+            dtUsers = clsUser.ListUsers();
+            _LoadDGV(dtUsers.DefaultView);
+        }
     }
 }

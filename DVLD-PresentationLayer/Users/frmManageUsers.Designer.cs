@@ -34,7 +34,7 @@
             this.dgvUsers = new System.Windows.Forms.DataGridView();
             this.lblRecords = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddUser = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.SuspendLayout();
@@ -104,15 +104,16 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // button1
+            // btnAddUser
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(660, 167);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(66, 64);
-            this.button1.TabIndex = 8;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddUser.Image = ((System.Drawing.Image)(resources.GetObject("btnAddUser.Image")));
+            this.btnAddUser.Location = new System.Drawing.Point(660, 167);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(66, 64);
+            this.btnAddUser.TabIndex = 8;
+            this.btnAddUser.UseVisualStyleBackColor = true;
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
             // 
             // frmManageUsers
             // 
@@ -120,7 +121,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(738, 668);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAddUser);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblRecords);
             this.Controls.Add(this.dgvUsers);
@@ -146,6 +147,6 @@
         private System.Windows.Forms.DataGridView dgvUsers;
         private System.Windows.Forms.Label lblRecords;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddUser;
     }
 }

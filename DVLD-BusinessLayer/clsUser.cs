@@ -14,12 +14,32 @@ namespace DVLD_BusinessLayer
 
         private enMode _Mode;
         private int _PersonID;
-        public int PersonID { get { return _PersonID; } }
+        public int PersonID 
+        {
+            get 
+            {
+                return _PersonID;
+            }
+            set
+            {
+                if(_Mode == enMode.AddNew)
+                {
+                    _PersonID = value;
+                }
+            }
+        }
         private int _UserID;
         public int UserID { get { return _UserID; } }
         public string UserName { get;set; }
         public bool IsActive { get; set; }
         private string _Password;
+        public string Password 
+        { set 
+            {
+                if(_Mode == enMode.AddNew)
+                    this._Password = value; 
+            } 
+        }
         
 
         public clsUser(int UserID , int PersonID , string UserName , bool IsActive) 
@@ -31,13 +51,13 @@ namespace DVLD_BusinessLayer
             _Mode = enMode.Update;  
         }
 
-        public clsUser(int PersonID, string Password)
+        public clsUser()
         {
             this.IsActive = false;
             this._UserID = -1;
-            this._PersonID = PersonID;
+            this._PersonID = -1;
             this.UserName = null;
-            this._Password = Password;
+            this._Password = null;
             _Mode = enMode.AddNew;
         }
 
@@ -54,10 +74,9 @@ namespace DVLD_BusinessLayer
             else return null;
         }
 
-        static public clsUser GetAddNewUser(int PersonID ,string Password)
+        static public clsUser GetAddNewUser()
         {
-            if (IsPersonAUser(PersonID) || !clsPerson.IsPersonExists(PersonID)) return null;
-            return new clsUser(PersonID, Password);
+            return new clsUser();
            
         }
 
@@ -85,6 +104,7 @@ namespace DVLD_BusinessLayer
                     int UserID = _AddNewUser();
                     if(UserID != -1)
                     {
+                        this._UserID = UserID;
                         _Mode = enMode.Update;
                         return true;
                     }

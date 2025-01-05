@@ -19,6 +19,46 @@ namespace DVLD_PresentationLayer.People
             InitializeComponent();
         }
 
+        private bool _FilterEnable = true;
+
+        public bool FilterEnabled
+        {
+            get
+            {
+                return _FilterEnable;
+            }
+            set
+            {
+                _FilterEnable = value;
+                if(_FilterEnable )
+                {
+                    EnableFilter();
+                }
+                else
+                {
+                    DisableFilter();
+                }
+            }
+        }
+
+        void EnableFilter()
+        {
+            mtxt.Enabled = true;
+            cbFilter.Enabled = true;
+            btnFind.Enabled = true;
+            btnAddNew.Enabled = true;
+
+        }
+
+        void DisableFilter()
+        {
+            mtxt.Enabled = false;
+            cbFilter.Enabled = false;
+            btnFind.Enabled = false;
+            btnAddNew.Enabled = false;
+
+        }
+
         public int PersonID { get; set; }
 
         void ChangeMaskInmtxt()
@@ -46,9 +86,20 @@ namespace DVLD_PresentationLayer.People
             cbFilter.SelectedIndex = 0;
         }
 
+        public event Action<int> EventPersonChanged; 
+
+        public void FindHandler(int PersonID)
+        {
+            Action<int> Handler = EventPersonChanged;
+            if(Handler != null)
+            {
+                Handler(PersonID);
+            }
+        }
+
         void FindPerson()
         {
-            switch(_Filter)
+            switch (_Filter)
             {
                 case enFilter.PersonID:
                     ctrlShowPersonInfo1.Find(int.Parse(mtxt.Text));
@@ -58,10 +109,12 @@ namespace DVLD_PresentationLayer.People
                     break;
             }
             this.PersonID = ctrlShowPersonInfo1.PersonID;
+            FindHandler(this.PersonID);
+            
 
         }
 
-        void FindPerson(int PersonID)
+        public void FindPerson(int PersonID)
         {
             cbFilter.SelectedIndex = (int)enFilter.PersonID;
             mtxt.Text = PersonID.ToString();
