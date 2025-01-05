@@ -122,6 +122,11 @@ namespace DVLD_BusinessLayer
             return clsUsersDataAccessLayer.GetUserID(PersonID) != -1;
         }
 
+        static public bool IsUserNameUsed(string UserName)
+        {
+            return clsUsersDataAccessLayer.IsUserNameUsed(UserName);
+        }
+
         
     }
 }
