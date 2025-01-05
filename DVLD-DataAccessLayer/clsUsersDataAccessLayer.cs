@@ -84,6 +84,7 @@ namespace DVLD_DataAccessLayer
                 {
                     dtUsers.Load(Reader);
                 }
+                Reader.Close();
             }
             catch
             {
@@ -282,6 +283,7 @@ namespace DVLD_DataAccessLayer
                     UserName = (string)Reader["UserName"];
                     IsActive = (bool)Reader["IsActive"];
                 }
+                Reader.Close();
             }
             catch
             {
@@ -292,6 +294,33 @@ namespace DVLD_DataAccessLayer
                 Connection.Close(); 
             }
             return IsFound;
+        }
+
+        static public bool IsUserNameUsed(string UserName)
+        {
+            bool IsUsed = false;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select COUNT(UserName) From Users Where UserName = @UserName";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@UserName", UserName);
+            try
+            {
+                Connection.Open();
+                object Result = Command.ExecuteScalar();
+                if (Result != null && int.TryParse(Result.ToString() , out int Temp))
+                {
+                    IsUsed = (Temp == 0);
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            return IsUsed;
         }
     }
 
