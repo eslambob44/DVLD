@@ -47,9 +47,52 @@ namespace DVLD_PresentationLayer.Users
 
         int GetUserIDFromDGV()
         {
-            return (int)dgvUsers.SelectedRows[0].Cells[0].Value;
+            if (dgvUsers.Rows.Count != 0)
+                return (int)dgvUsers.SelectedRows[0].Cells[0].Value;
+            else return -1;
         }
 
-        
+        private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddEditUser frm = new frmAddEditUser(-1);
+            frm.ShowDialog();
+            dtUsers = clsUser.ListUsers();
+            _LoadDGV(dtUsers.DefaultView);
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int UserID = GetUserIDFromDGV();
+            if(UserID != -1)
+            {
+                frmAddEditUser frm = new frmAddEditUser(UserID);
+                frm.ShowDialog();
+                dtUsers = clsUser.ListUsers();
+                _LoadDGV(dtUsers.DefaultView);
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int UserID = GetUserIDFromDGV();
+            if (UserID != -1)
+            {
+                if (MessageBox.Show("Are you sure you want to delete this user", "",
+                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if(clsUser.DeleteUser(UserID))
+                    {
+                        dtUsers = clsUser.ListUsers();
+                        _LoadDGV(dtUsers.DefaultView);
+                        MessageBox.Show("User Deleted Successfully");
+                    }
+                    else
+                    {
+                        MessageBox.Show("user is connected with other operations cannot delete",
+                            "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
     }
 }
