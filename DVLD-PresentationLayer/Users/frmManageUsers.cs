@@ -94,5 +94,15 @@ namespace DVLD_PresentationLayer.Users
                 }
             }
         }
+
+        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int UserID = GetUserIDFromDGV();
+            if (UserID != -1)
+            {
+                frmUserInfo frm = new frmUserInfo(UserID);
+                frm.ShowDialog();
+            }
+        }
     }
 }
