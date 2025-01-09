@@ -29,7 +29,7 @@ namespace DVLD_PresentationLayer.Users
             TextBox txt = sender as TextBox;
             if(string.IsNullOrEmpty(txt.Text) )
             {
-                errorProvider1.SetError(txt, "User name cannot be empty");
+                errorProvider1.SetError(txt, "_User name cannot be empty");
             }
             else
             {
@@ -71,7 +71,7 @@ namespace DVLD_PresentationLayer.Users
             }
             else
             {
-                MessageBox.Show("User name or password is incorrect!", "Cannot login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("_User name or password is incorrect!", "Cannot login", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             

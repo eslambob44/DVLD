@@ -30,7 +30,7 @@ namespace DVLD_PresentationLayer.Users
 
         void _LoadUpdateForm()
         {
-            lblTitle.Text = "Update User";
+            lblTitle.Text = "Update _User";
             ctrlFilterPerson1.FindPerson(_User.PersonID);
             ctrlFilterPerson1.FilterEnabled = false;
             lblUserID.Text = _User.UserID.ToString();
@@ -53,7 +53,7 @@ namespace DVLD_PresentationLayer.Users
                 _User = clsUser.Find(_UserID);
                 if( _User == null )
                 {
-                    MessageBox.Show("User Cannot found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("_User Cannot found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else
@@ -169,7 +169,7 @@ namespace DVLD_PresentationLayer.Users
             _User.IsActive = chkIsActive.Checked;
             if(_User.Save())
             {
-                MessageBox.Show("User Saved Successfully");
+                MessageBox.Show("_User Saved Successfully");
                 _Mode = enMode.Update;
                 _LoadUpdateForm();
             }

@@ -84,7 +84,7 @@ namespace DVLD_PresentationLayer.Users
                     {
                         dtUsers = clsUser.ListUsers();
                         _LoadDGV(dtUsers.DefaultView);
-                        MessageBox.Show("User Deleted Successfully");
+                        MessageBox.Show("_User Deleted Successfully");
                     }
                     else
                     {

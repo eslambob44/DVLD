@@ -28,7 +28,7 @@ namespace DVLD_PresentationLayer
             _Person = clsPerson.Find(PersonID);
             if (_Person == null)
             {
-                _LoadEmptyForm();
+                LoadEmptyForm();
                 MessageBox.Show("The person not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
@@ -38,7 +38,7 @@ namespace DVLD_PresentationLayer
             }
         }
 
-        void _LoadEmptyForm()
+        public void LoadEmptyForm()
         {
             lblPersonIDval.Text = "??";
             lblFullNameval.Text = "??";
@@ -50,6 +50,7 @@ namespace DVLD_PresentationLayer
             lblCountryval.Text = "??";
             lblAddressval.Text = "??";
             ctrlUserImage1.SetImage(null, clsPerson.enGendor.Male);
+            linkLabel1.Visible = false;
         }
 
         public void Find(string NationalNo)
@@ -57,7 +58,7 @@ namespace DVLD_PresentationLayer
             _Person = clsPerson.Find(NationalNo);
             if (_Person == null)
             {
-                _LoadEmptyForm();
+                LoadEmptyForm();
                 MessageBox.Show("The person not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
@@ -68,6 +69,7 @@ namespace DVLD_PresentationLayer
         }
         private void _LoadForm()
         {
+            linkLabel1.Visible=true;
             lblPersonIDval.Text = _Person.ID.ToString();
             lblFullNameval.Text = _Person.FullName;
             lblEmailval.Text = _Person.Email;

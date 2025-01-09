@@ -233,7 +233,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 16);
             this.label1.TabIndex = 26;
-            this.label1.Text = "User Name:";
+            this.label1.Text = "_User Name:";
             // 
             // lblUserID
             // 
@@ -263,7 +263,7 @@
             this.lblFullName.Name = "lblFullName";
             this.lblFullName.Size = new System.Drawing.Size(63, 16);
             this.lblFullName.TabIndex = 3;
-            this.lblFullName.Text = "User ID:";
+            this.lblFullName.Text = "_User ID:";
             // 
             // lblTitle
             // 
@@ -274,7 +274,7 @@
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(217, 36);
             this.lblTitle.TabIndex = 2;
-            this.lblTitle.Text = "Add New User";
+            this.lblTitle.Text = "Add New _User";
             // 
             // btnSave
             // 
