@@ -243,11 +243,11 @@ namespace DVLD_DataAccessLayer
             int RowsAffected = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Update Users
-                            set Password = @NewPassword  , 
+                            set Password = @NewPassword 
                             where UserID = @UserID and Password = @Password";
             SqlCommand Command = new SqlCommand(Query, Connection);
             Command.Parameters.AddWithValue("@UserID", UserID);
-            Command.Parameters.AddWithValue("@OldPassword", OldPassword);
+            Command.Parameters.AddWithValue("@Password", OldPassword);
             Command.Parameters.AddWithValue("@NewPassword", NewPassword);
             try
             {

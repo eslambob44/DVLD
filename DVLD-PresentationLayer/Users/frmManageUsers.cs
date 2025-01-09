@@ -104,5 +104,15 @@ namespace DVLD_PresentationLayer.Users
                 frm.ShowDialog();
             }
         }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int UserID = GetUserIDFromDGV();
+            if (UserID != -1)
+            {
+                frmChangePassword frm = new frmChangePassword(UserID);
+                frm.ShowDialog();
+            }
+        }
     }
 }

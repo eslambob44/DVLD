@@ -29,20 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUserInfo));
-            this.ctrlShowUserInfo1 = new DVLD_PresentationLayer.Users.ctrlShowUserInfo();
             this.label1 = new System.Windows.Forms.Label();
+            this.ctrlShowUserInfo1 = new DVLD_PresentationLayer.Users.ctrlShowUserInfo();
             this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // ctrlShowUserInfo1
-            // 
-            this.ctrlShowUserInfo1.BackColor = System.Drawing.Color.White;
-            this.ctrlShowUserInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlShowUserInfo1.Location = new System.Drawing.Point(3, 50);
-            this.ctrlShowUserInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ctrlShowUserInfo1.Name = "ctrlShowUserInfo1";
-            this.ctrlShowUserInfo1.Size = new System.Drawing.Size(885, 481);
-            this.ctrlShowUserInfo1.TabIndex = 0;
             // 
             // label1
             // 
@@ -53,7 +43,17 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(151, 36);
             this.label1.TabIndex = 2;
-            this.label1.Text = "User Info";
+            this.label1.Text = "_User Info";
+            // 
+            // ctrlShowUserInfo1
+            // 
+            this.ctrlShowUserInfo1.BackColor = System.Drawing.Color.White;
+            this.ctrlShowUserInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlShowUserInfo1.Location = new System.Drawing.Point(3, 50);
+            this.ctrlShowUserInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ctrlShowUserInfo1.Name = "ctrlShowUserInfo1";
+            this.ctrlShowUserInfo1.Size = new System.Drawing.Size(885, 481);
+            this.ctrlShowUserInfo1.TabIndex = 0;
             // 
             // btnClose
             // 
@@ -79,6 +79,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ctrlShowUserInfo1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmUserInfo";
             this.Text = "frmUserInfo";
