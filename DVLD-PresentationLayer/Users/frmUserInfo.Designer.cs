@@ -43,7 +43,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(151, 36);
             this.label1.TabIndex = 2;
-            this.label1.Text = "_User Info";
+            this.label1.Text = "User Info";
             // 
             // ctrlShowUserInfo1
             // 

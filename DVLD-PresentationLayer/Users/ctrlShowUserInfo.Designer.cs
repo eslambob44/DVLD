@@ -94,7 +94,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 16);
             this.label2.TabIndex = 3;
-            this.label2.Text = "_User Name:";
+            this.label2.Text = "User Name:";
             // 
             // lblUserID
             // 
@@ -114,7 +114,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 16);
             this.label1.TabIndex = 1;
-            this.label1.Text = "_User ID:";
+            this.label1.Text = "User ID:";
             // 
             // ctrlShowPersonInfo1
             // 
