@@ -44,5 +44,12 @@ namespace DVLD_PresentationLayer.Users
             dtUsers = clsUser.ListUsers();
             _LoadDGV(dtUsers.DefaultView);
         }
+
+        int GetUserIDFromDGV()
+        {
+            return (int)dgvUsers.SelectedRows[0].Cells[0].Value;
+        }
+
+        
     }
 }
