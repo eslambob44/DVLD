@@ -77,6 +77,11 @@ namespace DVLD_PresentationLayer.Users
             int UserID = GetUserIDFromDGV();
             if (UserID != -1)
             {
+                if(UserID == clsGlobalSettings.UserID)
+                {
+                    MessageBox.Show("Cannot delete current user", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 if (MessageBox.Show("Are you sure you want to delete this user", "",
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {

@@ -84,7 +84,6 @@ namespace DVLD_PresentationLayer.Users
             if(obj != -1 && clsUser.IsPersonAUser(obj) && _Mode == enMode.AddNew)
             {
                 MessageBox.Show("This person is already a user!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
             btnSave.Enabled = _ValidateInputs();
         }
@@ -134,11 +133,12 @@ namespace DVLD_PresentationLayer.Users
         }
 
         bool _ValidateInputs()
-        {
+            {
             if(ctrlFilterPerson1.PersonID == -1)
             {
                 return false;
             }
+            if (clsUser.IsPersonAUser(ctrlFilterPerson1.PersonID) && _Mode == enMode.AddNew) return false;
             if (string.IsNullOrEmpty(txtUserName.Text)) return false;
             else if (_Mode == enMode.Update && clsUser.IsUserNameUsed(txtUserName.Text) && _User.UserName != txtUserName.Text)
                 return false; 

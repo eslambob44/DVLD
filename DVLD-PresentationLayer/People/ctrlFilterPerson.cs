@@ -59,7 +59,7 @@ namespace DVLD_PresentationLayer.People
 
         }
 
-        public int PersonID { get; set; }
+        public int PersonID { get; set; } = -1;
 
         void ChangeMaskInmtxt()
         {
@@ -84,6 +84,7 @@ namespace DVLD_PresentationLayer.People
         private void ctrlFilterPerson_Load(object sender, EventArgs e)
         {
             cbFilter.SelectedIndex = 0;
+            PersonID = -1;
         }
 
         public event Action<int> EventPersonChanged; 
@@ -99,6 +100,7 @@ namespace DVLD_PresentationLayer.People
 
         void FindPerson()
         {
+            if (string.IsNullOrEmpty(mtxt.Text)) return;
             switch (_Filter)
             {
                 case enFilter.PersonID:
