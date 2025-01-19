@@ -1,4 +1,5 @@
 ﻿using DVLD_BusinessLayer;
+using DVLD_PresentationLayer.Application_Types;
 using DVLD_PresentationLayer.People;
 using DVLD_PresentationLayer.Users;
 using System;
@@ -51,6 +52,12 @@ namespace DVLD_PresentationLayer
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageApplicationTypes frm = new frmManageApplicationTypes();
+            frm.Show();
         }
     }
 }
