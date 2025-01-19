@@ -36,7 +36,15 @@ namespace DVLD_PresentationLayer.Application_Types
 
         private void frmManageApplicationTypes_Load(object sender, EventArgs e)
         {
-            dtApplicationTypes = clsApplicationTypes.ListApplicationTypes();
+            dtApplicationTypes = clsApplicationType.ListApplicationTypes();
+        }
+
+        private void editApplicationTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int ApplicationTypeID = (int)dgvApplicationTypes.SelectedRows[0].Cells[0].Value;
+            frmUpdateApplicationType frm = new frmUpdateApplicationType(ApplicationTypeID);
+            frm.ShowDialog();
+            dtApplicationTypes= clsApplicationType.ListApplicationTypes();
         }
     }
 }

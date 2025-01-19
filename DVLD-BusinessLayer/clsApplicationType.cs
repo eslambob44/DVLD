@@ -8,28 +8,27 @@ using System.Threading.Tasks;
 
 namespace DVLD_BusinessLayer
 {
-    public class clsApplicationTypes
+    public class clsApplicationType
     {
         private int _AppTypeID;
         public int ID { get { return _AppTypeID; } }
         public string Title { get; set; }
         public float Fees { get; set; }
 
-        private clsApplicationTypes(int ID , string Title , float Fees)
+        private clsApplicationType(int ID , string Title , float Fees)
         {
             this._AppTypeID = ID;
             this.Title = Title;
             this.Fees = Fees;
         }
 
-        static public clsApplicationTypes Find()
+        static public clsApplicationType Find(int ApplicationTypeID)
         {
-            int ID = 0;
             string Title = "";
             float Fees = 0;
-            if(clsApplicationTypesDataAccessLayer.Find(ID,ref Title,ref Fees) == true) 
+            if(clsApplicationTypesDataAccessLayer.Find(ApplicationTypeID, ref Title,ref Fees) == true) 
             {
-                return new clsApplicationTypes(ID , Title , Fees);
+                return new clsApplicationType(ApplicationTypeID, Title , Fees);
             }
             else
             {

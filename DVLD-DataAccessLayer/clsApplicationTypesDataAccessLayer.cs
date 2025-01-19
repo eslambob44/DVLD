@@ -83,7 +83,7 @@ namespace DVLD_DataAccessLayer
                 {
                     IsFound = true;
                     AppTypeTitle = (string)Reader["ApplicationTypeTitle"];
-                    Fees = (float)Reader["ApplicationFees"];
+                    Fees = (float)(decimal)Reader["ApplicationFees"];
                 }
             }
             catch
