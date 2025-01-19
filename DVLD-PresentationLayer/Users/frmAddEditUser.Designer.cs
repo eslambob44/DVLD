@@ -105,7 +105,7 @@
             this.ctrlFilterPerson1.Location = new System.Drawing.Point(-4, 0);
             this.ctrlFilterPerson1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ctrlFilterPerson1.Name = "ctrlFilterPerson1";
-            this.ctrlFilterPerson1.PersonID = 0;
+            this.ctrlFilterPerson1.PersonID = -1;
             this.ctrlFilterPerson1.Size = new System.Drawing.Size(882, 447);
             this.ctrlFilterPerson1.TabIndex = 2;
             this.ctrlFilterPerson1.EventPersonChanged += new System.Action<int>(this.ctrlFilterPerson1_EventPersonChanged);
@@ -151,7 +151,6 @@
             this.txtConfirmPassword.PasswordChar = '*';
             this.txtConfirmPassword.Size = new System.Drawing.Size(150, 22);
             this.txtConfirmPassword.TabIndex = 8;
-            this.txtConfirmPassword.TextChanged += new System.EventHandler(this.txt_TextChanged);
             this.txtConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtConfirmPassword_Validating);
             // 
             // pictureBox4
@@ -182,7 +181,6 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(150, 22);
             this.txtPassword.TabIndex = 7;
-            this.txtPassword.TextChanged += new System.EventHandler(this.txt_TextChanged);
             this.txtPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtPassword_Validating);
             // 
             // pictureBox1
@@ -222,7 +220,6 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(150, 22);
             this.txtUserName.TabIndex = 6;
-            this.txtUserName.TextChanged += new System.EventHandler(this.txt_TextChanged);
             this.txtUserName.Validating += new System.ComponentModel.CancelEventHandler(this.txtUserName_Validating);
             // 
             // label1
@@ -278,7 +275,6 @@
             // 
             // btnSave
             // 
-            this.btnSave.Enabled = false;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;

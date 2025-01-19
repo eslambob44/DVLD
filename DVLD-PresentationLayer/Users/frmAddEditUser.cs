@@ -85,7 +85,6 @@ namespace DVLD_PresentationLayer.Users
             {
                 MessageBox.Show("This person is already a user!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            btnSave.Enabled = _ValidateInputs();
         }
 
         private void txtUserName_Validating(object sender, CancelEventArgs e)
@@ -156,13 +155,14 @@ namespace DVLD_PresentationLayer.Users
             return true;
         }
 
-        private void txt_TextChanged(object sender, EventArgs e)
-        {
-            btnSave.Enabled = _ValidateInputs();
-        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if(!_ValidateInputs())
+            {
+                MessageBox.Show("Some input are invalid!" , "" , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             _User.PersonID = ctrlFilterPerson1.PersonID;
             _User.UserName = txtUserName.Text;
             if(_Mode == enMode.AddNew) _User.Password = txtPassword.Text;
