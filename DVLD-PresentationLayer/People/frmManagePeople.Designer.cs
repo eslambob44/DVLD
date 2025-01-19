@@ -56,13 +56,14 @@
             this.dgvPeople.AllowUserToDeleteRows = false;
             this.dgvPeople.AllowUserToResizeColumns = false;
             this.dgvPeople.AllowUserToResizeRows = false;
+            this.dgvPeople.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPeople.BackgroundColor = System.Drawing.Color.White;
             this.dgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPeople.ContextMenuStrip = this.cmsManagePeople;
             this.dgvPeople.Location = new System.Drawing.Point(12, 222);
             this.dgvPeople.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvPeople.MultiSelect = false;
-            this.dgvPeople.Name = "dgvUsers";
+            this.dgvPeople.Name = "dgvPeople";
             this.dgvPeople.ReadOnly = true;
             this.dgvPeople.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;

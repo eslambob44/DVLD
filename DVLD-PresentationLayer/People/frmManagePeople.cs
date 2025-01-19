@@ -16,14 +16,23 @@ namespace DVLD_PresentationLayer.People
         public frmManagePeople()
         {
             InitializeComponent();
-            dtPeople = clsPerson.ListPeople();
+            _dtPeople = clsPerson.ListPeople();
         }
 
         enum enFilter { None=0, PersonID =1 , NationalNo =2 , FirstName = 3 , SecondName = 4,
                         ThirdName = 5 , LastName = 6 , Nationality = 7 , Gendor = 8 ,
                         Phone = 9 , Email = 10 };
         enFilter _Filter = enFilter.None;
-        DataTable dtPeople;
+        
+        DataTable _dtPeople;
+        DataTable dtPeople
+        {
+            set
+            {
+                _dtPeople = value;
+                _LoadDGV(_dtPeople.DefaultView);
+            }
+        }
 
         int GetSelectedPersonID()
         {
@@ -39,24 +48,29 @@ namespace DVLD_PresentationLayer.People
         {
             
             dgvPeople.DataSource = dvPeople;
-            _AutoSizeDataGridView();
             lblRecords.Text = "#Records: "+dvPeople.Count;
+            _ApplyFilter();
         }
 
-        void _AutoSizeDataGridView()
+        void _ApplyFilter()
         {
-            foreach (DataGridViewColumn col in dgvPeople.Columns)
+            if (_Filter == enFilter.None) _dtPeople.DefaultView.RowFilter = null;
+            else if (_Filter == enFilter.PersonID)
             {
-                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                _dtPeople.DefaultView.RowFilter = $"Convert(PersonID , 'System.String') LIKE '%{mtxtFilter.Text}%'";
+            }
+            else
+            {
+                _dtPeople.DefaultView.RowFilter = $"{_Filter} LIKE '%{mtxtFilter.Text}%'";
             }
         }
+
 
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
             frmAddEditPerson frm = new frmAddEditPerson(-1);
             frm.ShowDialog();
             dtPeople = clsPerson.ListPeople();
-            _LoadDGV(dtPeople.DefaultView);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -66,7 +80,7 @@ namespace DVLD_PresentationLayer.People
 
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
-            _LoadDGV(dtPeople.DefaultView);
+            _LoadDGV(_dtPeople.DefaultView);
             cbFilter.SelectedIndex = 0;
         }
 
@@ -82,7 +96,6 @@ namespace DVLD_PresentationLayer.People
             frmAddEditPerson frm = new frmAddEditPerson(-1);
             frm.ShowDialog();
             dtPeople = clsPerson.ListPeople();
-            _LoadDGV(dtPeople.DefaultView);
 
         }
 
@@ -92,7 +105,6 @@ namespace DVLD_PresentationLayer.People
             frmAddEditPerson frm= new frmAddEditPerson(PersonID);
             frm.ShowDialog();
             dtPeople = clsPerson.ListPeople();
-            _LoadDGV(dtPeople.DefaultView);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,7 +116,6 @@ namespace DVLD_PresentationLayer.People
                 {
                     MessageBox.Show("Person deleted successfully");
                     dtPeople = clsPerson.ListPeople();
-                    _LoadDGV(dtPeople.DefaultView);
 
                 }
                 else
@@ -140,15 +151,7 @@ namespace DVLD_PresentationLayer.People
 
         private void mtxtFilter_TextChanged(object sender, EventArgs e)
         {
-            if (_Filter == enFilter.None) dtPeople.DefaultView.RowFilter = null;
-            else if(_Filter == enFilter.PersonID)
-            {
-                dtPeople.DefaultView.RowFilter = $"Convert(PersonID , 'System.String') LIKE '%{mtxtFilter.Text}%'";
-            }
-            else
-            {
-                dtPeople.DefaultView.RowFilter = $"{_Filter} LIKE '%{mtxtFilter.Text}%'";
-            }
+            _ApplyFilter();
         }
     }
 }
