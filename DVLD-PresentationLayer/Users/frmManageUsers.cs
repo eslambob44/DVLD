@@ -18,18 +18,47 @@ namespace DVLD_PresentationLayer.Users
             InitializeComponent();
         }
 
-        DataTable dtUsers;
+        DataTable _dtUsers;
+        DataTable dtUsers 
+        { get { return _dtUsers; } 
+            set 
+            {
+                _dtUsers = value;
+                _LoadDGV(_dtUsers.DefaultView);
+            }
+        }
+        enum enFilter { None, UserID, UserName, PersonID , FullName , IsActive};
+        enFilter _Filter = enFilter.None;
+        string _FilterValue = "";
        
         void _LoadDGV(DataView dvUsers)
         {
             dgvUsers.DataSource = dtUsers.DefaultView;
             lblRecords.Text = "#Records:" + dgvUsers.RowCount;
+            _ApplyFilter();
+        }
+
+        void _ApplyFilter()
+        {
+            if(_Filter == enFilter.None || _FilterValue =="")
+            {
+                dtUsers.DefaultView.RowFilter = "";
+                return;
+            }
+            string Filter= $"{_Filter} ";
+            if (_Filter == enFilter.UserID) Filter = "Convert(UserID, 'System.String') ";
+            else if (_Filter == enFilter.PersonID) Filter = "Convert(PersonID , 'System.String') ";
+            else if (_Filter == enFilter.IsActive) Filter = "Convert(IsActive , 'System.String') ";
+            Filter +=$"LIKE '%{_FilterValue}%'";
+            dtUsers.DefaultView.RowFilter = Filter ;
+            
         }
 
         private void frmManageUsers_Load(object sender, EventArgs e)
         {
             dtUsers = clsUser.ListUsers();
-            _LoadDGV(dtUsers.DefaultView);
+            cbFilter.SelectedIndex = 0;
+            cbIsActive.SelectedIndex = 0;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -42,7 +71,6 @@ namespace DVLD_PresentationLayer.Users
             frmAddEditUser frm = new frmAddEditUser(-1);
             frm.ShowDialog();
             dtUsers = clsUser.ListUsers();
-            _LoadDGV(dtUsers.DefaultView);
         }
 
         int GetUserIDFromDGV()
@@ -57,7 +85,6 @@ namespace DVLD_PresentationLayer.Users
             frmAddEditUser frm = new frmAddEditUser(-1);
             frm.ShowDialog();
             dtUsers = clsUser.ListUsers();
-            _LoadDGV(dtUsers.DefaultView);
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -68,7 +95,6 @@ namespace DVLD_PresentationLayer.Users
                 frmAddEditUser frm = new frmAddEditUser(UserID);
                 frm.ShowDialog();
                 dtUsers = clsUser.ListUsers();
-                _LoadDGV(dtUsers.DefaultView);
             }
         }
 
@@ -88,7 +114,6 @@ namespace DVLD_PresentationLayer.Users
                     if(clsUser.DeleteUser(UserID))
                     {
                         dtUsers = clsUser.ListUsers();
-                        _LoadDGV(dtUsers.DefaultView);
                         MessageBox.Show("_User Deleted Successfully");
                     }
                     else
@@ -118,6 +143,63 @@ namespace DVLD_PresentationLayer.Users
                 frmChangePassword frm = new frmChangePassword(UserID);
                 frm.ShowDialog();
             }
+        }
+        void _ShowFilterControl()
+        {
+            if (_Filter == enFilter.IsActive)
+            {
+                mtxtFilter.Visible = false;
+                cbIsActive.Visible = true;
+                cbIsActive.SelectedIndex = 0;
+            }
+            else if (cbFilter.SelectedIndex != (int)enFilter.None)
+            {
+                mtxtFilter.Visible = true;
+                cbIsActive.Visible = false;
+                mtxtFilter.Clear();
+            }
+            else
+            {
+                mtxtFilter.Visible = false;
+                cbIsActive.Visible = false;
+            }
+        }
+
+        private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _Filter = (enFilter)cbFilter.SelectedIndex;
+            _ShowFilterControl();
+            
+            if(_Filter ==  enFilter.UserID || _Filter== enFilter.PersonID)
+            {
+                mtxtFilter.Mask = "000000";
+            }
+            else
+            {
+                mtxtFilter.Mask = "";
+            }
+            _FilterValue = "";
+            _ApplyFilter();
+        }
+
+        private void mtxtFilter_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            
+        }
+
+        private void cbIsActive_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbIsActive.SelectedIndex == 0) _FilterValue = "";
+            else if (cbIsActive.SelectedIndex == 1) _FilterValue = true.ToString();
+            else _FilterValue = false.ToString();
+
+            _ApplyFilter();
+        }
+
+        private void mtxtFilter_TextChanged(object sender, EventArgs e)
+        {
+            _FilterValue = mtxtFilter.Text;
+            _ApplyFilter();
         }
     }
 }

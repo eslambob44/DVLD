@@ -141,7 +141,7 @@ namespace DVLD_PresentationLayer.People
 
             if(_Filter == enFilter.Phone ||  _Filter == enFilter.PersonID)
             {
-                mtxtFilter.Mask = "0000000000";
+                mtxtFilter.Mask = "00000000000";
             }
             else
             {
