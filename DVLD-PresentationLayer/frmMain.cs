@@ -1,6 +1,7 @@
 ﻿using DVLD_BusinessLayer;
 using DVLD_PresentationLayer.Application_Types;
 using DVLD_PresentationLayer.People;
+using DVLD_PresentationLayer.Test_Types;
 using DVLD_PresentationLayer.Users;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,12 @@ namespace DVLD_PresentationLayer
         private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManageApplicationTypes frm = new frmManageApplicationTypes();
+            frm.Show();
+        }
+
+        private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageTestTypes frm = new frmManageTestTypes();
             frm.Show();
         }
     }
