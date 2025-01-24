@@ -50,5 +50,10 @@ namespace DVLD_BusinessLayer
         {
             return clsApplicationTypesDataAccessLayer.ListApplicationTypes();
         }
+
+        static public float GetApplicationTypeFees(int ApplicationTypeID)
+        {
+            return clsApplicationTypesDataAccessLayer.GetApplicationTypeFees(ApplicationTypeID);
+        }
     }
 }
