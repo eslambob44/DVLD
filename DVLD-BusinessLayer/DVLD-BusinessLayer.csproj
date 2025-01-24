@@ -45,6 +45,7 @@
     <Compile Include="clsCountry.cs" />
     <Compile Include="clsGlobalSettings.cs" />
     <Compile Include="clsPerson.cs" />
+    <Compile Include="clsTestType.cs" />
     <Compile Include="clsUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
