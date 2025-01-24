@@ -45,6 +45,7 @@
     <Compile Include="clsApplicationTypesDataAccessLayer.cs" />
     <Compile Include="clsCountryDataAccessLayer.cs" />
     <Compile Include="clsDataAccessLayerSettings.cs" />
+    <Compile Include="clsLocalLicenseApplicationDataAccessLayer.cs" />
     <Compile Include="clsPersonDataAccess_1.cs" />
     <Compile Include="clsTestTypeDataAccessLayer.cs" />
     <Compile Include="clsUsersDataAccessLayer.cs" />
