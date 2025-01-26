@@ -1,77 +1,105 @@
 ﻿using DVLD_DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DVLD_BusinessLayer.clsApplication;
 
 namespace DVLD_BusinessLayer
 {
     public class clsApplication
     {
-        private enum enMode { Update , AddNew}
-        private enMode _Mode;
-        private int _ID;
+        protected enum enMode { Update , AddNew}
+        protected enMode _Mode;
+        protected int _ID;
         public int ID { get { return _ID; } }
-        private int _PersonID;
-        public int PersonID { get { return _PersonID; } }
-        private DateTime _ApplicationDate;
+        protected int _PersonID;
+        public int PersonID { 
+            
+            get { return _PersonID; }
+            set
+            {
+                if(_Mode == enMode.AddNew) _PersonID = value;
+            }
+        
+        }
+        protected DateTime _ApplicationDate;
         public DateTime ApplicationDate { get { return _ApplicationDate; } }
         public enum enApplicationType { NewLocalDrivingLicenseService = 1, RenewDrivingLicenseService =2
                                 , ReplacementForaLostDrivingLicense=3
                                 ,ReplacementForADamagedDrivingLicense=4, ReleaseDetainedDrivingLicense=5
                                 , NewInternationalLicense}
 
-        private enApplicationType __ApplicationType;
-        private enApplicationType _ApplicationType { get { return __ApplicationType; }
+        protected enApplicationType _ApplicationType;
+        
+        public enApplicationType ApplicationType 
+        {
+            
+            get { return _ApplicationType; }
             set
             {
-                __ApplicationType = value;
-                _PaidFees = clsApplicationType.GetApplicationTypeFees((int)__ApplicationType);
+                if (_Mode == enMode.AddNew)
+                {
+                    _ApplicationType = value;
+                    _PaidFees = clsApplicationType.GetApplicationTypeFees((int)_ApplicationType);
+                }
+            }
+        
+        }
+        public enum enApplicationStatus { New = 0 ,Completed = 1 , Canceled =2}
+        protected enApplicationStatus _ApplicationStatus;
+
+        
+        public enApplicationStatus ApplicationStatus 
+        { 
+            get { return _ApplicationStatus; }
+            set
+            {
+                if (_Mode == enMode.AddNew)
+                {
+                    _ApplicationStatus = value;
+                    _LastStatusDate = DateTime.Now;
+                }
+                
             }
         }
-        public enApplicationType ApplicationType { get { return _ApplicationType; } }
-        public enum enApplicationStatus { New = 0 ,Completed = 1 , Canceled =2}
-        private enApplicationStatus __ApplicationStatus;
-        private enApplicationStatus _ApplicationStatus {
-            get { return __ApplicationStatus; }
+
+        protected DateTime _LastStatusDate;
+        public DateTime LastStatusDate { get { return _LastStatusDate; } }
+        protected float _PaidFees;
+        public float PaidFees { get { return _PaidFees;} }
+        protected int _CreatedUserID;
+        public int CreateUserID 
+        { 
+            get { return _CreatedUserID; }
             set
             {
-                __ApplicationStatus = value;
-                _LastStatusDate = DateTime.Now;
-            } 
+                if(_Mode == enMode.AddNew)  _CreatedUserID = value; 
+            }       
         }
-        public enApplicationStatus ApplicationStatus { get { return _ApplicationStatus; } }
-
-        private DateTime _LastStatusDate;
-        public DateTime LastStatusDate { get { return _LastStatusDate; } }
-        private float _PaidFees;
-        public float PaidFees { get { return _PaidFees;} }
-        private int _CreatedUserID;
-        public int CreateUserID { get { return _CreatedUserID;} }
 
 
-        private clsApplication(int PersonID, enApplicationType ApplicationType, int CreatedUserID)
+        protected clsApplication()
         {
-            _PersonID = PersonID;
+            _PersonID = -1;
             _ApplicationDate = DateTime.Now;
-            _ApplicationType = ApplicationType;
-            _ApplicationStatus = enApplicationStatus.New;
-            _CreatedUserID = CreatedUserID;
+            ApplicationType = enApplicationType.NewInternationalLicense;
+            ApplicationStatus = enApplicationStatus.New;
+            _CreatedUserID = -1;
             _Mode = enMode.AddNew;
 
 
         }
-        static public clsApplication GetAddNewObject(int PersonID , enApplicationType ApplicationType , int CreatedUserID)
+        static public clsApplication GetAddNewObject()
         {
-            if (clsPerson.IsPersonExists(PersonID) && clsUser.Find(CreatedUserID).UserID != -1)
-            {
-                return new clsApplication(PersonID, ApplicationType, CreatedUserID);
-            }
-            else return null;
+            
+            return new clsApplication();
+            
         }
 
-        private bool _AddNewApplication()
+        virtual protected bool _AddNewApplication()
         {
             int AppID = clsApplicationDataAccessLayer.AddApplication(_PersonID , ApplicationDate,(int)_ApplicationType
                          ,(short)_ApplicationStatus , _LastStatusDate , _PaidFees , _CreatedUserID);
@@ -100,6 +128,8 @@ namespace DVLD_BusinessLayer
             }
             return false;
         }
+
+        
 
         
     }
