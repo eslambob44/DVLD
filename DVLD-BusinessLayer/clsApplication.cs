@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using static DVLD_BusinessLayer.clsApplication;
@@ -30,7 +31,7 @@ namespace DVLD_BusinessLayer
         public enum enApplicationType { NewLocalDrivingLicenseService = 1, RenewDrivingLicenseService =2
                                 , ReplacementForaLostDrivingLicense=3
                                 ,ReplacementForADamagedDrivingLicense=4, ReleaseDetainedDrivingLicense=5
-                                , NewInternationalLicense}
+                                , NewInternationalLicense=6}
 
         protected enApplicationType _ApplicationType;
         
@@ -199,6 +200,32 @@ namespace DVLD_BusinessLayer
         static public bool CompleteApplication(int ApplicationID)
         {
             return clsApplicationDataAccessLayer.UpdateApplicationStatus(ApplicationID, (short)enApplicationStatus.Completed);
+        }
+
+        static public string GetApplicationTypeString(enApplicationType ApplicationType)
+        {
+            switch(ApplicationType)
+            {
+                case enApplicationType.NewLocalDrivingLicenseService:
+                    return "New LocalDriving License Service";
+                case enApplicationType.RenewDrivingLicenseService:
+                    return "Renew Driving License Service";
+                case enApplicationType.ReplacementForaLostDrivingLicense:
+                    return "Replacement For a Lost Driving License";
+                case enApplicationType.ReplacementForADamagedDrivingLicense:
+                    return "Replacement For A Damaged Driving License";
+                case enApplicationType.ReleaseDetainedDrivingLicense:
+                    return "Release Detained Driving License";
+                case enApplicationType.NewInternationalLicense:
+                    return "New International License";
+                default:
+                    return null;
+            }
+        }
+
+        public string GetApplicationTypeString()
+        {
+            return GetApplicationTypeString(_ApplicationType);
         }
 
 
