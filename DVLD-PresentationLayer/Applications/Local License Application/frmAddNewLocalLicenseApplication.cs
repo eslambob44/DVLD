@@ -64,7 +64,7 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             Application.CreateUserID = clsGlobalSettings.UserID;
             Application.LicenseClass = (clsLocalLicenseApplication.enLicenseClass)(cbLicenseClasses.SelectedIndex + 1);
             int TestIfThereSameApplication;
-            if(( TestIfThereSameApplication= Application.GetSameLicenseClassApplication())!= -1)
+            if(( TestIfThereSameApplication= Application.GetActiveApplicationWithSameLicenseClass())!= -1)
             {
                 MessageBox.Show(@"Choose another license class,The selected person already have an active application for the selected class with id= "+ TestIfThereSameApplication
                                 , "" , MessageBoxButtons.OK , MessageBoxIcon.Error);

@@ -64,14 +64,14 @@ namespace DVLD_DataAccessLayer
             return dtLicenseClasses;
         }
 
-        static public int GetSameLicenseApplicationClass(int PersonID , int LicenseClassID)
+        static public int GetActiveApplicationWithSameLicenseClass(int PersonID , int LicenseClassID)
         {
             int ApplicationID = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Select Applications.ApplicationID from LocalDrivingLicenseApplications
                          inner join Applications on
                          Applications.ApplicationID = LocalDrivingLicenseApplications.ApplicationID
-                         where ApplicantPersonID = @PersonID and LicenseClassID = @LicenseClassID and not ApplicationStatus  = 2";
+                         where ApplicantPersonID = @PersonID and LicenseClassID = @LicenseClassID and ApplicationStatus  = 1";
             SqlCommand Command = new SqlCommand (Query, Connection);
             Command.Parameters.AddWithValue("@PersonID" , PersonID);
             Command.Parameters.AddWithValue("@LicenseClassID" , LicenseClassID);

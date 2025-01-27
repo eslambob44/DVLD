@@ -48,7 +48,7 @@ namespace DVLD_BusinessLayer
 
         override protected bool _AddNewApplication()
         {
-            if (GetSameLicenseClassApplication() == -1)
+            if (GetActiveApplicationWithSameLicenseClass() == -1)
             {
                 if (base._AddNewApplication())
                 {
@@ -61,9 +61,9 @@ namespace DVLD_BusinessLayer
             else return false;
         }
 
-        public int GetSameLicenseClassApplication()
+        public int GetActiveApplicationWithSameLicenseClass()
         {
-            return clsLocalLicenseApplicationDataAccessLayer.GetSameLicenseApplicationClass(PersonID, (int)LicenseClass);
+            return clsLocalLicenseApplicationDataAccessLayer.GetActiveApplicationWithSameLicenseClass(PersonID, (int)LicenseClass);
         }
 
         override public bool Save()
