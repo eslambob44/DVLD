@@ -130,6 +130,26 @@ namespace DVLD_DataAccessLayer
         }
 
 
+       static public bool UpdateApplicationStatus(int ApplicationID , short ApplicationStatus) 
+       {
+            bool IsUpdated=false;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Update Applications
+                            set ApplicationStatus = @ApplicationStatus
+                            Where ApplicationID = @ApplicationID and ApplicationStatus = 1";
+            SqlCommand Command = new SqlCommand (Query, Connection);
+            Command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
+            Command.Parameters.AddWithValue("@ApplicationStatus", ApplicationStatus);
+            try
+            {
+                Connection.Open();
+                int RowsAffected = Command.ExecuteNonQuery();
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return IsUpdated;
+        }
+
     }
 
 
