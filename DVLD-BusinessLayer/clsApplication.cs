@@ -25,7 +25,7 @@ namespace DVLD_BusinessLayer
             }
         
         }
-        protected DateTime _ApplicationDate;
+        private DateTime _ApplicationDate;
         public DateTime ApplicationDate { get { return _ApplicationDate; } }
         public enum enApplicationType { NewLocalDrivingLicenseService = 1, RenewDrivingLicenseService =2
                                 , ReplacementForaLostDrivingLicense=3
@@ -49,28 +49,26 @@ namespace DVLD_BusinessLayer
         
         }
         public enum enApplicationStatus { New = 1 ,Completed = 3 , Canceled =2}
-        protected enApplicationStatus _ApplicationStatus;
-
+        private enApplicationStatus __ApplicationStatus;
+        private enApplicationStatus _OriginalStatus;
         
-        public enApplicationStatus ApplicationStatus 
+        private enApplicationStatus _ApplicationStatus 
         { 
-            get { return _ApplicationStatus; }
+            get { return __ApplicationStatus; }
             set
             {
-                if (_Mode == enMode.AddNew)
-                {
-                    _ApplicationStatus = value;
-                    _LastStatusDate = DateTime.Now;
-                }
-                
+                __ApplicationStatus = value;
+                 _LastStatusDate = DateTime.Now;
             }
         }
 
-        protected DateTime _LastStatusDate;
+        public enApplicationStatus ApplicationStatus { get { return __ApplicationStatus; } }
+
+        private DateTime _LastStatusDate;
         public DateTime LastStatusDate { get { return _LastStatusDate; } }
-        protected float _PaidFees;
+        private float _PaidFees;
         public float PaidFees { get { return _PaidFees;} }
-        protected int _CreatedUserID;
+        private int _CreatedUserID;
         public int CreateUserID 
         { 
             get { return _CreatedUserID; }
@@ -84,14 +82,27 @@ namespace DVLD_BusinessLayer
         protected clsApplication()
         {
             _Mode = enMode.AddNew;
+            _ID = -1;
             _PersonID = -1;
             _ApplicationDate = DateTime.Now;
-            ApplicationType = enApplicationType.NewInternationalLicense;
-            ApplicationStatus = enApplicationStatus.New;
+            this.ApplicationType = enApplicationType.NewInternationalLicense;
+            this._ApplicationStatus = enApplicationStatus.New;
             _CreatedUserID = -1;
-            
+        }
 
-
+        protected clsApplication(int ID , int PersonID , DateTime ApplicationDate , enApplicationType ApplicationType,
+               float PaidFees, enApplicationStatus ApplicationStatus , int CreatedUserID , DateTime LastStatusDate)
+        {
+            _Mode = enMode.Update;
+            _ID = ID;
+            _PersonID = PersonID;
+            this._ApplicationDate = ApplicationDate;
+            this._ApplicationType = ApplicationType;
+            this.__ApplicationStatus = ApplicationStatus;
+            this._CreatedUserID = CreatedUserID;
+            _PaidFees = PaidFees;
+            this._LastStatusDate = LastStatusDate;
+            _OriginalStatus=ApplicationStatus;
         }
         static public clsApplication GetAddNewObject()
         {
@@ -100,10 +111,26 @@ namespace DVLD_BusinessLayer
             
         }
 
+        static public clsApplication Find(int ApplicationID)
+        {
+            int ID=-1, PersonID = -1, CreatedPersonID = -1;
+            DateTime ApplicationDate =DateTime.Now, LastStatusUpdate = DateTime.Now;
+            int ApplicationTypeID = -1;
+            short ApplicationStatus = -1;
+            float PaidFees = -1;
+            if (clsApplicationDataAccessLayer.FindApplication(ApplicationID, ref PersonID, ref ApplicationDate,
+                ref ApplicationTypeID, ref ApplicationStatus, ref LastStatusUpdate, ref PaidFees, ref CreatedPersonID))
+            {
+                return new clsApplication(ApplicationID, PersonID, ApplicationDate, (enApplicationType)ApplicationTypeID,
+                    PaidFees, (enApplicationStatus)ApplicationStatus, CreatedPersonID, LastStatusUpdate);
+            }
+            else return null;
+        }
+
         virtual protected bool _AddNewApplication()
         {
             int AppID = clsApplicationDataAccessLayer.AddApplication(_PersonID , ApplicationDate,(int)_ApplicationType
-                         ,(short)_ApplicationStatus , _LastStatusDate , _PaidFees , _CreatedUserID);
+                         ,(short)__ApplicationStatus , _LastStatusDate , _PaidFees , _CreatedUserID);
             if(AppID != -1)
             {
                 this._ID = AppID;
@@ -113,6 +140,12 @@ namespace DVLD_BusinessLayer
             {
                 return false;   
             }
+        }
+
+        virtual protected bool _Update()
+        {
+            return clsApplicationDataAccessLayer.UpdateApplication(_ID , PersonID,ApplicationDate , (int)ApplicationType,
+                        (short)_ApplicationStatus,LastStatusDate, _PaidFees , _CreatedUserID);
         }
 
         virtual public bool Save()
@@ -126,12 +159,50 @@ namespace DVLD_BusinessLayer
                         return true;
                     }
                     else return false;
+                case enMode.Update:
+                    if (_Update())
+                    {
+                        _OriginalStatus = __ApplicationStatus;
+                        return true;
+                    }
+                    else return false;
+                    
             }
             return false;
         }
 
-        
+        public bool CancelApplication()
+        {
+            if (_Mode == enMode.Update && _OriginalStatus == enApplicationStatus.New)
+            {
+                _ApplicationStatus = enApplicationStatus.Canceled;
+                return true;
+            }
+            return false;
+        }
 
-        
+        virtual public bool CompleteApplication()
+        {
+            if (_Mode == enMode.Update && _OriginalStatus == enApplicationStatus.New)
+            {
+                _ApplicationStatus = enApplicationStatus.Completed;
+                return true;
+            }
+            return false;
+        }
+
+        static public bool CancelApplication(int ApplicationID)
+        {
+            return clsApplicationDataAccessLayer.UpdateApplicationStatus(ApplicationID, (short)enApplicationStatus.Canceled);
+        }
+
+        static public bool CompleteApplication(int ApplicationID)
+        {
+            return clsApplicationDataAccessLayer.UpdateApplicationStatus(ApplicationID, (short)enApplicationStatus.Completed);
+        }
+
+
+
+
     }
 }
