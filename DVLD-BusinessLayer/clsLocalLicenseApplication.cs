@@ -127,5 +127,37 @@ namespace DVLD_BusinessLayer
         {
             return GetActiveTest(LocalDrivingLicenseApplicationID);
         }
+
+        public int GetNumberOfPassedTests()
+        {
+            return clsLocalLicenseApplicationDataAccessLayer.GetNumberOfPassedTests(LocalDrivingLicenseApplicationID);
+        }
+
+        static public string GetLicenseClassString(enLicenseClass LicenseClass)
+        {
+            switch(LicenseClass)
+            {
+                case enLicenseClass.SmallMotorcycle:
+                    return "Class 1 - Small Motorcycle";
+                case enLicenseClass.HeavyMotorcycle:
+                    return "Class 2 - Heavy Motorcycle License";
+                case enLicenseClass.OrdinaryDriving:
+                    return "Class 3 - Ordinary driving license";
+                case enLicenseClass.Commercial:
+                    return "Class 4 - Commercial";
+                case enLicenseClass.Agricultural:
+                    return "Class 5 - Agricultural";
+                case enLicenseClass.SmallAndMediumBus:
+                    return "Class 6 - Small and medium bus";
+                case enLicenseClass.TruckAndHeavyVehicle:
+                    return "Class 7 - Truck and heavy vehicle";
+                default: return null;
+            }
+        }
+
+        public string GetLicenseClassString()
+        {
+            return GetLicenseClassString(LicenseClass);
+        }
     }
 }
