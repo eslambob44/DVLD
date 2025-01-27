@@ -222,6 +222,30 @@ namespace DVLD_DataAccessLayer
             return ActiveTest;
         }
 
+        static public int GetNumberOfPassedTests(int ldlApplicationID)
+        {
+            int PassedTests = -1;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select Count(tests.TestID) from Tests
+            inner join TestAppointments
+            on Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+            where TestAppointments.LocalDrivingLicenseApplicationID = @ldlApplicationID;";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@ldlApplicationID", ldlApplicationID);
+            try
+            {
+                Connection.Open();
+                object Result = Command.ExecuteScalar();
+                if(Result!=null && int.TryParse (Result.ToString() , out int Temp))
+                {
+                    PassedTests= Temp;
+                }
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return PassedTests;
+        }
+
 
     }
 }
