@@ -11,6 +11,7 @@ namespace DVLD_BusinessLayer
 {
     public class clsLocalLicenseApplication : clsApplication
     {
+        public enum enActiveTest {VisionTest=1,WrittenTest=2,PracticalTest=3,TestCompleted = 0 , Error =-1 }
         private int _LocalDrivingLicenseApplicationID;
         public int LocalDrivingLicenseApplicationID { get { return _LocalDrivingLicenseApplicationID; } }
         public enum enLicenseClass
@@ -34,9 +35,45 @@ namespace DVLD_BusinessLayer
             ApplicationType = enApplicationType.NewLocalDrivingLicenseService;
         }
 
+        private clsLocalLicenseApplication(int ldlID ,enLicenseClass LicenseClass, int ApplicationId,
+            int PersonID , DateTime ApplicationDate , enApplicationType ApplicationType , float PaidFees 
+            , enApplicationStatus ApplicationStatus , int CreatedUserID , DateTime LastStatusDate )
+            :base(ApplicationId , PersonID , ApplicationDate , ApplicationType , PaidFees , ApplicationStatus ,
+                 CreatedUserID,LastStatusDate)
+        {
+            this._LocalDrivingLicenseApplicationID = ldlID;
+            this._LicenseClass = LicenseClass;
+        }
+
+        new static public clsLocalLicenseApplication Find(int LocalDrivingLicenseID)
+        {
+            int ldlID=-1, ApplicationId = -1, PersonID = -1, CreatedUserID = -1;
+            int LicenseClass=-1;
+            
+            DateTime ApplicationDate = DateTime.Now , LastStatusDate=DateTime.Now;
+            int ApplicationType=-1;
+            float PaidFees = -1;
+            short ApplicationStatus=-1;
+
+            if (clsLocalLicenseApplicationDataAccessLayer.FindLocalLicenseApplication(LocalDrivingLicenseID,
+                ref ApplicationId, ref LicenseClass, ref PersonID, ref ApplicationDate, ref ApplicationType,
+                ref ApplicationStatus, ref LastStatusDate, ref PaidFees, ref CreatedUserID))
+            {
+                return new clsLocalLicenseApplication(ldlID, (enLicenseClass)LicenseClass, ApplicationId, PersonID, ApplicationDate, (enApplicationType)ApplicationType,
+                    PaidFees, (enApplicationStatus)ApplicationStatus, CreatedUserID, LastStatusDate);
+            }
+            else return null;
+            
+        }
+
         static public DataTable ListLicenseClasses()
         {
             return clsLocalLicenseApplicationDataAccessLayer.ListLicenseClasses();
+        }
+
+        static public DataTable ListLocalLicenseApplications()
+        {
+            return clsLocalLicenseApplicationDataAccessLayer.ListLocalLicenseApplications();
         }
 
         new static public clsLocalLicenseApplication GetAddNewObject()
@@ -79,6 +116,16 @@ namespace DVLD_BusinessLayer
                     else return false;
             }
             return false;
+        }
+
+        static public enActiveTest GetActiveTest(int LocalDrivingLicenseID)
+        {
+            return (enActiveTest)clsLocalLicenseApplicationDataAccessLayer.GetActiveTest(LocalDrivingLicenseID);
+        }
+
+        public enActiveTest GetActiveTest()
+        {
+            return GetActiveTest(LocalDrivingLicenseApplicationID);
         }
     }
 }
