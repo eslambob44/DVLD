@@ -186,6 +186,42 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
+        static public int GetActiveTest(int ldlApplicationID)
+        {
+            int ActiveTest =-1 ;
+            SqlConnection Connection = new SqlConnection (clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select ActiveTest = 
+                            case 
+                            	When BiggestTestID is null then 0
+                            	when BiggestTestID between 1 and 2 then BiggestTestID+1
+                            	else -1
+                            End
+                            from
+                            (
+                            	Select max(TestTypeID) as BiggestTestID  From Tests
+                            	inner join TestAppointments 
+                            	on Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+                            	Where TestResult =1 and LocalDrivingLicenseApplicationID =@ldlApplicationID
+                            )R1;";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@ldlApplicationID" , ldlApplicationID);
+            try
+            {
+                Connection.Open();
+                object Result = Command.ExecuteScalar();
+                if(Result != null && int.TryParse(Result.ToString() , out int Temp))
+                {
+                    ActiveTest = Temp;
+                }
+            }
+            catch
+            {
+
+            }
+            finally { Connection.Close(); }
+            return ActiveTest;
+        }
+
 
     }
 }
