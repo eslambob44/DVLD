@@ -58,6 +58,12 @@
     <Compile Include="Application Types\frmUpdateApplicationType.Designer.cs">
       <DependentUpon>frmUpdateApplicationType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\ctrlShowApplicationInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Applications\ctrlShowApplicationInfo.Designer.cs">
+      <DependentUpon>ctrlShowApplicationInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\Local License Application\frmAddNewLocalLicenseApplication.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Application Types\frmUpdateApplicationType.resx">
       <DependentUpon>frmUpdateApplicationType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\ctrlShowApplicationInfo.resx">
+      <DependentUpon>ctrlShowApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Local License Application\frmAddNewLocalLicenseApplication.resx">
       <DependentUpon>frmAddNewLocalLicenseApplication.cs</DependentUpon>

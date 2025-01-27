@@ -207,7 +207,7 @@ namespace DVLD_BusinessLayer
             switch(ApplicationType)
             {
                 case enApplicationType.NewLocalDrivingLicenseService:
-                    return "New LocalDriving License Service";
+                    return "New Local Driving License Service";
                 case enApplicationType.RenewDrivingLicenseService:
                     return "Renew Driving License Service";
                 case enApplicationType.ReplacementForaLostDrivingLicense:

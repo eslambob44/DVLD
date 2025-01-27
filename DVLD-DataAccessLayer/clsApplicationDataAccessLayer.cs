@@ -65,7 +65,7 @@ namespace DVLD_DataAccessLayer
                     PersonID = (int)Reader["ApplicantPersonID"];
                     ApplicationDate = (DateTime)Reader["ApplicationDate"];
                     ApplicationTypeID = (int)Reader["ApplicationTypeID"];
-                    ApplicationStatus = (short)Reader["ApplicationStatus"];
+                    ApplicationStatus = (byte)Reader["ApplicationStatus"];
                     LastStatusDate = (DateTime)Reader["LastStatusDate"];
                     PaidFees = (float)(decimal)Reader["PaidFees"];
                     CreatedUserID = (int)Reader["CreatedByUserID"];

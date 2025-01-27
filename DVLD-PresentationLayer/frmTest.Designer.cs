@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlShowUserInfo1 = new DVLD_PresentationLayer.Users.ctrlShowUserInfo();
+            this.ctrlShowApplicationInfo1 = new DVLD_PresentationLayer.Applications.ctrlShowApplicationInfo();
             this.SuspendLayout();
             // 
-            // ctrlShowUserInfo1
+            // ctrlShowApplicationInfo1
             // 
-            this.ctrlShowUserInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlShowUserInfo1.Location = new System.Drawing.Point(13, 14);
-            this.ctrlShowUserInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ctrlShowUserInfo1.Name = "ctrlShowUserInfo1";
-            this.ctrlShowUserInfo1.Size = new System.Drawing.Size(885, 481);
-            this.ctrlShowUserInfo1.TabIndex = 0;
+            this.ctrlShowApplicationInfo1.BackColor = System.Drawing.Color.White;
+            this.ctrlShowApplicationInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlShowApplicationInfo1.Location = new System.Drawing.Point(39, 92);
+            this.ctrlShowApplicationInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ctrlShowApplicationInfo1.Name = "ctrlShowApplicationInfo1";
+            this.ctrlShowApplicationInfo1.Size = new System.Drawing.Size(833, 305);
+            this.ctrlShowApplicationInfo1.TabIndex = 0;
             // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 620);
-            this.Controls.Add(this.ctrlShowUserInfo1);
+            this.Controls.Add(this.ctrlShowApplicationInfo1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmTest";
@@ -57,6 +58,6 @@
 
         #endregion
 
-        private Users.ctrlShowUserInfo ctrlShowUserInfo1;
+        private Applications.ctrlShowApplicationInfo ctrlShowApplicationInfo1;
     }
 }
