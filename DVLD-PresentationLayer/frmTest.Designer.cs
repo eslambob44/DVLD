@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlShowApplicationInfo1 = new DVLD_PresentationLayer.Applications.ctrlShowApplicationInfo();
+            this.ctrlShowLocalDrivingLicenseApplicationInfo1 = new DVLD_PresentationLayer.Applications.Local_License_Application.ctrlShowLocalDrivingLicenseApplicationInfo();
             this.SuspendLayout();
             // 
-            // ctrlShowApplicationInfo1
+            // ctrlShowLocalDrivingLicenseApplicationInfo1
             // 
-            this.ctrlShowApplicationInfo1.BackColor = System.Drawing.Color.White;
-            this.ctrlShowApplicationInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlShowApplicationInfo1.Location = new System.Drawing.Point(39, 92);
-            this.ctrlShowApplicationInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ctrlShowApplicationInfo1.Name = "ctrlShowApplicationInfo1";
-            this.ctrlShowApplicationInfo1.Size = new System.Drawing.Size(833, 305);
-            this.ctrlShowApplicationInfo1.TabIndex = 0;
+            this.ctrlShowLocalDrivingLicenseApplicationInfo1.BackColor = System.Drawing.Color.White;
+            this.ctrlShowLocalDrivingLicenseApplicationInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlShowLocalDrivingLicenseApplicationInfo1.Location = new System.Drawing.Point(65, 41);
+            this.ctrlShowLocalDrivingLicenseApplicationInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ctrlShowLocalDrivingLicenseApplicationInfo1.Name = "ctrlShowLocalDrivingLicenseApplicationInfo1";
+            this.ctrlShowLocalDrivingLicenseApplicationInfo1.Size = new System.Drawing.Size(828, 454);
+            this.ctrlShowLocalDrivingLicenseApplicationInfo1.TabIndex = 0;
             // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 620);
-            this.Controls.Add(this.ctrlShowApplicationInfo1);
+            this.Controls.Add(this.ctrlShowLocalDrivingLicenseApplicationInfo1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmTest";
@@ -58,6 +58,6 @@
 
         #endregion
 
-        private Applications.ctrlShowApplicationInfo ctrlShowApplicationInfo1;
+        private Applications.Local_License_Application.ctrlShowLocalDrivingLicenseApplicationInfo ctrlShowLocalDrivingLicenseApplicationInfo1;
     }
 }

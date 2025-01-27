@@ -19,7 +19,7 @@ namespace DVLD_PresentationLayer
 
         private void frmTest_Load(object sender, EventArgs e)
         {
-            ctrlShowApplicationInfo1.Find(72);
+            ctrlShowLocalDrivingLicenseApplicationInfo1.Find(32);
         }
     }
 }

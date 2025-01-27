@@ -64,6 +64,12 @@
     <Compile Include="Applications\ctrlShowApplicationInfo.Designer.cs">
       <DependentUpon>ctrlShowApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\Local License Application\ctrlShowLocalDrivingLicenseApplicationInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Applications\Local License Application\ctrlShowLocalDrivingLicenseApplicationInfo.Designer.cs">
+      <DependentUpon>ctrlShowLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\Local License Application\frmAddNewLocalLicenseApplication.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\ctrlShowApplicationInfo.resx">
       <DependentUpon>ctrlShowApplicationInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Local License Application\ctrlShowLocalDrivingLicenseApplicationInfo.resx">
+      <DependentUpon>ctrlShowLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Local License Application\frmAddNewLocalLicenseApplication.resx">
       <DependentUpon>frmAddNewLocalLicenseApplication.cs</DependentUpon>
