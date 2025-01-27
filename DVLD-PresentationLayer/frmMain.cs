@@ -1,5 +1,6 @@
 ﻿using DVLD_BusinessLayer;
 using DVLD_PresentationLayer.Application_Types;
+using DVLD_PresentationLayer.Applications.Local_License_Application;
 using DVLD_PresentationLayer.People;
 using DVLD_PresentationLayer.Test_Types;
 using DVLD_PresentationLayer.Users;
@@ -64,6 +65,12 @@ namespace DVLD_PresentationLayer
         private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManageTestTypes frm = new frmManageTestTypes();
+            frm.Show();
+        }
+
+        private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddNewLocalLicenseApplication frm = new frmAddNewLocalLicenseApplication();
             frm.Show();
         }
     }

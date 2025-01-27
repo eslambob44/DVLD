@@ -64,14 +64,14 @@ namespace DVLD_DataAccessLayer
             return dtLicenseClasses;
         }
 
-        static public bool CheckIfCanApplyForApplication(int PersonID , int LicenseClassID)
+        static public int GetSameLicenseApplicationClass(int PersonID , int LicenseClassID)
         {
-            bool IsValid = false;
+            int ApplicationID = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Select Count(Applications.ApplicationID)   from LocalDrivingLicenseApplications
+            string Query = @"Select Applications.ApplicationID from LocalDrivingLicenseApplications
                          inner join Applications on
                          Applications.ApplicationID = LocalDrivingLicenseApplications.ApplicationID
-                         where ApplicantPersonID = @PersonID and LicenseClassID = @LicenseClassID and not ApplicationStatus  = 3";
+                         where ApplicantPersonID = @PersonID and LicenseClassID = @LicenseClassID and not ApplicationStatus  = 2";
             SqlCommand Command = new SqlCommand (Query, Connection);
             Command.Parameters.AddWithValue("@PersonID" , PersonID);
             Command.Parameters.AddWithValue("@LicenseClassID" , LicenseClassID);
@@ -81,7 +81,7 @@ namespace DVLD_DataAccessLayer
                 object Result = Command.ExecuteScalar();
                 if (Result != null && int.TryParse(Result.ToString() , out int Temp))
                 {
-                    IsValid = (Temp == 0);
+                    ApplicationID = Temp;
                 }
             }
             catch
@@ -92,7 +92,7 @@ namespace DVLD_DataAccessLayer
             {
                 Connection.Close ();
             }
-            return IsValid;
+            return ApplicationID;
         }
     }
 }

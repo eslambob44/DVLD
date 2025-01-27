@@ -48,7 +48,7 @@ namespace DVLD_BusinessLayer
             }
         
         }
-        public enum enApplicationStatus { New = 0 ,Completed = 1 , Canceled =2}
+        public enum enApplicationStatus { New = 1 ,Completed = 3 , Canceled =2}
         protected enApplicationStatus _ApplicationStatus;
 
         
@@ -83,12 +83,13 @@ namespace DVLD_BusinessLayer
 
         protected clsApplication()
         {
+            _Mode = enMode.AddNew;
             _PersonID = -1;
             _ApplicationDate = DateTime.Now;
             ApplicationType = enApplicationType.NewInternationalLicense;
             ApplicationStatus = enApplicationStatus.New;
             _CreatedUserID = -1;
-            _Mode = enMode.AddNew;
+            
 
 
         }

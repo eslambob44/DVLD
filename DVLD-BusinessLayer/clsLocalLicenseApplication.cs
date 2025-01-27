@@ -31,6 +31,7 @@ namespace DVLD_BusinessLayer
         private clsLocalLicenseApplication() : base () 
         {
             _LicenseClass = enLicenseClass.OrdinaryDriving;
+            ApplicationType = enApplicationType.NewLocalDrivingLicenseService;
         }
 
         static public DataTable ListLicenseClasses()
@@ -47,7 +48,7 @@ namespace DVLD_BusinessLayer
 
         override protected bool _AddNewApplication()
         {
-            if (CheckIfCanApplyForApplication())
+            if (GetSameLicenseClassApplication() == -1)
             {
                 if (base._AddNewApplication())
                 {
@@ -60,9 +61,9 @@ namespace DVLD_BusinessLayer
             else return false;
         }
 
-        public bool CheckIfCanApplyForApplication()
+        public int GetSameLicenseClassApplication()
         {
-            return clsLocalLicenseApplicationDataAccessLayer.CheckIfCanApplyForApplication(PersonID, (int)LicenseClass);
+            return clsLocalLicenseApplicationDataAccessLayer.GetSameLicenseApplicationClass(PersonID, (int)LicenseClass);
         }
 
         override public bool Save()
