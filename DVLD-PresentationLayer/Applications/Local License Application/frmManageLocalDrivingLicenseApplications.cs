@@ -216,5 +216,16 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             frmLocalDrivingLicenseApplicationInfo frm = new frmLocalDrivingLicenseApplicationInfo(ldlApplicationID);
             frm.ShowDialog();
         }
+
+        private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int ldlApplicationID = GetSelectedldlApplicationID();
+            int ApplicationID = clsLocalLicenseApplication.Find(ldlApplicationID).ID;
+            if (clsLocalLicenseApplication.CancelApplication(ApplicationID))
+            {
+                MessageBox.Show("Application Canceled Successfully");
+                dtLocalDrivingLicenseApplications = clsLocalLicenseApplication.ListLocalLicenseApplications();
+            }
+        }
     }
 }

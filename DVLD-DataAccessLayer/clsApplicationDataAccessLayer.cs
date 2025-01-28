@@ -144,6 +144,7 @@ namespace DVLD_DataAccessLayer
             {
                 Connection.Open();
                 int RowsAffected = Command.ExecuteNonQuery();
+                IsUpdated  = RowsAffected > 0;
             }
             catch { }
             finally { Connection.Close(); }
