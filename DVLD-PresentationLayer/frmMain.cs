@@ -73,5 +73,11 @@ namespace DVLD_PresentationLayer
             frmAddNewLocalLicenseApplication frm = new frmAddNewLocalLicenseApplication();
             frm.Show();
         }
+
+        private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageLocalDrivingLicenseApplications frm = new frmManageLocalDrivingLicenseApplications();
+            frm.Show();
+        }
     }
 }

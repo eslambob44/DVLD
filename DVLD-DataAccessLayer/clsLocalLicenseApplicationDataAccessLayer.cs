@@ -110,7 +110,7 @@ namespace DVLD_DataAccessLayer
                             ) ,
                             Status = 
                             case
-                            	when ApplicationStatus = 1 then 'Now'
+                            	when ApplicationStatus = 1 then 'New'
                             	when ApplicationStatus = 3 then 'Completed'
                             	when ApplicationStatus = 2 then 'Canceled'
                             END
@@ -192,8 +192,9 @@ namespace DVLD_DataAccessLayer
             SqlConnection Connection = new SqlConnection (clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Select ActiveTest = 
                             case 
-                            	When BiggestTestID is null then 0
+                            	When BiggestTestID is null then 1
                             	when BiggestTestID between 1 and 2 then BiggestTestID+1
+                                When BiggestTestID =3 then 0
                             	else -1
                             End
                             from
@@ -216,7 +217,7 @@ namespace DVLD_DataAccessLayer
             }
             catch
             {
-
+        
             }
             finally { Connection.Close(); }
             return ActiveTest;
