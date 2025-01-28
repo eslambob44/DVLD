@@ -209,5 +209,12 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
         {
             _ApplyFilter();
         }
+
+        private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int ldlApplicationID  = GetSelectedldlApplicationID();
+            frmLocalDrivingLicenseApplicationInfo frm = new frmLocalDrivingLicenseApplicationInfo(ldlApplicationID);
+            frm.ShowDialog();
+        }
     }
 }
