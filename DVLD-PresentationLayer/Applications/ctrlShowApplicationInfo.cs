@@ -21,17 +21,19 @@ namespace DVLD_PresentationLayer.Applications
             InitializeComponent();
         }
 
-        public void Find(int ApplicationID)
+        public bool Find(int ApplicationID)
         {
             Application = clsApplication.Find(ApplicationID);
             if(Application != null)
             {
                 _Load();
+                return true;
             }
             else
             {
                 MessageBox.Show("Cannot find an application with Application ID: "+ ApplicationID,"" , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                LoadEmptyForm();
+                return false;
             }
         }
 
@@ -65,6 +67,18 @@ namespace DVLD_PresentationLayer.Applications
             lblApplicationDate.Text = Application.ApplicationDate.ToString("dd/MM/yyyy");
             lblStatusDate.Text = Application.LastStatusDate.ToString("dd/MM/yyyy");
             lblCreatedUserName.Text = _GetCreatedUserName(Application.CreateUserID);
+        }
+
+        public void LoadEmptyForm()
+        {
+            lblApplicationID.Text = "??";
+            lblApplicationStatus.Text = "??";
+            lblPaidFees.Text = "??";
+            lblApplicantFullName.Text = "??";
+            lblApplicationType.Text = "??";
+            lblApplicationDate.Text = "??";
+            lblStatusDate.Text = "??";
+            lblCreatedUserName.Text = "??";
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
