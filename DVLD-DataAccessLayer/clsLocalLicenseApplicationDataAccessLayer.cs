@@ -247,6 +247,108 @@ namespace DVLD_DataAccessLayer
             return PassedTests;
         }
 
+        static public bool IsApplicationHaveActiveSameAppointment(int LocalDrivingLicenseApplicationID, int TestTypeID)
+        {
+            bool IsHasActiveAppointment = true;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select Count(TestAppointmentID) From TestAppointments
+                            Where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID 
+                            and TestTypeID = @TestTypeID and IsLocked = 0;";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            Command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            try
+            {
+                Connection.Open();
+                object Result = Command.ExecuteScalar();
+                if (Result != null && int.TryParse(Result.ToString(), out int Temp))
+                {
+                    IsHasActiveAppointment = Temp > 0;
+                }
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return IsHasActiveAppointment;
+        }
+
+        static public int GetNumberOfAppointments(int LocalDrivingLicenseApplicationID, int TestTypeID)
+        {
+            int NumberOfAppointments = -1;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select Count(TestAppointmentID) From TestAppointments
+                            Where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID 
+                            and TestTypeID = @TestTypeID;";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            Command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            try
+            {
+                Connection.Open();
+                object Result = Command.ExecuteScalar();
+                if (Result != null && int.TryParse(Result.ToString(), out int Temp))
+                {
+                    NumberOfAppointments = Temp;
+                }
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return NumberOfAppointments;
+        }
+
+        static public bool IsPassedTheTest(int LocalDrivingLicenseApplicationID, int TestTypeID)
+        {
+            bool IsPassed = false;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select Count(Tests.TestAppointmentID) as SucceededCount From Tests
+                            inner join TestAppointments on 
+                            Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+                            Where TestAppointments.LocalDrivingLicenseApplicationID =@LocalDrivingLicenseApplicationID  
+                            and Tests.TestResult= 1 and TestTypeID =@TestTypeID";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            Command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            try
+            {
+                Connection.Open();
+                object Result = Command.ExecuteScalar();
+                if (Result != null && int.TryParse(Result.ToString(), out int Temp))
+                {
+                    IsPassed = Temp > 0;
+                }
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return IsPassed;
+
+        }
+
+        static public int NumberOfTriesInTest(int LocalDrivingLicenseApplicationID, int TestTypeID)
+        {
+            int NumberOfTries = -1;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select Count(Tests.TestAppointmentID) as NumberOfTries From Tests
+                            inner join TestAppointments on 
+                            Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+                            Where TestAppointments.LocalDrivingLicenseApplicationID =@LocalDrivingLicenseApplicationID  
+                            and TestTypeID =@TestTypeID";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            Command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            try
+            {
+                Connection.Open();
+                object Result = Command.ExecuteScalar();
+                if (Result != null && int.TryParse(Result.ToString(), out int Temp))
+                {
+                    NumberOfTries = Temp;
+                }
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return NumberOfTries;
+
+        }
+
 
     }
 }
