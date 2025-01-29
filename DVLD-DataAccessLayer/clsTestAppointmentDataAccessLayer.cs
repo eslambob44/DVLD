@@ -64,7 +64,7 @@ namespace DVLD_DataAccessLayer
         }
 
         static public bool FindAppointment(int AppointmentID , ref int TestTypeID , ref int LocalDrivingLicenseApplicationID,
-            DateTime AppointmentDate , float PaidFees , int CreatedUserID , bool IsLocked)
+            ref DateTime AppointmentDate , ref float PaidFees , ref int CreatedUserID ,ref bool IsLocked)
         {
             bool IsFound = true;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);

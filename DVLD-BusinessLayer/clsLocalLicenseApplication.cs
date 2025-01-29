@@ -175,5 +175,10 @@ namespace DVLD_BusinessLayer
         {
             return clsLocalLicenseApplicationDataAccessLayer.GetNumberOfTriesInTest(LocalDrivingLicenseApplicationID, (int)testType);
         }
+
+        public DataTable ListAppointmentsBasedOnTestType(clsTestType.enTestType TestType)
+        {
+            return clsTestAppointmentDataAccessLayer.ListAppointmentsByTestType(LocalDrivingLicenseApplicationID,(int)TestType);
+        }
     }
 }
