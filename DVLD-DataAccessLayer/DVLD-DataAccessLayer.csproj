@@ -47,6 +47,7 @@
     <Compile Include="clsDataAccessLayerSettings.cs" />
     <Compile Include="clsLocalLicenseApplicationDataAccessLayer.cs" />
     <Compile Include="clsPersonDataAccess_1.cs" />
+    <Compile Include="clsTestAppointmentDataAccessLayer.cs" />
     <Compile Include="clsTestTypeDataAccessLayer.cs" />
     <Compile Include="clsUsersDataAccessLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
