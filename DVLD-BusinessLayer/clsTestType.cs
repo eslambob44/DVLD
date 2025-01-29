@@ -53,5 +53,10 @@ namespace DVLD_BusinessLayer
         {
             return clsTestTypeDataAccessLayer.ListTestTypes();
         }
+
+        static public float GetTestFees(int TestTypeID)
+        {
+            return clsTestTypeDataAccessLayer.GetFees(TestTypeID);
+        }
     }
 }
