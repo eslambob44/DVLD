@@ -159,5 +159,21 @@ namespace DVLD_BusinessLayer
         {
             return GetLicenseClassString(LicenseClass);
         }
+
+        
+        public bool IsHasActiveAppointment(clsTestType.enTestType testType)
+        {
+            return clsLocalLicenseApplicationDataAccessLayer.IsApplicationHaveActiveSameAppointment(LocalDrivingLicenseApplicationID, (int)testType);
+        }
+
+        public bool IsTestPassed(clsTestType.enTestType testType)
+        {
+            return clsLocalLicenseApplicationDataAccessLayer.IsPassedTheTest(LocalDrivingLicenseApplicationID, (int)testType);
+        }
+
+        public int GetNumberOfTriesOnTest(clsTestType.enTestType testType)
+        {
+            return clsLocalLicenseApplicationDataAccessLayer.GetNumberOfTriesInTest(LocalDrivingLicenseApplicationID, (int)testType);
+        }
     }
 }

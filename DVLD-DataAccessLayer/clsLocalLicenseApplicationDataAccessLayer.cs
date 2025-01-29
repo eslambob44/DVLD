@@ -322,7 +322,7 @@ namespace DVLD_DataAccessLayer
 
         }
 
-        static public int NumberOfTriesInTest(int LocalDrivingLicenseApplicationID, int TestTypeID)
+        static public int GetNumberOfTriesInTest(int LocalDrivingLicenseApplicationID, int TestTypeID)
         {
             int NumberOfTries = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);

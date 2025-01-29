@@ -58,5 +58,7 @@ namespace DVLD_BusinessLayer
         {
             return clsTestTypeDataAccessLayer.GetFees(TestTypeID);
         }
+
+        public enum enTestType { Vision = 1, Written, Practical };
     }
 }
