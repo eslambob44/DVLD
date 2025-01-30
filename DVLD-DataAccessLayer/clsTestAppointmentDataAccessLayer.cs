@@ -100,6 +100,40 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
+
+        static public bool FindAppointmentByRetakeTestApplicationID(int RetakeTestApplicationID, ref int TestTypeID, ref int LocalDrivingLicenseApplicationID,
+            ref DateTime AppointmentDate, ref float PaidFees, ref int CreatedUserID, ref bool IsLocked
+            , ref int AppointmentID)
+        {
+            bool IsFound = true;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select * From TestAppointments
+                            Where @RetakeTestApplicationID = @RetakeTestApplicationID";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID);
+            try
+            {
+                Connection.Open();
+                SqlDataReader Reader = Command.ExecuteReader();
+
+                if (Reader.Read())
+                {
+                    IsFound = true;
+                    TestTypeID = (int)Reader["TestTypeID"];
+                    LocalDrivingLicenseApplicationID = (int)Reader["LocalDrivingLicenseApplicationID"];
+                    AppointmentDate = (DateTime)Reader["AppointmentDate"];
+                    PaidFees = (float)(decimal)Reader["PaidFees"];
+                    CreatedUserID = (int)Reader["CreatedByUserID"];
+                    IsLocked = (bool)Reader["IsLocked"];
+                    AppointmentID = (int)Reader["AppointmentID"];
+                }
+                Reader.Close();
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return IsFound;
+        }
+
         static public DataTable ListAppointmentsByTestType(int LocalDrivingLicenseApplicationID ,int TestTypeID)
         {
             DataTable dtAppointments = new DataTable();

@@ -111,6 +111,25 @@ namespace DVLD_BusinessLayer
             else return null;
         }
 
+        static public clsTestAppointment FindByRetakeTestApplicationID(int RetakeTestApplicationID)
+        {
+            int testTypeID = -1;
+            float paidFees = 0.0f;
+            int localDrivingLicenseApplicationID = 0;
+            DateTime appointmentDate = DateTime.MinValue;
+            int createdUserID = 0;
+            bool isLocked = false;
+            int TestAppointmentID = -1;
+
+            if (clsTestAppointmentDataAccessLayer.FindAppointmentByRetakeTestApplicationID(RetakeTestApplicationID, ref testTypeID, ref localDrivingLicenseApplicationID
+                , ref appointmentDate, ref paidFees, ref createdUserID, ref isLocked, ref TestAppointmentID))
+            {
+                return new clsTestAppointment(TestAppointmentID, (clsTestType.enTestType)testTypeID, paidFees
+                    , localDrivingLicenseApplicationID, appointmentDate, createdUserID, isLocked, RetakeTestApplicationID);
+            }
+            else return null;
+        }
+
         static public clsTestAppointment GetAddNewObject()
         {
             return new clsTestAppointment();
