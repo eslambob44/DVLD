@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD_BusinessLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +20,7 @@ namespace DVLD_PresentationLayer
 
         private void frmTest_Load(object sender, EventArgs e)
         {
-            ctrlShowLocalDrivingLicenseApplicationInfo1.Find(32);
+            ctrlShowRetakeTestApplicationInfo1.ShowEmptyForm( clsTestType.enTestType.Vision,true);
         }
     }
 }

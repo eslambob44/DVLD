@@ -88,6 +88,12 @@
     <Compile Include="Applications\Local License Application\frmManageLocalDrivingLicenseApplications.Designer.cs">
       <DependentUpon>frmManageLocalDrivingLicenseApplications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\Retake Test Applicaiton\ctrlShowRetakeTestApplicationInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Applications\Retake Test Applicaiton\ctrlShowRetakeTestApplicationInfo.Designer.cs">
+      <DependentUpon>ctrlShowRetakeTestApplicationInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ctrlUserImage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Local License Application\frmManageLocalDrivingLicenseApplications.resx">
       <DependentUpon>frmManageLocalDrivingLicenseApplications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Retake Test Applicaiton\ctrlShowRetakeTestApplicationInfo.resx">
+      <DependentUpon>ctrlShowRetakeTestApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ctrlUserImage.resx">
       <DependentUpon>ctrlUserImage.cs</DependentUpon>

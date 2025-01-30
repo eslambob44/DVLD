@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlShowLocalDrivingLicenseApplicationInfo1 = new DVLD_PresentationLayer.Applications.Local_License_Application.ctrlShowLocalDrivingLicenseApplicationInfo();
+            this.ctrlShowRetakeTestApplicationInfo1 = new DVLD_PresentationLayer.Applications.Retake_Test_Application.ctrlShowRetakeTestApplicationInfo();
             this.SuspendLayout();
             // 
-            // ctrlShowLocalDrivingLicenseApplicationInfo1
+            // ctrlShowRetakeTestApplicationInfo1
             // 
-            this.ctrlShowLocalDrivingLicenseApplicationInfo1.BackColor = System.Drawing.Color.White;
-            this.ctrlShowLocalDrivingLicenseApplicationInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlShowLocalDrivingLicenseApplicationInfo1.Location = new System.Drawing.Point(65, 41);
-            this.ctrlShowLocalDrivingLicenseApplicationInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ctrlShowLocalDrivingLicenseApplicationInfo1.Name = "ctrlShowLocalDrivingLicenseApplicationInfo1";
-            this.ctrlShowLocalDrivingLicenseApplicationInfo1.Size = new System.Drawing.Size(828, 454);
-            this.ctrlShowLocalDrivingLicenseApplicationInfo1.TabIndex = 0;
+            this.ctrlShowRetakeTestApplicationInfo1.BackColor = System.Drawing.Color.White;
+            this.ctrlShowRetakeTestApplicationInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlShowRetakeTestApplicationInfo1.Location = new System.Drawing.Point(236, 167);
+            this.ctrlShowRetakeTestApplicationInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ctrlShowRetakeTestApplicationInfo1.Name = "ctrlShowRetakeTestApplicationInfo1";
+            this.ctrlShowRetakeTestApplicationInfo1.Size = new System.Drawing.Size(556, 123);
+            this.ctrlShowRetakeTestApplicationInfo1.TabIndex = 0;
             // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 620);
-            this.Controls.Add(this.ctrlShowLocalDrivingLicenseApplicationInfo1);
+            this.Controls.Add(this.ctrlShowRetakeTestApplicationInfo1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmTest";
@@ -58,6 +58,6 @@
 
         #endregion
 
-        private Applications.Local_License_Application.ctrlShowLocalDrivingLicenseApplicationInfo ctrlShowLocalDrivingLicenseApplicationInfo1;
+        private Applications.Retake_Test_Application.ctrlShowRetakeTestApplicationInfo ctrlShowRetakeTestApplicationInfo1;
     }
 }

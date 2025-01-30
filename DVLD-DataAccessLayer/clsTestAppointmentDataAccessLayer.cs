@@ -89,7 +89,7 @@ namespace DVLD_DataAccessLayer
                     AppointmentDate = (DateTime)Reader["AppointmentDate"];
                     PaidFees = (float)(decimal)Reader["PaidFees"];
                     CreatedUserID = (int)Reader["CreatedByUserID"];
-                    IsLocked = (bool)Reader["CreatedByUserID"];
+                    IsLocked = (bool)Reader["IsLocked"];
                     if (Reader["RetakeTestApplicationID"] == DBNull.Value) RetakeTestApplicationID = -1;
                     else RetakeTestApplicationID = (int)Reader["RetakeTestApplicationID"];
                 }
