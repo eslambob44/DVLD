@@ -56,6 +56,16 @@ namespace DVLD_BusinessLayer
         private bool _IsLocked;
         public bool IsLocked { get { return _IsLocked; }  }
 
+        private int _RetakeTestApplicationID;
+        public int RetakeTestApplicationID
+        {
+            get { return _RetakeTestApplicationID; }
+            set
+            {
+                if( _Mode == enMode.AddNew) _RetakeTestApplicationID = value;
+            }
+        }
+
         private clsTestAppointment()
         {
             _Mode = enMode.AddNew;
@@ -65,9 +75,11 @@ namespace DVLD_BusinessLayer
             AppointmentDate = DateTime.Now;
             CreatedUserID = -1;
             _IsLocked = false;
+            _RetakeTestApplicationID = -1;
         }
 
-        private clsTestAppointment( int iD, clsTestType.enTestType testType, float paidFees, int localDrivingLicenseApplicationID, DateTime appointmentDate, int createdUserID, bool isLocked)
+        private clsTestAppointment( int iD, clsTestType.enTestType testType, float paidFees, int localDrivingLicenseApplicationID
+            , DateTime appointmentDate, int createdUserID, bool isLocked , int RetakeTestApplicationID)
         {
             _Mode = enMode.Update;
             _ID = iD;
@@ -77,6 +89,7 @@ namespace DVLD_BusinessLayer
             AppointmentDate = appointmentDate;
             _CreatedUserID = createdUserID;
             _IsLocked = isLocked;
+            _RetakeTestApplicationID=RetakeTestApplicationID;
         }
 
         static public clsTestAppointment Find(int AppointmentID)
@@ -87,12 +100,13 @@ namespace DVLD_BusinessLayer
             DateTime appointmentDate = DateTime.MinValue;
             int createdUserID = 0;
             bool isLocked = false;
+            int RetakeTestApplicationID=-1;
 
             if (clsTestAppointmentDataAccessLayer.FindAppointment(AppointmentID, ref testTypeID, ref localDrivingLicenseApplicationID
-                , ref appointmentDate, ref paidFees, ref createdUserID, ref isLocked))
+                , ref appointmentDate, ref paidFees, ref createdUserID, ref isLocked ,ref RetakeTestApplicationID))
             {
                 return new clsTestAppointment(AppointmentID, (clsTestType.enTestType)testTypeID, paidFees
-                    , localDrivingLicenseApplicationID, appointmentDate, createdUserID, isLocked);
+                    , localDrivingLicenseApplicationID, appointmentDate, createdUserID, isLocked, RetakeTestApplicationID);
             }
             else return null;
         }
@@ -112,7 +126,7 @@ namespace DVLD_BusinessLayer
 
 
             _ID = clsTestAppointmentDataAccessLayer.AddNewAppointment((int)TestType, _LocalDrivingLicenseApplicationID
-                , AppointmentDate, _PaidFees, _CreatedUserID, _IsLocked);
+                , AppointmentDate, _PaidFees, _CreatedUserID, _IsLocked,_RetakeTestApplicationID);
             return (_ID != -1);
         }
 

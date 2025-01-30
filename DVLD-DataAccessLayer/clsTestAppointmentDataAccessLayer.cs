@@ -11,13 +11,13 @@ namespace DVLD_DataAccessLayer
     static public class clsTestAppointmentDataAccessLayer
     {
         static public int AddNewAppointment(int TestTypeID , int LocalDrivingLicenseApplicationID 
-            , DateTime AppointmentDate , float PaidFees , int CreatedUserID , bool IsLocked)
+            , DateTime AppointmentDate , float PaidFees , int CreatedUserID , bool IsLocked ,int RetakeTestID)
         {
             int AppointmentID = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Insert Into TestAppointments Values
                             (@TestTypeID , @LocalDrivingLicenseApplicationID , @AppointmentDate , @PaidFees
-                            , @CreatedUserID , @IsLocked);
+                            , @CreatedUserID , @IsLocked,@RetakeTestID);
                             SELECT SCOPE_IDENTITY();";
             SqlCommand Command = new SqlCommand(Query, Connection);
             Command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
@@ -26,6 +26,9 @@ namespace DVLD_DataAccessLayer
             Command.Parameters.AddWithValue("@PaidFees", PaidFees);
             Command.Parameters.AddWithValue("@CreatedUserID", CreatedUserID);
             Command.Parameters.AddWithValue("@IsLocked", IsLocked);
+            if (RetakeTestID == -1)
+            { Command.Parameters.AddWithValue("@RetakeTestID", DBNull.Value); }
+            else Command.Parameters.AddWithValue("@RetakeTestID", RetakeTestID);
             try
             {
                 Connection.Open();
@@ -64,7 +67,8 @@ namespace DVLD_DataAccessLayer
         }
 
         static public bool FindAppointment(int AppointmentID , ref int TestTypeID , ref int LocalDrivingLicenseApplicationID,
-            ref DateTime AppointmentDate , ref float PaidFees , ref int CreatedUserID ,ref bool IsLocked)
+            ref DateTime AppointmentDate , ref float PaidFees , ref int CreatedUserID ,ref bool IsLocked 
+            , ref int RetakeTestApplicationID)
         {
             bool IsFound = true;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
@@ -86,6 +90,8 @@ namespace DVLD_DataAccessLayer
                     PaidFees = (float)(decimal)Reader["PaidFees"];
                     CreatedUserID = (int)Reader["CreatedByUserID"];
                     IsLocked = (bool)Reader["CreatedByUserID"];
+                    if (Reader["RetakeTestApplicationID"] == DBNull.Value) RetakeTestApplicationID = -1;
+                    else RetakeTestApplicationID = (int)Reader["RetakeTestApplicationID"];
                 }
                 Reader.Close();
             }
