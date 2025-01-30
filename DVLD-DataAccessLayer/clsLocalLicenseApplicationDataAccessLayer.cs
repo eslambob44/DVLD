@@ -230,7 +230,7 @@ namespace DVLD_DataAccessLayer
             string Query = @"Select Count(tests.TestID) from Tests
             inner join TestAppointments
             on Tests.TestAppointmentID = TestAppointments.TestAppointmentID
-            where TestAppointments.LocalDrivingLicenseApplicationID = @ldlApplicationID;";
+            where TestAppointments.LocalDrivingLicenseApplicationID = @ldlApplicationID and TestResult = 1;";
             SqlCommand Command = new SqlCommand(Query, Connection);
             Command.Parameters.AddWithValue("@ldlApplicationID", ldlApplicationID);
             try

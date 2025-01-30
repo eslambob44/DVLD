@@ -1,4 +1,5 @@
 ﻿using DVLD_BusinessLayer;
+using DVLD_PresentationLayer.Test_Appointments;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -226,6 +227,15 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
                 MessageBox.Show("Application Canceled Successfully");
                 dtLocalDrivingLicenseApplications = clsLocalLicenseApplication.ListLocalLicenseApplications();
             }
+        }
+
+        private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            clsTestType.enTestType TestType = (clsTestType.enTestType)int.Parse(tsmi.Tag.ToString());
+            int LocalDrivingLicenseApplicationID = GetSelectedldlApplicationID();
+            frmManageTestAppointments frm = new frmManageTestAppointments(LocalDrivingLicenseApplicationID, TestType);
+            frm.ShowDialog();
         }
     }
 }
