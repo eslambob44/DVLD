@@ -31,7 +31,7 @@ namespace DVLD_BusinessLayer
         public enum enApplicationType { NewLocalDrivingLicenseService = 1, RenewDrivingLicenseService =2
                                 , ReplacementForaLostDrivingLicense=3
                                 ,ReplacementForADamagedDrivingLicense=4, ReleaseDetainedDrivingLicense=5
-                                , NewInternationalLicense=6}
+                                , NewInternationalLicense=6 , RetakeTest =8}
 
         protected enApplicationType _ApplicationType;
         
