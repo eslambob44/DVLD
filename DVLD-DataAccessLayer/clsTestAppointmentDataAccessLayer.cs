@@ -70,10 +70,10 @@ namespace DVLD_DataAccessLayer
             ref DateTime AppointmentDate , ref float PaidFees , ref int CreatedUserID ,ref bool IsLocked 
             , ref int RetakeTestApplicationID)
         {
-            bool IsFound = true;
+            bool IsFound = false;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Select * From TestAppointments
-                            Where @TestAppointmentID = @AppointmentID";
+                            Where TestAppointmentID = @AppointmentID";
             SqlCommand Command = new SqlCommand (Query, Connection);
             Command.Parameters.AddWithValue("@AppointmentID", AppointmentID);
             try

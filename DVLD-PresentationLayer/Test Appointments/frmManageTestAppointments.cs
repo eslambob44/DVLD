@@ -58,6 +58,7 @@ namespace DVLD_PresentationLayer.Test_Appointments
                     break;
             }
             lblAppointmentTitle.Text = _TestType.ToString() + " Test Appointment";
+            
         }
 
         void _LoadForm()
@@ -107,8 +108,18 @@ namespace DVLD_PresentationLayer.Test_Appointments
             }
             else
             {
-                // call the form
+                frmAddEditTestAppointment frm = new frmAddEditTestAppointment(_localDrivingLicenseApplicationID, _TestType);
+                frm.ShowDialog();
+                dtAppointments = _Application.ListAppointmentsBasedOnTestType(_TestType);
             }
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int AppointmentID = int.Parse(dgvAppointments.SelectedRows[0].Cells[0].Value.ToString());
+            frmAddEditTestAppointment frm = new frmAddEditTestAppointment(AppointmentID);
+            frm.ShowDialog();
+            dtAppointments = _Application.ListAppointmentsBasedOnTestType(_TestType);
         }
     }
 }
