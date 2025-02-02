@@ -39,7 +39,7 @@ namespace DVLD_BusinessLayer
             get { return _Notes; }
             set
             {
-                if(_Mode == enMode.AddNew) Notes = value;
+                if(_Mode == enMode.AddNew) _Notes = value;
             }
         }
 
@@ -49,7 +49,7 @@ namespace DVLD_BusinessLayer
             get { return _CreatedUserID; }
             set
             {
-                if(_Mode == enMode.AddNew) CreatedUserID = value;
+                if(_Mode == enMode.AddNew) _CreatedUserID = value;
             }
         }
 

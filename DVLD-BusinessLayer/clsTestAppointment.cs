@@ -181,9 +181,9 @@ namespace DVLD_BusinessLayer
             return LockAppointment(ID);
         }
 
-        public int GetTestID(int TestAppointmentID)
+        public int GetTestID()
         {
-            return clsTestAppointmentDataAccessLayer.GetTestID(TestAppointmentID);
+            return clsTestAppointmentDataAccessLayer.GetTestID(ID);
         }
 
     }

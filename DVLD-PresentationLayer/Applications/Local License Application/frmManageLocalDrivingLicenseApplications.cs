@@ -236,6 +236,7 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             int LocalDrivingLicenseApplicationID = GetSelectedldlApplicationID();
             frmManageTestAppointments frm = new frmManageTestAppointments(LocalDrivingLicenseApplicationID, TestType);
             frm.ShowDialog();
+            dtLocalDrivingLicenseApplications = clsLocalLicenseApplication.ListLocalLicenseApplications();
         }
     }
 }

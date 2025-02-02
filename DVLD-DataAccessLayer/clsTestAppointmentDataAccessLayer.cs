@@ -194,7 +194,7 @@ namespace DVLD_DataAccessLayer
             {
                 Connection.Open();
                 object Result = Command.ExecuteScalar();
-                if(Result != DBNull.Value )
+                if(Result != null )
                 {
                     TestID = int.Parse(Result.ToString());
                 }

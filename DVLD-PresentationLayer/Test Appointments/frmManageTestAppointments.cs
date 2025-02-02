@@ -1,5 +1,6 @@
 ﻿using DVLD_BusinessLayer;
 using DVLD_PresentationLayer.Properties;
+using DVLD_PresentationLayer.Test;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -120,6 +121,25 @@ namespace DVLD_PresentationLayer.Test_Appointments
             frmAddEditTestAppointment frm = new frmAddEditTestAppointment(AppointmentID);
             frm.ShowDialog();
             dtAppointments = _Application.ListAppointmentsBasedOnTestType(_TestType);
+        }
+
+        private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int AppointmentID = int.Parse(dgvAppointments.SelectedRows[0].Cells[0].Value.ToString());
+            clsTestAppointment Appointment = clsTestAppointment.Find(AppointmentID);
+            if (Appointment != null)
+            {
+                if(Appointment.GetTestID() == -1)
+                {
+                    frmTakeTest frm = new frmTakeTest(AppointmentID);
+                    frm.ShowDialog();
+                    dtAppointments = _Application.ListAppointmentsBasedOnTestType(_TestType);
+                }
+                else
+                {
+                    MessageBox.Show("test already taken, Cannot take a taken test","",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
