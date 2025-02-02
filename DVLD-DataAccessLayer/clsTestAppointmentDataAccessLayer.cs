@@ -108,7 +108,7 @@ namespace DVLD_DataAccessLayer
             bool IsFound = true;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Select * From TestAppointments
-                            Where @RetakeTestApplicationID = @RetakeTestApplicationID";
+                            Where RetakeTestApplicationID = @RetakeTestApplicationID";
             SqlCommand Command = new SqlCommand(Query, Connection);
             Command.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID);
             try
