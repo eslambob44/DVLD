@@ -181,6 +181,30 @@ namespace DVLD_DataAccessLayer
             return IsUpdated;
         }
 
+        static public int GetTestID(int TestAppointmentID)
+        {
+            
+            
+            int TestID = -1;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select TestID From Tests Where TestAppointmentID = @TestAppointmentID";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
+            try
+            {
+                Connection.Open();
+                object Result = Command.ExecuteScalar();
+                if(Result != DBNull.Value )
+                {
+                    TestID = int.Parse(Result.ToString());
+                }
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return TestID;
+            
+        }
+
         
 
     }
