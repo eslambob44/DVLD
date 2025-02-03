@@ -75,7 +75,7 @@ namespace DVLD_DataAccessLayer
                 Connection.Open();
                 object Result = Command.ExecuteScalar();
                 if(Result != null)
-                    IsDriver = (bool)Result;
+                    IsDriver = Result.ToString() =="1";
                 
             }
             catch { }
