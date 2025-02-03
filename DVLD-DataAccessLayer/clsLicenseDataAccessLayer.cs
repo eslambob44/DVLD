@@ -32,9 +32,9 @@ namespace DVLD_DataAccessLayer
             {
                 Connection.Open();
                 object Result = Command.ExecuteScalar();
-                if (Result != null && bool.TryParse(Result.ToString() , out bool Temp))
+                if (Result != null && int.TryParse(Result.ToString() , out int Temp))
                 {
-                    IsHasLicense = Temp;
+                    IsHasLicense = (Temp ==1);
                 }
             }
             catch { }

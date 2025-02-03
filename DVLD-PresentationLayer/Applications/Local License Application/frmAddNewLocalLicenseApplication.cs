@@ -53,6 +53,63 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             _LoadForm();
         }
 
+        bool _ValidateIfThereIsntActiveApplication()
+        {
+            int TestIfThereSameApplication;
+            if ((TestIfThereSameApplication = Application.GetActiveApplicationWithSameLicenseClass()) != -1)
+            {
+                MessageBox.Show(@"Choose another license class,The selected person already have an active application for the selected class with id= " + TestIfThereSameApplication
+                                , "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        bool _ValidateIfPersonHasLicenseWithSameClass()
+        {
+            clsDriver Driver;
+            if ((Driver = clsDriver.FindByPersonID(ctrlFilterPerson1.PersonID)) != null)
+            {
+                if (Driver.IsDriverHasAnActiveLicense((clsLocalLicenseApplication.enLicenseClass)(cbLicenseClasses.SelectedIndex + 1)))
+                {
+                    MessageBox.Show(@"Person already have an active license with the same class"
+                                    , "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        int _GetAge(DateTime BirthDay)
+        {
+            int Age = DateTime.Now.Year - BirthDay.Year;
+            BirthDay = BirthDay.AddYears(Age);
+            if (DateTime.Now < BirthDay) Age--;
+            return Age;
+        }
+
+        bool _ValidateIfPersonMeetMinimumAgeForLicense()
+        {
+            clsPerson Person = clsPerson.Find(ctrlFilterPerson1.PersonID);
+            int MinimumAge = clsLicenseClass.GetMinimumAllowedAge(cbLicenseClasses.SelectedIndex + 1);
+            if (_GetAge(Person.DateOfBirth) < MinimumAge)
+            {
+                MessageBox.Show("Person must meet minimum age: "+MinimumAge+" Year for apply for this license", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            } return true;
+        }
+
+        bool _Validate()
+        {
+            
+            if(!_ValidateIfThereIsntActiveApplication()) return false;
+            if(!_ValidateIfPersonHasLicenseWithSameClass()) return false;
+            if(!_ValidateIfPersonMeetMinimumAgeForLicense()) return false;
+            
+
+            return true;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if(ctrlFilterPerson1.PersonID ==-1)
@@ -63,13 +120,8 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             Application.PersonID = ctrlFilterPerson1.PersonID;
             Application.CreateUserID = clsGlobalSettings.UserID;
             Application.LicenseClass = (clsLocalLicenseApplication.enLicenseClass)(cbLicenseClasses.SelectedIndex + 1);
-            int TestIfThereSameApplication;
-            if(( TestIfThereSameApplication= Application.GetActiveApplicationWithSameLicenseClass())!= -1)
-            {
-                MessageBox.Show(@"Choose another license class,The selected person already have an active application for the selected class with id= "+ TestIfThereSameApplication
-                                , "" , MessageBoxButtons.OK , MessageBoxIcon.Error);
-                return;
-            }
+
+            if (!_Validate()) return;
 
             if(Application.Save())
             {
