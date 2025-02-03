@@ -1,4 +1,5 @@
 ﻿using DVLD_BusinessLayer;
+using DVLD_PresentationLayer.Licenses;
 using DVLD_PresentationLayer.Test_Appointments;
 using System;
 using System.Collections.Generic;
@@ -235,6 +236,14 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             clsTestType.enTestType TestType = (clsTestType.enTestType)int.Parse(tsmi.Tag.ToString());
             int LocalDrivingLicenseApplicationID = GetSelectedldlApplicationID();
             frmManageTestAppointments frm = new frmManageTestAppointments(LocalDrivingLicenseApplicationID, TestType);
+            frm.ShowDialog();
+            dtLocalDrivingLicenseApplications = clsLocalLicenseApplication.ListLocalLicenseApplications();
+        }
+
+        private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LocalDrivingLicenseApplicationID = GetSelectedldlApplicationID();
+            frmIssueLicense frm = new frmIssueLicense(LocalDrivingLicenseApplicationID);
             frm.ShowDialog();
             dtLocalDrivingLicenseApplications = clsLocalLicenseApplication.ListLocalLicenseApplications();
         }

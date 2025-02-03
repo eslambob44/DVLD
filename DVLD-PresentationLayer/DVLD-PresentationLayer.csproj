@@ -106,6 +106,12 @@
     <Compile Include="frmTest.Designer.cs">
       <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licenses\frmIssueLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\frmIssueLicense.Designer.cs">
+      <DependentUpon>frmIssueLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="People\ctrlFilterPerson.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\frmIssueLicense.resx">
+      <DependentUpon>frmIssueLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People\ctrlFilterPerson.resx">
       <DependentUpon>ctrlFilterPerson.cs</DependentUpon>

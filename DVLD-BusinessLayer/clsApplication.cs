@@ -176,8 +176,7 @@ namespace DVLD_BusinessLayer
         {
             if (_Mode == enMode.Update && _OriginalStatus == enApplicationStatus.New)
             {
-                _ApplicationStatus = enApplicationStatus.Canceled;
-                return true;
+                return clsApplicationDataAccessLayer.UpdateApplicationStatus(_ID, (short)enApplicationStatus.Canceled);
             }
             return false;
         }
@@ -186,8 +185,8 @@ namespace DVLD_BusinessLayer
         {
             if (_Mode == enMode.Update && _OriginalStatus == enApplicationStatus.New)
             {
-                _ApplicationStatus = enApplicationStatus.Completed;
-                return true;
+                return clsApplicationDataAccessLayer.UpdateApplicationStatus(_ID, (short)enApplicationStatus.Completed);
+                
             }
             return false;
         }

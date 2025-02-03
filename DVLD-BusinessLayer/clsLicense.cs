@@ -82,8 +82,9 @@ namespace DVLD_BusinessLayer
             _Mode = enMode.ReadOnly;
             _ApplicationID = applicationID;
             _DriverID = driverID;
-            _LicenseClass = licenseClass;
             _IssueDate = DateTime.Now;
+            _LicenseClass = licenseClass;
+
             _ExpirationDate = expirationDate;
             Notes = notes;
             this.IsActive = isActive;
@@ -96,8 +97,8 @@ namespace DVLD_BusinessLayer
             _LicenseID = -1;
             _ApplicationID = -1;
             _DriverID = -1;
-            LicenseClass = clsLocalLicenseApplication.enLicenseClass.OrdinaryDriving;
             _IssueDate = DateTime.Now;
+            LicenseClass = clsLocalLicenseApplication.enLicenseClass.OrdinaryDriving;
             Notes = string.Empty;
             IsActive = true;
             _IssueReason = enIssueReason.FirstTime;

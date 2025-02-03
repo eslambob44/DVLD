@@ -33,7 +33,7 @@ namespace DVLD_DataAccessLayer
         {
             int DefaultValidityLength = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Select MinimumAllowedAge From LicenseClasses Where LicenseClassID = @LicenseClassID";
+            string Query = @"Select DefaultValidityLength From LicenseClasses Where LicenseClassID = @LicenseClassID";
             SqlCommand Command = new SqlCommand(Query, Connection);
             Command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
             try
