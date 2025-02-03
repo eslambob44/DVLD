@@ -20,7 +20,10 @@ namespace DVLD_DataAccessLayer
             SqlCommand Command = new SqlCommand(Query, Connection);
             Command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
             Command.Parameters.AddWithValue("@TestResult", TestResult);
-            Command.Parameters.AddWithValue("@Notes", Notes);
+            if(string.IsNullOrEmpty(Notes))
+                Command.Parameters.AddWithValue("@Notes", DBNull.Value);
+            else
+                Command.Parameters.AddWithValue("@Notes", Notes);
             Command.Parameters.AddWithValue("@CreatedUserID", CreatedUserID);
             try
             {
@@ -53,7 +56,10 @@ namespace DVLD_DataAccessLayer
                     IsFound = true;
                     TestID = (int)Reader["TestID"];
                     TestResult = (bool)Reader["TestResult"];
-                    Notes = (string)Reader["Notes"];
+                    if (Reader["Notes"] == DBNull.Value)
+                        Notes = null;
+                    else
+                        Notes = (string)Reader["Notes"];
                     CreatedUserID = (int)Reader["CreatedByUserID"];
                 }
             }
