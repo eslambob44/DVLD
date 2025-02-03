@@ -123,6 +123,11 @@ namespace DVLD_PresentationLayer.Test_Appointments
             dtAppointments = _Application.ListAppointmentsBasedOnTestType(_TestType);
         }
 
+        void _ReloadctrlShowApplication()
+        {
+            ctrlShowLocalDrivingLicenseApplicationInfo1.Find(_localDrivingLicenseApplicationID);
+        }
+
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int AppointmentID = int.Parse(dgvAppointments.SelectedRows[0].Cells[0].Value.ToString());
@@ -132,6 +137,7 @@ namespace DVLD_PresentationLayer.Test_Appointments
                 if(Appointment.GetTestID() == -1)
                 {
                     frmTakeTest frm = new frmTakeTest(AppointmentID);
+                    frm.PassTest += _ReloadctrlShowApplication;
                     frm.ShowDialog();
                     dtAppointments = _Application.ListAppointmentsBasedOnTestType(_TestType);
                 }

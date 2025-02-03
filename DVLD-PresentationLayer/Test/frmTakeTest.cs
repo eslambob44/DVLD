@@ -100,6 +100,9 @@ namespace DVLD_PresentationLayer.Test
             _Result = (enResult)int.Parse(rb.Tag.ToString());
         }
 
+        public delegate void PassTestEventHandler();
+        public event PassTestEventHandler PassTest;
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if(_Result == enResult.None)
@@ -118,6 +121,8 @@ namespace DVLD_PresentationLayer.Test
                     btnSave.Enabled = false;
                     lblTestID.Text = _Test.TestID.ToString();
                     MessageBox.Show("Data saved successfully","",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    PassTest?.Invoke();
+                    lblTrails.Text = _LocalDrivingLicenseApplication.GetNumberOfTriesOnTest(_TestAppointment.TestType).ToString();
                     
                 }
                 else
