@@ -47,6 +47,7 @@
     <Compile Include="clsDataAccessLayerSettings.cs" />
     <Compile Include="clsDriverDataAccessLayer.cs" />
     <Compile Include="clsLicenseClassDataAccessLayer.cs" />
+    <Compile Include="clsLicenseDataAccessLayer.cs" />
     <Compile Include="clsLocalLicenseApplicationDataAccessLayer.cs" />
     <Compile Include="clsPersonDataAccess_1.cs" />
     <Compile Include="clsTestDataAccessLayer.cs" />
