@@ -1,6 +1,7 @@
 ﻿using DVLD_DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -125,6 +126,11 @@ namespace DVLD_BusinessLayer
         public bool IsDriverHasAnActiveLicense(clsLocalLicenseApplication.enLicenseClass LicenseClass)
         {
             return clsLicenseDataAccessLayer.IsDriverHasLicenseFromLicenseClass(_DriverID, (int)LicenseClass);
+        }
+
+        static public DataTable ListDrivers()
+        {
+            return clsDriverDataAccessLayer.ListDrivers();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -101,6 +102,37 @@ namespace DVLD_DataAccessLayer
             catch { }
             finally { Connection.Close(); }
             return DriverID;
+        }
+
+        static public DataTable ListDrivers()
+        {
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            DataTable dtDrivers = new DataTable();
+            string Query = @"Select DriverID as [Driver ID] , Drivers.PersonID as [Person ID] ,NationalNo as [National Number]
+                            , [Full Name] = (FirstName + ' ' + SecondName + ' ' + ThirdName + ' ' + LastName) 
+                            , CreatedDate as Date , 
+                            [Active Licenses] = 
+                            (
+                                Select Count(LicenseID) From Licenses 
+                                Where DriverID = Drivers.DriverID and IsActive = 1
+                            )
+                            from Drivers
+                            inner join People on 
+                            Drivers.PersonID = People.PersonID";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            try
+            {
+                Connection.Open();
+                SqlDataReader Reader = Command.ExecuteReader();
+                if(Reader.HasRows)
+                {
+                    dtDrivers.Load(Reader);
+                }
+                Reader.Close();
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return dtDrivers;
         }
 
     }
