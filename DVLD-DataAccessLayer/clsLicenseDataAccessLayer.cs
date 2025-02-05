@@ -43,7 +43,7 @@ namespace DVLD_DataAccessLayer
         }
 
         static public int AddLicense(int ApplicationID , int DriverID , int LicenseClassID , DateTime IssueDate , DateTime ExpirationDate,
-            string Notes , float PaidFees , bool IsActive , int IssueReason , int CreatedUserID)
+            string Notes , float PaidFees , bool IsActive , byte IssueReason , int CreatedUserID)
         {
             int LicenseID = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
@@ -83,7 +83,73 @@ namespace DVLD_DataAccessLayer
 
 
 
-        
+        static public bool FindLicense(int LicenseID , ref int ApplicationID , ref int DriverID , ref int LicenseClassID,
+            ref DateTime IssueDate , ref DateTime ExpirationDate , ref string Notes , ref float PaidFees ,
+            ref bool IsActive , ref byte IssueReason , ref int CreatedUserID)
+        {
+            bool IsFound = false;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = "Select * From Licenses where LicenseID = @LicenseID";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@LicenseID" , LicenseID);
+            try
+            {
+                Connection.Open();
+                SqlDataReader Reader = Command.ExecuteReader();
+                if(Reader.Read())
+                {
+                    IsFound = true;
+                    ApplicationID = (int)Reader["ApplicationID"];
+                    DriverID = (int)Reader["DriverID"];
+                    LicenseClassID = (int)Reader["LicenseClassID"];
+                    IssueDate = (DateTime)Reader["IssueDate"];
+                    ExpirationDate = (DateTime)Reader["ExpirationDate"];
+                    Notes = (Reader["Notes"] == DBNull.Value) ? string.Empty : (string)Reader["Notes"];
+                    PaidFees = (float)(decimal)Reader["PaidFees"];
+                    IsActive = (bool)Reader["IsActive"];
+                    IssueReason = (byte)Reader["IssueReason"];
+                    CreatedUserID = (int)Reader["CreatedByUserID"];
+                }
+                Reader.Close();
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return IsFound;
+        }
+
+        static public bool FindLicenseByApplicationID(int ApplicationID, ref int LicenseID, ref int DriverID, ref int LicenseClassID,
+            ref DateTime IssueDate, ref DateTime ExpirationDate, ref string Notes, ref float PaidFees,
+            ref bool IsActive, ref byte IssueReason, ref int CreatedUserID)
+        {
+            bool IsFound = false;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = "Select * From Licenses where ApplicationID = @ApplicationID";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
+            try
+            {
+                Connection.Open();
+                SqlDataReader Reader = Command.ExecuteReader();
+                if (Reader.Read())
+                {
+                    IsFound = true;
+                    LicenseID = (int)Reader["LicenseID"];
+                    DriverID = (int)Reader["DriverID"];
+                    LicenseClassID = (int)Reader["LicenseClassID"];
+                    IssueDate = (DateTime)Reader["IssueDate"];
+                    ExpirationDate = (DateTime)Reader["ExpirationDate"];
+                    Notes = (Reader["Notes"] == DBNull.Value) ? string.Empty : (string)Reader["Notes"];
+                    PaidFees = (float)(decimal)Reader["PaidFees"];
+                    IsActive = (bool)Reader["IsActive"];
+                    IssueReason = (byte)Reader["IssueReason"];
+                    CreatedUserID = (int)Reader["CreatedByUserID"];
+                }
+                Reader.Close();
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return IsFound;
+        }
 
 
     }

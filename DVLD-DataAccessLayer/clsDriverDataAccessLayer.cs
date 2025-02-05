@@ -135,5 +135,31 @@ namespace DVLD_DataAccessLayer
             return dtDrivers;
         }
 
+        static public DataTable ListLocalLicenses(int DriverID)
+        {
+            DataTable dtLicenses = new DataTable();
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select LicenseID as [Lic.ID] , ApplicationID as [App.ID] , [Class Name] = 
+                            (
+                            	Select ClassName From LicenseClasses Where LicenseClasses.LicenseClassID = Licenses.LicenseClass
+                            ) 
+                            ,IssueDate as [Issue Date] , ExpirationDate as [Expiration Date] , IsActive as [Is Active]
+                            From Licenses
+                            
+                            Where DriverID = @DriverID";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@DriverID", DriverID);
+            try
+            {
+                Connection.Open();
+                SqlDataReader Reader = Command.ExecuteReader();
+                if (Reader.HasRows)
+                    dtLicenses.Load(Reader);
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return dtLicenses;
+        }
+
     }
 }
