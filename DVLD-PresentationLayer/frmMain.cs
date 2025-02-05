@@ -1,6 +1,7 @@
 ﻿using DVLD_BusinessLayer;
 using DVLD_PresentationLayer.Application_Types;
 using DVLD_PresentationLayer.Applications.Local_License_Application;
+using DVLD_PresentationLayer.Drivers;
 using DVLD_PresentationLayer.People;
 using DVLD_PresentationLayer.Test_Types;
 using DVLD_PresentationLayer.Users;
@@ -77,6 +78,12 @@ namespace DVLD_PresentationLayer
         private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManageLocalDrivingLicenseApplications frm = new frmManageLocalDrivingLicenseApplications();
+            frm.Show();
+        }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageDrivers frm = new frmManageDrivers();
             frm.Show();
         }
     }
