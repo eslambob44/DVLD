@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DVLD_BusinessLayer.clsLicense;
+using static DVLD_BusinessLayer.clsLocalLicenseApplication;
 
 namespace DVLD_BusinessLayer
 {
@@ -105,6 +107,50 @@ namespace DVLD_BusinessLayer
             _CreatedUserID = -1;
         }
 
+        static public clsLicense FindLicense(int LicenseID)
+        {
+            int applicationID = -1;
+            int driverID = -1;
+            int licenseClass = -1;
+            DateTime issueDate = DateTime.Now;
+            DateTime expirationDate = DateTime.Now;
+            string notes = "";
+            float paidFees = -1;
+            byte issueReason = 0;
+            int createdUserID = -1;
+            bool isActive =false;
+            if (clsLicenseDataAccessLayer.FindLicense(LicenseID, ref applicationID, ref driverID, ref licenseClass,
+                ref issueDate, ref expirationDate, ref notes, ref paidFees, ref isActive,
+                ref issueReason, ref createdUserID))
+            {
+                return new clsLicense(LicenseID, applicationID, driverID, (clsLocalLicenseApplication.enLicenseClass)licenseClass,
+                    issueDate, expirationDate, notes, paidFees, (enIssueReason)issueReason, createdUserID, isActive);
+            }
+            else return null;
+        }
+
+        static public clsLicense FindLicenseByApplication(int ApplicationID)
+        {
+            int licenseID = -1;
+            int driverID = -1;
+            int licenseClass = -1;
+            DateTime issueDate = DateTime.Now;
+            DateTime expirationDate = DateTime.Now;
+            string notes = "";
+            float paidFees = -1;
+            byte issueReason = 0;
+            int createdUserID = -1;
+            bool isActive = false;
+            if (clsLicenseDataAccessLayer.FindLicenseByApplicationID(ApplicationID, ref licenseID, ref driverID, ref licenseClass,
+                ref issueDate, ref expirationDate, ref notes, ref paidFees, ref isActive,
+                ref issueReason, ref createdUserID))
+            {
+                return new clsLicense(licenseID, ApplicationID, driverID, (clsLocalLicenseApplication.enLicenseClass)licenseClass,
+                    issueDate, expirationDate, notes, paidFees, (enIssueReason)issueReason, createdUserID, isActive);
+            }
+            else return null;
+        }
+
         
 
 
@@ -117,7 +163,7 @@ namespace DVLD_BusinessLayer
         private bool _AddNew()
         {
             int LicenseID = clsLicenseDataAccessLayer.AddLicense(_ApplicationID, _DriverID, (int)_LicenseClass,
-                _IssueDate, _ExpirationDate, Notes, _PaidFees, IsActive, (int)_IssueReason, CreatedUserID);
+                _IssueDate, _ExpirationDate, Notes, _PaidFees, IsActive, (byte)_IssueReason, CreatedUserID);
             if(LicenseID != -1)
             {
                 _LicenseID = LicenseID;

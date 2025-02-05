@@ -132,5 +132,10 @@ namespace DVLD_BusinessLayer
         {
             return clsDriverDataAccessLayer.ListDrivers();
         }
+
+        public DataTable ListLocalLicenses()
+        {
+            return clsDriverDataAccessLayer.ListLocalLicenses(_DriverID);
+        }
     }
 }
