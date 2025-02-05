@@ -1,4 +1,5 @@
 ﻿using DVLD_BusinessLayer;
+using DVLD_PresentationLayer.Licenses;
 using DVLD_PresentationLayer.People;
 using System;
 using System.Collections.Generic;
@@ -84,6 +85,13 @@ namespace DVLD_PresentationLayer.Drivers
             int PersonID  = int.Parse(dgvDrivers.SelectedRows[0].Cells["Person ID"].Value.ToString());
             frmPersonInfo frm = new frmPersonInfo(PersonID);
             frm.ShowDialog();   
+        }
+
+        private void showDriverLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int DriverID = int.Parse(dgvDrivers.SelectedRows[0].Cells["Driver ID"].Value.ToString());
+            frmManageLicenses frm = new frmManageLicenses(DriverID);
+            frm.ShowDialog();
         }
     }
 }

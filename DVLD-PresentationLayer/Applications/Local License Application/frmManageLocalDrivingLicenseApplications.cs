@@ -247,5 +247,17 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             frm.ShowDialog();
             dtLocalDrivingLicenseApplications = clsLocalLicenseApplication.ListLocalLicenseApplications();
         }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clsDriver Driver = clsDriver.FindByPersonID
+                (clsLocalLicenseApplication.Find(int.Parse(dgvApplications.SelectedRows[0].Cells[0].Value.ToString())).PersonID);
+            if(Driver != null )
+            {
+                frmManageLicenses frm = new frmManageLicenses(Driver.DriverID);
+                frm.ShowDialog();
+            }
+            
+        }
     }
 }
