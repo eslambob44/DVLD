@@ -29,6 +29,11 @@ namespace DVLD_BusinessLayer
             set { if (_Mode == enMode.AddNew) _DriverID = value; }
         }
 
+        public bool IsDetained
+        {
+            get { return clsLicenseDataAccessLayer.IsLicenseDetained(_LicenseID); }
+        }
+
 
         private clsLocalLicenseApplication.enLicenseClass _LicenseClass;
         public clsLocalLicenseApplication.enLicenseClass LicenseClass

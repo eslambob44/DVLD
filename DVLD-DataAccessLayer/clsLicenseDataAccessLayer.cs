@@ -101,7 +101,7 @@ namespace DVLD_DataAccessLayer
                     IsFound = true;
                     ApplicationID = (int)Reader["ApplicationID"];
                     DriverID = (int)Reader["DriverID"];
-                    LicenseClassID = (int)Reader["LicenseClassID"];
+                    LicenseClassID = (int)Reader["LicenseClass"];
                     IssueDate = (DateTime)Reader["IssueDate"];
                     ExpirationDate = (DateTime)Reader["ExpirationDate"];
                     Notes = (Reader["Notes"] == DBNull.Value) ? string.Empty : (string)Reader["Notes"];
@@ -151,6 +151,26 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
-
+        static  public bool IsLicenseDetained(int LicenseID)
+        {
+            bool IsDetained = false;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Select Count(LicenseID)   From DetainedLicenses
+                            Where IsReleased = 0 and LicenseID = @LicenseID;";
+            SqlCommand command = new SqlCommand(Query, Connection);
+            command.Parameters.AddWithValue("@LicenseID" , LicenseID);
+            try
+            {
+                Connection.Open();
+                object Result = command.ExecuteScalar();
+                if(Result != null)
+                {
+                    IsDetained = int.Parse(Result.ToString())!=0;
+                }
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return IsDetained;
+        }
     }
 }
