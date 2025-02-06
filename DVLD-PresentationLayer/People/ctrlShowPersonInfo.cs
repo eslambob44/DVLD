@@ -1,5 +1,6 @@
 ﻿using DVLD_BusinessLayer;
 using DVLD_PresentationLayer.People;
+using DVLD_PresentationLayer.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,6 +81,7 @@ namespace DVLD_PresentationLayer
             lblDateOfBirthval.Text = _Person.DateOfBirth.ToString("yyyy/MMMM/dd");
             lblCountryval.Text = _Person.Country;
             ctrlUserImage1.SetImage(_Person.ImagePath, _Person.Gendor);
+            pbGendor.Image = (_Person.Gendor == clsPerson.enGendor.Male)?Resources.Man_32:Resources.Woman_32;
 
         }
 

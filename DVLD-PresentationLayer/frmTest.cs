@@ -20,7 +20,7 @@ namespace DVLD_PresentationLayer
 
         private void frmTest_Load(object sender, EventArgs e)
         {
-            ctrlShowRetakeTestApplicationInfo1.ShowEmptyForm( clsTestType.enTestType.Vision,true);
+            ctrlShowLicenseInfo1.Find(19);
         }
     }
 }

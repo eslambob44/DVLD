@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlShowRetakeTestApplicationInfo1 = new DVLD_PresentationLayer.Applications.Retake_Test_Application.ctrlShowRetakeTestApplicationInfo();
+            this.ctrlShowLicenseInfo1 = new DVLD_PresentationLayer.Licenses.ctrlShowLicenseInfo();
             this.SuspendLayout();
             // 
-            // ctrlShowRetakeTestApplicationInfo1
+            // ctrlShowLicenseInfo1
             // 
-            this.ctrlShowRetakeTestApplicationInfo1.BackColor = System.Drawing.Color.White;
-            this.ctrlShowRetakeTestApplicationInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlShowRetakeTestApplicationInfo1.Location = new System.Drawing.Point(236, 167);
-            this.ctrlShowRetakeTestApplicationInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ctrlShowRetakeTestApplicationInfo1.Name = "ctrlShowRetakeTestApplicationInfo1";
-            this.ctrlShowRetakeTestApplicationInfo1.Size = new System.Drawing.Size(556, 123);
-            this.ctrlShowRetakeTestApplicationInfo1.TabIndex = 0;
+            this.ctrlShowLicenseInfo1.BackColor = System.Drawing.Color.White;
+            this.ctrlShowLicenseInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlShowLicenseInfo1.Location = new System.Drawing.Point(50, 74);
+            this.ctrlShowLicenseInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ctrlShowLicenseInfo1.Name = "ctrlShowLicenseInfo1";
+            this.ctrlShowLicenseInfo1.Size = new System.Drawing.Size(881, 399);
+            this.ctrlShowLicenseInfo1.TabIndex = 0;
             // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 620);
-            this.Controls.Add(this.ctrlShowRetakeTestApplicationInfo1);
+            this.Controls.Add(this.ctrlShowLicenseInfo1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmTest";
@@ -58,6 +58,6 @@
 
         #endregion
 
-        private Applications.Retake_Test_Application.ctrlShowRetakeTestApplicationInfo ctrlShowRetakeTestApplicationInfo1;
+        private Licenses.ctrlShowLicenseInfo ctrlShowLicenseInfo1;
     }
 }
