@@ -91,6 +91,7 @@
             this.lblViewLicenseInfo.TabIndex = 49;
             this.lblViewLicenseInfo.TabStop = true;
             this.lblViewLicenseInfo.Text = "View License Info";
+            this.lblViewLicenseInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblViewLicenseInfo_LinkClicked);
             // 
             // lblLicenseClass
             // 

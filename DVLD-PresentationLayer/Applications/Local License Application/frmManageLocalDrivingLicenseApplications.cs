@@ -259,5 +259,17 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             }
             
         }
+
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clsLocalLicenseApplication application = clsLocalLicenseApplication.Find(GetSelectedldlApplicationID());
+            clsLicense License = clsLicense.FindLicenseByApplication(application.ID);
+            if( License != null )
+            {
+                int LicenseID = License.LicenseID;
+                frmLicenseInfo frm = new frmLicenseInfo(LicenseID);
+                frm.ShowDialog();
+            }
+        }
     }
 }
