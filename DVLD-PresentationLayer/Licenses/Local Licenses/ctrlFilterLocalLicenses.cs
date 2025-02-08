@@ -28,6 +28,12 @@ namespace DVLD_PresentationLayer.Licenses.Local_Licenses
             }
         }
 
+        public void Find(int LicenseID)
+        {
+            mtxtFilter.Text = LicenseID.ToString();
+            btnFilter.PerformClick();
+        }
+
         private void btnFilter_Click(object sender, EventArgs e)
         {
             int LicenseID = int.Parse(mtxtFilter.Text.Trim());

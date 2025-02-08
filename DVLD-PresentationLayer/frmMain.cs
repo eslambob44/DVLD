@@ -2,6 +2,7 @@
 using DVLD_PresentationLayer.Application_Types;
 using DVLD_PresentationLayer.Applications.Local_License_Application;
 using DVLD_PresentationLayer.Drivers;
+using DVLD_PresentationLayer.Licenses.International_Licenses;
 using DVLD_PresentationLayer.People;
 using DVLD_PresentationLayer.Test_Types;
 using DVLD_PresentationLayer.Users;
@@ -84,6 +85,12 @@ namespace DVLD_PresentationLayer
         private void driversToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManageDrivers frm = new frmManageDrivers();
+            frm.Show();
+        }
+
+        private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmIssueInternationalLicense frm = new frmIssueInternationalLicense();
             frm.Show();
         }
     }

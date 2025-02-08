@@ -93,5 +93,13 @@ namespace DVLD_PresentationLayer.Drivers
             frmManageLicenses frm = new frmManageLicenses(DriverID);
             frm.ShowDialog();
         }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            int DriverID = (int)dgvDrivers.SelectedRows[0].Cells["Driver ID"].Value;
+            clsDriver Driver = clsDriver.Find(DriverID);
+            issueInternationalLicenseToolStripMenuItem.Enabled = (Driver.GetActiveInternationalLicenseID()==-1);
+            issueInternationalLicenseToolStripMenuItem.Enabled &= Driver.IsDriverHasAnActiveLicense(clsLocalLicenseApplication.enLicenseClass.OrdinaryDriving);
+        }
     }
 }
