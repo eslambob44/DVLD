@@ -137,5 +137,15 @@ namespace DVLD_BusinessLayer
         {
             return clsDriverDataAccessLayer.ListLocalLicenses(_DriverID);
         }
+
+        public int GetActiveInternationalLicenseID()
+        {
+            return clsInternationalLicenseDataAccessLayer.GetActiveInternationalLicenseID(_DriverID);
+        }
+
+        public DataTable ListInternationalLicenses()
+        {
+            return clsInternationalLicenseDataAccessLayer.ListInternationalLicenses(_DriverID);
+        }
     }
 }
