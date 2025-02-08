@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DVLD_PresentationLayer.Licenses
 {
-    public partial class frmLicenseInfo : Form
+    public partial class frmLocalLicenseInfo : Form
     {
-        public frmLicenseInfo(int LicenseID)
+        public frmLocalLicenseInfo(int LicenseID)
         {
             InitializeComponent();
             if(!ctrlShowLicenseInfo1.Find(LicenseID)) this.Close();

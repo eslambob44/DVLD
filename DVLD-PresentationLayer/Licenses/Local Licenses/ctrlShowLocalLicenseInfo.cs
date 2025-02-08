@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace DVLD_PresentationLayer.Licenses
 {
-    public partial class ctrlShowLicenseInfo : UserControl
+    public partial class ctrlShowLocalLicenseInfo : UserControl
     {
 
         clsLicense _License;
         clsDriver _Driver;
         clsPerson _Person;
-        public ctrlShowLicenseInfo()
+        public ctrlShowLocalLicenseInfo()
         {
             InitializeComponent();
             

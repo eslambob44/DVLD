@@ -1,6 +1,6 @@
 ﻿namespace DVLD_PresentationLayer.Licenses
 {
-    partial class frmLicenseInfo
+    partial class frmLocalLicenseInfo
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLicenseInfo));
-            this.ctrlShowLicenseInfo1 = new DVLD_PresentationLayer.Licenses.ctrlShowLicenseInfo();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLocalLicenseInfo));
+            this.ctrlShowLicenseInfo1 = new DVLD_PresentationLayer.Licenses.ctrlShowLocalLicenseInfo();
             this.btnClose = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -105,7 +105,7 @@
 
         #endregion
 
-        private ctrlShowLicenseInfo ctrlShowLicenseInfo1;
+        private ctrlShowLocalLicenseInfo ctrlShowLicenseInfo1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;

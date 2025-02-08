@@ -267,7 +267,7 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             if( License != null )
             {
                 int LicenseID = License.LicenseID;
-                frmLicenseInfo frm = new frmLicenseInfo(LicenseID);
+                frmLocalLicenseInfo frm = new frmLocalLicenseInfo(LicenseID);
                 frm.ShowDialog();
             }
         }

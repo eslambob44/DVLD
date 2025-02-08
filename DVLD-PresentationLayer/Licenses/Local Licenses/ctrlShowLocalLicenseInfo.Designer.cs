@@ -1,6 +1,6 @@
 ﻿namespace DVLD_PresentationLayer.Licenses
 {
-    partial class ctrlShowLicenseInfo
+    partial class ctrlShowLocalLicenseInfo
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlShowLicenseInfo));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlShowLocalLicenseInfo));
             this.lblIssueDate = new System.Windows.Forms.Label();
             this.lblLicenseID = new System.Windows.Forms.Label();
             this.lblNationalNumber = new System.Windows.Forms.Label();

@@ -75,7 +75,7 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             int LicenseID = GetLicenseID();
             if(LicenseID != -1)
             {
-                frmLicenseInfo frm = new frmLicenseInfo(LicenseID);
+                frmLocalLicenseInfo frm = new frmLocalLicenseInfo(LicenseID);
                 frm.ShowDialog();
             }
         }

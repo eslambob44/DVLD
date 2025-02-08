@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlShowLicenseInfo1 = new DVLD_PresentationLayer.Licenses.ctrlShowLicenseInfo();
+            this.ctrlShowLicenseInfo1 = new DVLD_PresentationLayer.Licenses.ctrlShowLocalLicenseInfo();
             this.SuspendLayout();
             // 
             // ctrlShowLicenseInfo1
@@ -58,6 +58,6 @@
 
         #endregion
 
-        private Licenses.ctrlShowLicenseInfo ctrlShowLicenseInfo1;
+        private Licenses.ctrlShowLocalLicenseInfo ctrlShowLicenseInfo1;
     }
 }
