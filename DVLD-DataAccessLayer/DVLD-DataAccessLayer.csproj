@@ -46,6 +46,7 @@
     <Compile Include="clsCountryDataAccessLayer.cs" />
     <Compile Include="clsDataAccessLayerSettings.cs" />
     <Compile Include="clsDriverDataAccessLayer.cs" />
+    <Compile Include="clsInternationalLicenseDataAccessLayer.cs" />
     <Compile Include="clsLicenseClassDataAccessLayer.cs" />
     <Compile Include="clsLicenseDataAccessLayer.cs" />
     <Compile Include="clsLocalLicenseApplicationDataAccessLayer.cs" />
