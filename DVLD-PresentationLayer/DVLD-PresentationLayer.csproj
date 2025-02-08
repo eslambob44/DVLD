@@ -282,6 +282,9 @@
     <EmbeddedResource Include="frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\Local Licenses\ctrlFilterLocalLicenses.resx">
+      <DependentUpon>ctrlFilterLocalLicenses.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Local Licenses\ctrlShowLocalLicenseInfo.resx">
       <DependentUpon>ctrlShowLocalLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
