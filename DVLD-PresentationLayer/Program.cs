@@ -1,4 +1,5 @@
-﻿using DVLD_PresentationLayer.People;
+﻿using DVLD_PresentationLayer.Licenses.International_Licenses;
+using DVLD_PresentationLayer.People;
 using DVLD_PresentationLayer.Users;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace DVLD_PresentationLayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmTest());
+            Application.Run(new frmLogin());
         }
     }
 }

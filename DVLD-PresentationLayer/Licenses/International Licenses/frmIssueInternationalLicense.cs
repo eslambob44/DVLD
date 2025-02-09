@@ -166,5 +166,11 @@ namespace DVLD_PresentationLayer.Licenses.International_Licenses
             frmManageLicenses frm = new frmManageLicenses(_LocalLicense.DriverID);
             frm.ShowDialog();
         }
+
+        private void llblShowLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmInternationalLicenseInfo frm = new frmInternationalLicenseInfo(_InternationalLicense.InternationalLicenseID);
+            frm.ShowDialog();
+        }
     }
 }
