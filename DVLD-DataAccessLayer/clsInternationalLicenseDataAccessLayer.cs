@@ -104,9 +104,11 @@ namespace DVLD_DataAccessLayer
         {
             DataTable dtInternationalLicenses = new DataTable();
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"SELECT  [InternationalLicenseID]
-                            ,[ApplicationID],[IssuedUsingLocalLicenseID],[IssueDate],[ExpirationDate]
-                            ,[IsActive] FROM [InternationalLicenses]
+            string Query = @"SELECT  [InternationalLicenseID] as [Int.License ID]
+                            ,[ApplicationID] as [Application ID]
+                            ,[IssuedUsingLocalLicenseID] as [L.License ID]
+                            ,[IssueDate] as [Issue Date],[ExpirationDate] as [Expiration Date]
+                            ,[IsActive] as [Is Active] FROM [InternationalLicenses]
                             Where DriverID = @DriverID";
             SqlCommand Command = new SqlCommand(Query, Connection);
             Command.Parameters.AddWithValue("@DriverID" , DriverID);
@@ -129,9 +131,12 @@ namespace DVLD_DataAccessLayer
         {
             DataTable dtInternationalLicenses = new DataTable();
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"SELECT  [InternationalLicenseID]
-                            ,[ApplicationID],[DriverID],[IssuedUsingLocalLicenseID],[IssueDate],[ExpirationDate]
-                            ,[IsActive] FROM [InternationalLicenses]";
+            string Query = @"SELECT  [InternationalLicenseID] as [Int.License ID]
+                            ,[ApplicationID] as [Application ID]
+                            ,[DriverID] as [Driver ID]
+                            ,[IssuedUsingLocalLicenseID] as [L.License ID]
+                            ,[IssueDate] as [Issue Date],[ExpirationDate] as [Expiration Date]
+                            ,[IsActive] as [Is Active] FROM [InternationalLicenses]";
             SqlCommand Command = new SqlCommand(Query, Connection);
             try
             {
