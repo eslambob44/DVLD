@@ -199,6 +199,43 @@ namespace DVLD_BusinessLayer
             
         }
 
+        private bool _CheckLicenseForRenew(int ApplicationID)
+        {
+            clsApplication RenewApplication = clsApplication.Find(ApplicationID);
+            if(RenewApplication != null)
+                if (RenewApplication.ApplicationType != clsApplication.enApplicationType.RenewDrivingLicenseService)
+                    return false;
+            else return false;
+
+            if (_Mode == enMode.AddNew) return false;
+            if (_ExpirationDate < DateTime.Now) return false;
+            if (!IsActive) return false;
+            if (IsDetained) return false;
+
+            return true;
+        }
+
+        public int RenewLicense(int ApplicationID , int CreatedUserID)
+        {
+            if (!_CheckLicenseForRenew(ApplicationID)) return -1;
+
+            else
+            {
+                clsLicense RenewedLicense = clsLicense.GetAddNewObject();
+                RenewedLicense.ApplicationID = ApplicationID;
+                RenewedLicense.CreatedUserID = CreatedUserID;
+                RenewedLicense.DriverID = _DriverID;
+                RenewedLicense.IssueReason = enIssueReason.Renew;
+                RenewedLicense.LicenseClass = _LicenseClass;
+                if (RenewedLicense.Save())
+                {
+                    this.IsActive = false;
+                    return RenewedLicense.LicenseID;
+                }
+                else return -1;
+            }
+        }
+
         
     }
 }
