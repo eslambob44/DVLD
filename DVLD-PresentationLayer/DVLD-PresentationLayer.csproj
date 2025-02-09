@@ -64,6 +64,12 @@
     <Compile Include="Applications\ctrlShowApplicationInfo.Designer.cs">
       <DependentUpon>ctrlShowApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\International License Application\frmManageInternationalLicenseApplications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\International License Application\frmManageInternationalLicenseApplications.Designer.cs">
+      <DependentUpon>frmManageInternationalLicenseApplications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\Local License Application\ctrlShowLocalDrivingLicenseApplicationInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -272,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\ctrlShowApplicationInfo.resx">
       <DependentUpon>ctrlShowApplicationInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\International License Application\frmManageInternationalLicenseApplications.resx">
+      <DependentUpon>frmManageInternationalLicenseApplications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Local License Application\ctrlShowLocalDrivingLicenseApplicationInfo.resx">
       <DependentUpon>ctrlShowLocalDrivingLicenseApplicationInfo.cs</DependentUpon>

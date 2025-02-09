@@ -1,5 +1,6 @@
 ﻿using DVLD_BusinessLayer;
 using DVLD_PresentationLayer.Application_Types;
+using DVLD_PresentationLayer.Applications.International_License_Application;
 using DVLD_PresentationLayer.Applications.Local_License_Application;
 using DVLD_PresentationLayer.Drivers;
 using DVLD_PresentationLayer.Licenses.International_Licenses;
@@ -91,6 +92,12 @@ namespace DVLD_PresentationLayer
         private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmIssueInternationalLicense frm = new frmIssueInternationalLicense();
+            frm.Show();
+        }
+
+        private void internationalLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageInternationalLicenseApplications frm = new frmManageInternationalLicenseApplications();
             frm.Show();
         }
     }
