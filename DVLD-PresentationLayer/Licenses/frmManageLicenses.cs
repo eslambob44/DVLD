@@ -37,6 +37,23 @@ namespace DVLD_PresentationLayer.Licenses
             
         }
 
+        DataTable _dtInternationalLicenses;
+        DataTable dtInternationalLicenses
+        {
+            get { return _dtInternationalLicenses; }
+            set
+            {
+                _dtInternationalLicenses = value;
+                _LoadInternationalDGV(_dtInternationalLicenses.DefaultView);
+            }
+        }
+
+        void _LoadInternationalDGV(DataView dv)
+        {
+            dgvInternationalLicenses.DataSource = dv;
+            lblInternationalRecords.Text = "#Records: "+dgvInternationalLicenses.Rows.Count;
+        }
+
         void _FindDriver(int DriverID) 
         {
             _Driver = clsDriver.Find(DriverID);
@@ -49,6 +66,7 @@ namespace DVLD_PresentationLayer.Licenses
             ctrlFilterPerson1.FindPerson(_Driver.PersonID);
             ctrlFilterPerson1.FilterEnabled = false;
             dtLocalLicenses = _Driver.ListLocalLicenses();
+            dtInternationalLicenses = _Driver.ListInternationalLicenses();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
