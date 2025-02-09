@@ -20,7 +20,7 @@ namespace DVLD_PresentationLayer
 
         private void frmTest_Load(object sender, EventArgs e)
         {
-            ctrlShowLicenseInfo1.Find(19);
+            ctrlShowInternationalLicenseInfo1.Find(13);
         }
     }
 }

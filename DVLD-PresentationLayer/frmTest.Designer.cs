@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlShowLicenseInfo1 = new DVLD_PresentationLayer.Licenses.ctrlShowLocalLicenseInfo();
+            this.ctrlShowInternationalLicenseInfo1 = new DVLD_PresentationLayer.Licenses.International_Licenses.ctrlShowInternationalLicenseInfo();
             this.SuspendLayout();
             // 
-            // ctrlShowLicenseInfo1
+            // ctrlShowInternationalLicenseInfo1
             // 
-            this.ctrlShowLicenseInfo1.BackColor = System.Drawing.Color.White;
-            this.ctrlShowLicenseInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlShowLicenseInfo1.Location = new System.Drawing.Point(50, 74);
-            this.ctrlShowLicenseInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ctrlShowLicenseInfo1.Name = "ctrlShowLicenseInfo1";
-            this.ctrlShowLicenseInfo1.Size = new System.Drawing.Size(881, 399);
-            this.ctrlShowLicenseInfo1.TabIndex = 0;
+            this.ctrlShowInternationalLicenseInfo1.BackColor = System.Drawing.Color.White;
+            this.ctrlShowInternationalLicenseInfo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlShowInternationalLicenseInfo1.Location = new System.Drawing.Point(70, 72);
+            this.ctrlShowInternationalLicenseInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ctrlShowInternationalLicenseInfo1.Name = "ctrlShowInternationalLicenseInfo1";
+            this.ctrlShowInternationalLicenseInfo1.Size = new System.Drawing.Size(783, 315);
+            this.ctrlShowInternationalLicenseInfo1.TabIndex = 0;
             // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 620);
-            this.Controls.Add(this.ctrlShowLicenseInfo1);
+            this.Controls.Add(this.ctrlShowInternationalLicenseInfo1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmTest";
@@ -58,6 +58,6 @@
 
         #endregion
 
-        private Licenses.ctrlShowLocalLicenseInfo ctrlShowLicenseInfo1;
+        private Licenses.International_Licenses.ctrlShowInternationalLicenseInfo ctrlShowInternationalLicenseInfo1;
     }
 }

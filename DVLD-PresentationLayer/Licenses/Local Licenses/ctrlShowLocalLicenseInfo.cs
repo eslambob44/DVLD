@@ -86,6 +86,8 @@ namespace DVLD_PresentationLayer.Licenses
             lblDriverID.Text = "??";
             lblExpirationDate.Text = "??";
             lblIsDetained.Text = "??";
+            pbGendor.Image =  Resources.Man_32;
+            ctrlUserImage1.SetImage("", clsPerson.enGendor.Male);
         }
 
         void _LoadForm()

@@ -112,6 +112,12 @@
     <Compile Include="frmTest.Designer.cs">
       <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licenses\International Licenses\ctrlShowInternationalLicenseInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Licenses\International Licenses\ctrlShowInternationalLicenseInfo.Designer.cs">
+      <DependentUpon>ctrlShowInternationalLicenseInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Licenses\International Licenses\frmIssueInternationalLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\International Licenses\ctrlShowInternationalLicenseInfo.resx">
+      <DependentUpon>ctrlShowInternationalLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\International Licenses\frmIssueInternationalLicense.resx">
       <DependentUpon>frmIssueInternationalLicense.cs</DependentUpon>
