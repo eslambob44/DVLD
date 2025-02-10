@@ -213,18 +213,20 @@ namespace DVLD_BusinessLayer
             return _ExpirationDate < DateTime.Now;
         }
 
-        private bool _CheckLicenseForRenew(int ApplicationID)
+        private bool _CheckLicenseForTransaction(int ApplicationID , clsApplication.enApplicationType ApplicationType
+            , bool IsExpired )
         {
             clsApplication RenewApplication = clsApplication.Find(ApplicationID);
             if (RenewApplication != null)
             {
-                if (RenewApplication.ApplicationType != clsApplication.enApplicationType.RenewDrivingLicenseService)
+                if (RenewApplication.ApplicationType != ApplicationType)
                     return false;
             }
             else return false;
+            if (IsLicenseExpired() != IsExpired) return false;
 
             if (_Mode == enMode.AddNew) return false;
-            if (!IsLicenseExpired()) return false;
+
             if (!IsActive) return false;
             if (IsDetained) return false;
 
@@ -233,7 +235,7 @@ namespace DVLD_BusinessLayer
 
         public int RenewLicense(int ApplicationID , int CreatedUserID , string Notes)
         {
-            if (!_CheckLicenseForRenew(ApplicationID)) return -1;
+            if (!_CheckLicenseForTransaction(ApplicationID , clsApplication.enApplicationType.RenewDrivingLicenseService, true)) return -1;
 
             else
             {
@@ -247,10 +249,59 @@ namespace DVLD_BusinessLayer
                 if (RenewedLicense.Save())
                 {
                     this.IsActive = false;
+                    clsApplication.CompleteApplication(ApplicationID);
                     return RenewedLicense.LicenseID;
                 }
-                else return -1;
+                else 
+                {
+                    clsApplication.CancelApplication(ApplicationID);
+                    return -1; 
+                }
             }
+        }
+
+        public int ReplaceLicenseForDamaged(int ApplicationID , int CreatedUserID)
+        {
+            
+            if (!_CheckLicenseForTransaction(ApplicationID, clsApplication.enApplicationType.ReplacementForADamagedDrivingLicense , false))
+            {
+                return -1;
+            }
+            else return _FillReplacedLicense(ApplicationID, clsApplication.enApplicationType.ReplacementForADamagedDrivingLicense , CreatedUserID);
+        }
+
+        public int ReplaceLicenseForLost(int ApplicationID , int CreatedUserID)
+        {
+            if (!_CheckLicenseForTransaction(ApplicationID, clsApplication.enApplicationType.ReplacementForaLostDrivingLicense,false))
+            {
+                return -1;
+            }
+            else return _FillReplacedLicense(ApplicationID, clsApplication.enApplicationType.ReplacementForaLostDrivingLicense , CreatedUserID);
+        }
+
+        private int _FillReplacedLicense(int ApplicationID , clsApplication.enApplicationType ApplicationType , int CreatedUserID)
+        {
+            clsLicense NewLicense = clsLicense.GetAddNewObject();
+            NewLicense.ApplicationID = ApplicationID;
+            NewLicense.LicenseClass = _LicenseClass;
+            NewLicense.CreatedUserID = CreatedUserID;
+            NewLicense.DriverID = _DriverID;
+            NewLicense._IssueDate = DateTime.Now;
+            NewLicense._ExpirationDate = _ExpirationDate;
+            NewLicense.Notes = string.Empty;
+            NewLicense.IssueReason = (ApplicationType == clsApplication.enApplicationType.ReplacementForADamagedDrivingLicense) ? enIssueReason.ReplacementForDamaged : enIssueReason.ReplacementForLost;
+            if(NewLicense.Save())
+            {
+                this.IsActive = false;
+                clsApplication.CompleteApplication(ApplicationID);
+                return NewLicense.LicenseID;
+            }
+            else
+            {
+                clsApplication.CancelApplication(ApplicationID);
+                return -1;
+            }
+            
         }
 
         
