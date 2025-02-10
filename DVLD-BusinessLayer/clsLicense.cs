@@ -58,7 +58,16 @@ namespace DVLD_BusinessLayer
         private float _PaidFees;
         public float PaidFees { get { return _PaidFees;} }
 
-        public bool IsActive;
+        private bool _IsActive;
+        public bool IsActive
+        {
+            get { return _IsActive; }
+            set 
+            {
+                if(clsLicenseDataAccessLayer.UpdateLicenseActiveStatus(_LicenseID, value))
+                    _IsActive = value; 
+            }
+        }
 
         public enum enIssueReason { FirstTime = 1 , Renew = 2 , ReplacementForDamaged = 3 , ReplacementForLost = 4}
 
@@ -94,7 +103,7 @@ namespace DVLD_BusinessLayer
 
             _ExpirationDate = expirationDate;
             Notes = notes;
-            this.IsActive = isActive;
+            this._IsActive = isActive;
             _IssueReason = issueReason;
             _CreatedUserID = createdUserID;
         }
@@ -107,7 +116,7 @@ namespace DVLD_BusinessLayer
             _IssueDate = DateTime.Now;
             LicenseClass = clsLocalLicenseApplication.enLicenseClass.OrdinaryDriving;
             Notes = string.Empty;
-            IsActive = true;
+            _IsActive = true;
             _IssueReason = enIssueReason.FirstTime;
             _CreatedUserID = -1;
         }
@@ -199,23 +208,30 @@ namespace DVLD_BusinessLayer
             
         }
 
+        public bool IsLicenseExpired()
+        {
+            return _ExpirationDate < DateTime.Now;
+        }
+
         private bool _CheckLicenseForRenew(int ApplicationID)
         {
             clsApplication RenewApplication = clsApplication.Find(ApplicationID);
-            if(RenewApplication != null)
+            if (RenewApplication != null)
+            {
                 if (RenewApplication.ApplicationType != clsApplication.enApplicationType.RenewDrivingLicenseService)
                     return false;
+            }
             else return false;
 
             if (_Mode == enMode.AddNew) return false;
-            if (_ExpirationDate < DateTime.Now) return false;
+            if (!IsLicenseExpired()) return false;
             if (!IsActive) return false;
             if (IsDetained) return false;
 
             return true;
         }
 
-        public int RenewLicense(int ApplicationID , int CreatedUserID)
+        public int RenewLicense(int ApplicationID , int CreatedUserID , string Notes)
         {
             if (!_CheckLicenseForRenew(ApplicationID)) return -1;
 
@@ -227,6 +243,7 @@ namespace DVLD_BusinessLayer
                 RenewedLicense.DriverID = _DriverID;
                 RenewedLicense.IssueReason = enIssueReason.Renew;
                 RenewedLicense.LicenseClass = _LicenseClass;
+                RenewedLicense.Notes = Notes;
                 if (RenewedLicense.Save())
                 {
                     this.IsActive = false;

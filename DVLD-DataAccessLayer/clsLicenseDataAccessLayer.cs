@@ -172,5 +172,26 @@ namespace DVLD_DataAccessLayer
             finally { Connection.Close(); }
             return IsDetained;
         }
+
+        static public bool UpdateLicenseActiveStatus(int LicenseID , bool IsActive)
+        {
+            bool IsUpdated = false;
+            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
+            string Query = @"Update Licenses
+                            set IsActive = @IsActive
+                            Where LicenseID = @LicenseID";
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            Command.Parameters.AddWithValue("@IsActive" , IsActive);
+            Command.Parameters.AddWithValue("@LicenseID" , LicenseID );
+            try
+            {
+                Connection.Open();
+                int RowsAffected = Command.ExecuteNonQuery();   
+                IsUpdated  = RowsAffected > 0;
+            }
+            catch { }
+            finally { Connection.Close(); }
+            return IsUpdated;
+        }
     }
 }

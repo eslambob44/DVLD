@@ -4,6 +4,7 @@ using DVLD_PresentationLayer.Applications.International_License_Application;
 using DVLD_PresentationLayer.Applications.Local_License_Application;
 using DVLD_PresentationLayer.Drivers;
 using DVLD_PresentationLayer.Licenses.International_Licenses;
+using DVLD_PresentationLayer.Licenses.Local_Licenses;
 using DVLD_PresentationLayer.People;
 using DVLD_PresentationLayer.Test_Types;
 using DVLD_PresentationLayer.Users;
@@ -98,6 +99,12 @@ namespace DVLD_PresentationLayer
         private void internationalLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManageInternationalLicenseApplications frm = new frmManageInternationalLicenseApplications();
+            frm.Show();
+        }
+
+        private void replacementForToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRenewLicense frm = new frmRenewLicense();
             frm.Show();
         }
     }
