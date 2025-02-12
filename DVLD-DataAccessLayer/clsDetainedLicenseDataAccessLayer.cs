@@ -18,7 +18,7 @@ namespace DVLD_DataAccessLayer
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string query = @"
             INSERT INTO DetainedLicenses VALUES 
-            (, @LicenseID, @DetainDate, @FineFees, @CreatedByUserID, @IsReleased, @ReleaseDate,
+            ( @LicenseID, @DetainDate, @FineFees, @CreatedByUserID, @IsReleased, @ReleaseDate,
                 @ReleasedByUserID, @ReleaseApplicationID);
                 Select SCOPE_IDENTITY();";
 

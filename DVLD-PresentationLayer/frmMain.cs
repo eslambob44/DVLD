@@ -113,5 +113,11 @@ namespace DVLD_PresentationLayer
             frmReplaceDamagedOrLostLicense frm = new frmReplaceDamagedOrLostLicense();
             frm.Show();
         }
+
+        private void detainLiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDetainLicense frm = new frmDetainLicense();
+            frm.Show();
+        }
     }
 }

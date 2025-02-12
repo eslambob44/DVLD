@@ -148,6 +148,12 @@
     <Compile Include="Licenses\Local Licenses\ctrlShowLocalLicenseInfo.Designer.cs">
       <DependentUpon>ctrlShowLocalLicenseInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licenses\Local Licenses\frmDetainLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\Local Licenses\frmDetainLicense.Designer.cs">
+      <DependentUpon>frmDetainLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Licenses\Local Licenses\frmIssueLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -335,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Local Licenses\ctrlShowLocalLicenseInfo.resx">
       <DependentUpon>ctrlShowLocalLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\Local Licenses\frmDetainLicense.resx">
+      <DependentUpon>frmDetainLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Local Licenses\frmIssueLicense.resx">
       <DependentUpon>frmIssueLicense.cs</DependentUpon>
