@@ -88,10 +88,10 @@
             this.btnRenew.Enabled = false;
             this.btnRenew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRenew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRenew.Image = ((System.Drawing.Image)(resources.GetObject("btnRenew.Image")));
+            this.btnRenew.Image = ((System.Drawing.Image)(resources.GetObject("btnReplace.Image")));
             this.btnRenew.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnRenew.Location = new System.Drawing.Point(773, 989);
-            this.btnRenew.Name = "btnRenew";
+            this.btnRenew.Name = "btnReplace";
             this.btnRenew.Size = new System.Drawing.Size(127, 43);
             this.btnRenew.TabIndex = 49;
             this.btnRenew.Text = "Renew";

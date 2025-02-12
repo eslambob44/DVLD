@@ -172,6 +172,12 @@
     <Compile Include="Licenses\Local Licenses\frmRenewLicense.Designer.cs">
       <DependentUpon>frmRenewLicense.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licenses\Local Licenses\frmReplaceDamagedOrLostLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\Local Licenses\frmReplaceDamagedOrLostLicense.Designer.cs">
+      <DependentUpon>frmReplaceDamagedOrLostLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="People\ctrlFilterPerson.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -341,6 +347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Local Licenses\frmRenewLicense.resx">
       <DependentUpon>frmRenewLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\Local Licenses\frmReplaceDamagedOrLostLicense.resx">
+      <DependentUpon>frmReplaceDamagedOrLostLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People\ctrlFilterPerson.resx">
       <DependentUpon>ctrlFilterPerson.cs</DependentUpon>

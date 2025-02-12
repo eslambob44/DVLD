@@ -162,6 +162,7 @@
             this.replacementForLostOrDamagedLicenseToolStripMenuItem.Name = "replacementForLostOrDamagedLicenseToolStripMenuItem";
             this.replacementForLostOrDamagedLicenseToolStripMenuItem.Size = new System.Drawing.Size(520, 70);
             this.replacementForLostOrDamagedLicenseToolStripMenuItem.Text = "Replacement for lost or Damaged License";
+            this.replacementForLostOrDamagedLicenseToolStripMenuItem.Click += new System.EventHandler(this.replacementForLostOrDamagedLicenseToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
@@ -201,7 +202,7 @@
             // 
             this.localDrivingLicenseApplicationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("localDrivingLicenseApplicationsToolStripMenuItem.Image")));
             this.localDrivingLicenseApplicationsToolStripMenuItem.Name = "localDrivingLicenseApplicationsToolStripMenuItem";
-            this.localDrivingLicenseApplicationsToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
+            this.localDrivingLicenseApplicationsToolStripMenuItem.Size = new System.Drawing.Size(448, 70);
             this.localDrivingLicenseApplicationsToolStripMenuItem.Text = "Local Driving License Applications";
             this.localDrivingLicenseApplicationsToolStripMenuItem.Click += new System.EventHandler(this.localDrivingLicenseApplicationsToolStripMenuItem_Click);
             // 
@@ -209,7 +210,7 @@
             // 
             this.internationalLicenseApplicationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("internationalLicenseApplicationsToolStripMenuItem.Image")));
             this.internationalLicenseApplicationsToolStripMenuItem.Name = "internationalLicenseApplicationsToolStripMenuItem";
-            this.internationalLicenseApplicationsToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
+            this.internationalLicenseApplicationsToolStripMenuItem.Size = new System.Drawing.Size(448, 70);
             this.internationalLicenseApplicationsToolStripMenuItem.Text = "International License Applications";
             this.internationalLicenseApplicationsToolStripMenuItem.Click += new System.EventHandler(this.internationalLicenseApplicationsToolStripMenuItem_Click);
             // 

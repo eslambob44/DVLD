@@ -107,5 +107,11 @@ namespace DVLD_PresentationLayer
             frmRenewLicense frm = new frmRenewLicense();
             frm.Show();
         }
+
+        private void replacementForLostOrDamagedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReplaceDamagedOrLostLicense frm = new frmReplaceDamagedOrLostLicense();
+            frm.Show();
+        }
     }
 }
