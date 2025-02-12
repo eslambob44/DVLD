@@ -304,6 +304,53 @@ namespace DVLD_BusinessLayer
             
         }
 
+
+        private bool _CheckForIfCanDetainLicense()
+        {
+            if (_Mode == enMode.AddNew) return false;
+            if(!_IsActive) return false;
+            if (IsDetained) return false;
+            if(IsLicenseExpired()) return false;
+
+            return true;
+        }
+
+        public int DetainLicense(int FineFees , int CreatedUserID)
+        {
+            if(_CheckForIfCanDetainLicense())
+            {
+                return clsDetainedLicense.DetainLicense(_LicenseID , FineFees, CreatedUserID);
+            }
+            return -1;
+        }
+
+        private bool _CheckIfCanReleaseLicense(int ApplicationID)
+        {
+            clsApplication Application = clsApplication.Find(ApplicationID);
+            if (Application != null)
+            {
+                if (Application.ApplicationType != clsApplication.enApplicationType.ReleaseDetainedDrivingLicense) return false;
+            }
+            else return false;
+
+
+            if (_Mode == enMode.AddNew) return false;
+            if (!_IsActive) return false;
+            if (!IsDetained) return false;
+            if (IsLicenseExpired()) return false;
+
+            return true;
+        }
+
+        public bool ReleaseDetainedLicense(int ReleasedUserID , int ApplicationID)
+        {
+            if(_CheckIfCanReleaseLicense(ApplicationID))
+            {
+                return clsDetainedLicense.ReleaseDetainedLicense(_LicenseID,ReleasedUserID , ApplicationID);
+            }
+            return false;
+        }
+
         
     }
 }
