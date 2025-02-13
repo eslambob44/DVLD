@@ -54,11 +54,11 @@ namespace DVLD_DataAccessLayer
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"UPDATE DetainedLicenses
             SET 
-                IsReleased = True,
+                IsReleased = 1,
                 ReleaseDate = @ReleaseDate,
                 ReleasedByUserID = @ReleasedByUserID,
                 ReleaseApplicationID = @ReleaseApplicationID
-            WHERE LicenseID = @LicenseID and IsReleased = False;";
+            WHERE LicenseID = @LicenseID and IsReleased = 0;";
             SqlCommand command = new SqlCommand(Query, Connection);
             command.Parameters.AddWithValue("@ReleaseDate", ReleaseDate);
             command.Parameters.AddWithValue("@ReleasedByUserID", ReleasedUserID);
@@ -152,7 +152,7 @@ namespace DVLD_DataAccessLayer
             bool IsFound = false;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Select * From DetainedLicenses
-                            WHERE LicenseID = @LicenseID;";
+                            WHERE LicenseID = @LicenseID and IsReleased = 0;";
             SqlCommand command = new SqlCommand(Query, Connection);
             command.Parameters.AddWithValue("@LicenseID", licenseID);
             try

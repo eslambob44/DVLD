@@ -119,5 +119,11 @@ namespace DVLD_PresentationLayer
             frmDetainLicense frm = new frmDetainLicense();
             frm.Show();
         }
+
+        private void realeseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLicense frm = new frmReleaseDetainedLicense();
+            frm.Show();
+        }
     }
 }

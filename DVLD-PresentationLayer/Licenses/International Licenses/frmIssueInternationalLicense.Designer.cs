@@ -396,10 +396,10 @@
             this.btnIssue.Enabled = false;
             this.btnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIssue.Image = ((System.Drawing.Image)(resources.GetObject("btnReplace.Image")));
+            this.btnIssue.Image = ((System.Drawing.Image)(resources.GetObject("btnRelease.Image")));
             this.btnIssue.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnIssue.Location = new System.Drawing.Point(772, 841);
-            this.btnIssue.Name = "btnReplace";
+            this.btnIssue.Name = "btnRelease";
             this.btnIssue.Size = new System.Drawing.Size(127, 43);
             this.btnIssue.TabIndex = 3;
             this.btnIssue.Text = "Issue";
