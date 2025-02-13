@@ -31,6 +31,7 @@ namespace DVLD_PresentationLayer.Licenses.Local_Licenses
         public void Find(int LicenseID)
         {
             mtxtFilter.Text = LicenseID.ToString();
+            Application.DoEvents();
             btnFilter.PerformClick();
         }
 

@@ -172,6 +172,12 @@
     <Compile Include="Licenses\frmManageLicenses.Designer.cs">
       <DependentUpon>frmManageLicenses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licenses\Local Licenses\frmManageDetainedLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\Local Licenses\frmManageDetainedLicenses.Designer.cs">
+      <DependentUpon>frmManageDetainedLicenses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Licenses\Local Licenses\frmRenewLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -359,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\frmManageLicenses.resx">
       <DependentUpon>frmManageLicenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\Local Licenses\frmManageDetainedLicenses.resx">
+      <DependentUpon>frmManageDetainedLicenses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Local Licenses\frmRenewLicense.resx">
       <DependentUpon>frmRenewLicense.cs</DependentUpon>

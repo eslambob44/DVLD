@@ -27,8 +27,7 @@ namespace DVLD_PresentationLayer.Licenses.Local_Licenses
         {
             InitializeComponent();
             _Application = clsApplication.GetAddNewObject();
-            ctrlFilterLocalLicenses1.Find(LicenseID);
-            ctrlFilterLocalLicenses1.FilterEnabled = false;
+            _License = clsLicense.FindLicense(LicenseID);
 
         }
 
@@ -40,6 +39,11 @@ namespace DVLD_PresentationLayer.Licenses.Local_Licenses
 
         private void frmReplaceDetainedLicense_Load(object sender, EventArgs e)
         {
+            if(_License!= null)
+            {
+                ctrlFilterLocalLicenses1.Find(_License.LicenseID);
+                ctrlFilterLocalLicenses1.FilterEnabled = false;
+            }
             _FillApplicationObject();
             _LoadForm();
         }

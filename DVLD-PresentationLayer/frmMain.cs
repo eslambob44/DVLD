@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 
 namespace DVLD_PresentationLayer
 {
@@ -114,15 +115,21 @@ namespace DVLD_PresentationLayer
             frm.Show();
         }
 
-        private void detainLiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmDetainLicense frm = new frmDetainLicense();
-            frm.Show();
-        }
-
         private void realeseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmReleaseDetainedLicense frm = new frmReleaseDetainedLicense();
+            frm.Show();
+        }
+
+        private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDetainLicense frm = new frmDetainLicense();  
+            frm.Show();
+        }
+
+        private void manageDetainedLicensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageDetainedLicenses frm = new frmManageDetainedLicenses();
             frm.Show();
         }
     }
