@@ -98,7 +98,7 @@ namespace DVLD_BusinessLayer
             _Mode = enMode.ReadOnly;
             _ApplicationID = applicationID;
             _DriverID = driverID;
-            _IssueDate = DateTime.Now;
+            _IssueDate = issueDate;
             _LicenseClass = licenseClass;
 
             _ExpirationDate = expirationDate;
@@ -233,7 +233,7 @@ namespace DVLD_BusinessLayer
             return true;
         }
 
-        public int RenewLicense(int ApplicationID , int CreatedUserID , string Notes)
+        public int RenewLicense(int ApplicationID , int CreatedUserID , string Notes = "")
         {
             if (!_CheckLicenseForTransaction(ApplicationID , clsApplication.enApplicationType.RenewDrivingLicenseService, true)) return -1;
 
@@ -290,6 +290,7 @@ namespace DVLD_BusinessLayer
             NewLicense._ExpirationDate = _ExpirationDate;
             NewLicense.Notes = string.Empty;
             NewLicense.IssueReason = (ApplicationType == clsApplication.enApplicationType.ReplacementForADamagedDrivingLicense) ? enIssueReason.ReplacementForDamaged : enIssueReason.ReplacementForLost;
+            NewLicense._PaidFees = 0;
             if(NewLicense.Save())
             {
                 this.IsActive = false;

@@ -15,12 +15,12 @@ namespace DVLD_BusinessLayer
             return clsCountryDataAccessLayer.ListCountries();
         }
 
-        static public int FindCountry(string CountryName)
+        static public int GetCountryID(string CountryName)
         {
             return clsCountryDataAccessLayer.FindCountry(CountryName);
         }
 
-        static public string FindCountry(int CountryId) 
+        static public string GetCountryName(int CountryId) 
         {
             return clsCountryDataAccessLayer.FindCountry(CountryId);
         }

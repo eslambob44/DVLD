@@ -224,7 +224,7 @@ namespace DVLD_PresentationLayer.People
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(!_ValidateFields()) 
+            if( this.ValidateChildren() ) 
             {
                 MessageBox.Show("Some field are invalid", "cant save", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -238,7 +238,7 @@ namespace DVLD_PresentationLayer.People
             _Person.Address = txtAddress.Text;
             _Person.Gendor = _Gendor;
             _Person.Phone = txtPhone.Text;
-            _Person.NationalityCountryID = clsCountry.FindCountry(cbCountries.Text);
+            _Person.NationalityCountryID = clsCountry.GetCountryID(cbCountries.Text);
             _Person.ImagePath = ctrlUserImage1.ImageLocation;
             _Person.DateOfBirth = dtpDateOfBirth.Value;
             if(_Person.Save())

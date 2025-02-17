@@ -1,4 +1,5 @@
 ﻿using DVLD_BusinessLayer;
+using DVLD_PresentationLayer.Licenses.International_Licenses;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,6 +73,23 @@ namespace DVLD_PresentationLayer.Licenses
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void showLicenseInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LicenseID = (int)dgvLocalLicensesHistory.SelectedRows[0].Cells["Lic.ID"].Value;
+            frmLocalLicenseInfo frm = new frmLocalLicenseInfo(LicenseID);
+            frm.ShowDialog();
+        }
+
+        private void showLicenseInfoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if(dgvInternationalLicenses.SelectedRows.Count > 0)
+            {
+                int InternationalLicenseID = (int)dgvInternationalLicenses.SelectedRows[0].Cells["Int.License ID"].Value;
+                frmInternationalLicenseInfo frm = new frmInternationalLicenseInfo(InternationalLicenseID);
+                frm.ShowDialog();
+            }
         }
     }
 }
