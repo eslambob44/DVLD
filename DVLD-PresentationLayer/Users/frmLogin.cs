@@ -110,17 +110,21 @@ namespace DVLD_PresentationLayer.Users
         string OpenRememberedUserFile(string FilePath = @"D:\RememberedUser.txt")
         {
             string Content = null;
-            try
+            if (File.Exists(FilePath))
             {
-                StreamReader Reader = new StreamReader(FilePath);
-                Content = Reader.ReadToEnd();
-                Reader.Close();
+                try
+                {
+                    StreamReader Reader = new StreamReader(FilePath);
+                    Content = Reader.ReadToEnd();
+                    Reader.Close();
+                }
+                catch(Exception e)
+                {
+                    return null;
+                }
+                return Content;
             }
-            catch
-            {
-
-            }
-            return Content;
+            return null;
         }
 
         void LoadRememberedUser( string Delim = "#//#")
