@@ -38,14 +38,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblRecords = new System.Windows.Forms.Label();
             this.dgvLicenses = new System.Windows.Forms.DataGridView();
-            this.btnDetainLicense = new System.Windows.Forms.Button();
-            this.btnReleaseLicense = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showPersonDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showLicenseDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.releaseLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDetainLicense = new System.Windows.Forms.Button();
+            this.btnReleaseLicense = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLicenses)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -61,6 +61,7 @@
             this.mtxtFilter.TabIndex = 24;
             this.mtxtFilter.ValidatingType = typeof(int);
             this.mtxtFilter.TextChanged += new System.EventHandler(this.mtxtFilter_TextChanged);
+            this.mtxtFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtxtFilter_KeyPress);
             // 
             // cbFilter
             // 
@@ -157,30 +158,6 @@
             this.dgvLicenses.Size = new System.Drawing.Size(1203, 340);
             this.dgvLicenses.TabIndex = 17;
             // 
-            // btnDetainLicense
-            // 
-            this.btnDetainLicense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDetainLicense.Image = ((System.Drawing.Image)(resources.GetObject("btnDetainLicense.Image")));
-            this.btnDetainLicense.Location = new System.Drawing.Point(1136, 163);
-            this.btnDetainLicense.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDetainLicense.Name = "btnDetainLicense";
-            this.btnDetainLicense.Size = new System.Drawing.Size(75, 70);
-            this.btnDetainLicense.TabIndex = 25;
-            this.btnDetainLicense.UseVisualStyleBackColor = true;
-            this.btnDetainLicense.Click += new System.EventHandler(this.btnDetainLicense_Click);
-            // 
-            // btnReleaseLicense
-            // 
-            this.btnReleaseLicense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReleaseLicense.Image = ((System.Drawing.Image)(resources.GetObject("btnReleaseLicense.Image")));
-            this.btnReleaseLicense.Location = new System.Drawing.Point(1049, 163);
-            this.btnReleaseLicense.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnReleaseLicense.Name = "btnReleaseLicense";
-            this.btnReleaseLicense.Size = new System.Drawing.Size(75, 70);
-            this.btnReleaseLicense.TabIndex = 26;
-            this.btnReleaseLicense.UseVisualStyleBackColor = true;
-            this.btnReleaseLicense.Click += new System.EventHandler(this.btnReleaseLicense_Click);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -230,6 +207,30 @@
             this.releaseLicenseToolStripMenuItem.Size = new System.Drawing.Size(241, 38);
             this.releaseLicenseToolStripMenuItem.Text = "Release Detained License";
             this.releaseLicenseToolStripMenuItem.Click += new System.EventHandler(this.releaseLicenseToolStripMenuItem_Click);
+            // 
+            // btnDetainLicense
+            // 
+            this.btnDetainLicense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDetainLicense.Image = ((System.Drawing.Image)(resources.GetObject("btnDetainLicense.Image")));
+            this.btnDetainLicense.Location = new System.Drawing.Point(1136, 163);
+            this.btnDetainLicense.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDetainLicense.Name = "btnDetainLicense";
+            this.btnDetainLicense.Size = new System.Drawing.Size(75, 70);
+            this.btnDetainLicense.TabIndex = 25;
+            this.btnDetainLicense.UseVisualStyleBackColor = true;
+            this.btnDetainLicense.Click += new System.EventHandler(this.btnDetainLicense_Click);
+            // 
+            // btnReleaseLicense
+            // 
+            this.btnReleaseLicense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReleaseLicense.Image = ((System.Drawing.Image)(resources.GetObject("btnReleaseLicense.Image")));
+            this.btnReleaseLicense.Location = new System.Drawing.Point(1049, 163);
+            this.btnReleaseLicense.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnReleaseLicense.Name = "btnReleaseLicense";
+            this.btnReleaseLicense.Size = new System.Drawing.Size(75, 70);
+            this.btnReleaseLicense.TabIndex = 26;
+            this.btnReleaseLicense.UseVisualStyleBackColor = true;
+            this.btnReleaseLicense.Click += new System.EventHandler(this.btnReleaseLicense_Click);
             // 
             // frmManageDetainedLicenses
             // 

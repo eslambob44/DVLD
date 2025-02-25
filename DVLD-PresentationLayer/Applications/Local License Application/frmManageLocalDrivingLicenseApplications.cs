@@ -183,13 +183,7 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
                     mtxtFilter.Visible = false;
                     cbStatus.Visible = false;
                     break;
-                case enFilter.ldlAppID:
-                    mtxtFilter.Mask = "0000000000";
-                    break;
-                case enFilter.NationalNo:
-                case enFilter.FullName:
-                    mtxtFilter.Mask = "";
-                    break;
+                
                 case enFilter.Status:
                     mtxtFilter.Visible = false;
                     cbStatus.Visible = true;
@@ -270,6 +264,12 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
                 frmLocalLicenseInfo frm = new frmLocalLicenseInfo(LicenseID);
                 frm.ShowDialog();
             }
+        }
+
+        private void mtxtFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(_Filter == enFilter.ldlAppID)
+                e.Handled = (!char.IsDigit(e.KeyChar) && ! char.IsControl(e.KeyChar));
         }
     }
 }

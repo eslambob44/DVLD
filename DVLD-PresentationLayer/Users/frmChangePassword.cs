@@ -25,7 +25,9 @@ namespace DVLD_PresentationLayer.Users
         {
             if(!_User.IsCorrectPassword(txtCurrentPassword.Text))
             {
+                e.Cancel= true;
                 errorProvider1.SetError(txtCurrentPassword,"Wrong Password");
+                return;
             }
             else
             {
@@ -47,7 +49,9 @@ namespace DVLD_PresentationLayer.Users
         {
             if (string.IsNullOrEmpty(txtNewPassword.Text))
             {
-                errorProvider1.SetError(txtNewPassword, "user name cannot by empty");
+                e.Cancel= true;
+                errorProvider1.SetError(txtNewPassword, "password cannot by empty");
+                return;
             }
             else
             {
@@ -59,24 +63,21 @@ namespace DVLD_PresentationLayer.Users
         {
             if (txtConfirmPassword.Text != txtNewPassword.Text)
             {
+
+                e.Cancel = true;
                 errorProvider1.SetError(txtConfirmPassword, "the password should be the same");
+                return;
             }
             else
             {
                 errorProvider1.SetError(txtConfirmPassword, "");
             }
         }
-        bool _ValidateInputs()
-        {
-            if (!_User.IsCorrectPassword(txtCurrentPassword.Text)) return false;
-            if (string.IsNullOrEmpty(txtNewPassword.Text)) return false;
-            if (txtConfirmPassword.Text != txtNewPassword.Text) return false;
-            return true;
-        }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!_ValidateInputs())
+            if (!this.ValidateChildren())
             {
                 MessageBox.Show("input are invalid", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

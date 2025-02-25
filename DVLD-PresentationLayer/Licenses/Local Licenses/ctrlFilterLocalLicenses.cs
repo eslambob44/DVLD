@@ -49,5 +49,10 @@ namespace DVLD_PresentationLayer.Licenses.Local_Licenses
                 gbFilter.Enabled = value;
             } 
         }
+
+        private void mtxtFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar));
+        }
     }
 }

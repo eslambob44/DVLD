@@ -69,7 +69,7 @@ namespace DVLD_PresentationLayer.People
                 }
                 txtPhone.Text = _Person.Phone;  
                 txtEmail.Text = _Person.Email;
-                cbCountries.SelectedIndex = cbCountries.FindString(_Person.Country);
+                cbCountries.SelectedIndex = cbCountries.FindString(_Person.CountryName);
                 ctrlUserImage1.SetImage(_Person.ImagePath , _Person.Gendor);
                 txtAddress.Text = _Person.Address;
             }
@@ -205,19 +205,6 @@ namespace DVLD_PresentationLayer.People
             return false;
         }
 
-        bool _ValidateFields()
-        {
-            if(_ValidateIsEmpty(txtFirstName.Text)) return false;
-            if(_ValidateIsEmpty(txtSecondName.Text)) return false;
-            if(_ValidateIsEmpty(txtThirdName.Text)) return false;
-            if(_ValidateIsEmpty(txtLastName.Text)) return false;    
-            if(_ValidateIsEmpty(txtNationalNumber.Text)) return false;
-            if(clsPerson.IsPersonExists(txtNationalNumber.Text) && _Mode == enMode.AddNew)return false;   
-            if(_ValidateIsEmpty(txtPhone.Text)) return false;
-            if((!IsValidEmail(txtEmail.Text)) && (!string.IsNullOrEmpty(txtEmail.Text))) return false;
-            if(_ValidateIsEmpty(txtAddress.Text)) return false;
-            return true;
-        }
 
         public delegate void DataReceivedHandler(int PersonID);
         public event DataReceivedHandler DataReceived;

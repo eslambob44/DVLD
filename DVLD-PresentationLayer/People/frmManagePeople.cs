@@ -139,19 +139,21 @@ namespace DVLD_PresentationLayer.People
                 mtxtFilter.Visible = true;
             }
 
-            if(_Filter == enFilter.Phone ||  _Filter == enFilter.PersonID)
-            {
-                mtxtFilter.Mask = "00000000000";
-            }
-            else
-            {
-                mtxtFilter.Mask = "";
-            }
+            
+            
         }
 
         private void mtxtFilter_TextChanged(object sender, EventArgs e)
         {
             _ApplyFilter();
+        }
+
+        private void mtxtFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (_Filter == enFilter.Phone || _Filter == enFilter.PersonID)
+            {
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) ;
+            }
         }
     }
 }

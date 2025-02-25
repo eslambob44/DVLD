@@ -286,7 +286,7 @@
             this.lblCountry.Name = "lblCountry";
             this.lblCountry.Size = new System.Drawing.Size(63, 16);
             this.lblCountry.TabIndex = 10;
-            this.lblCountry.Text = "Country:";
+            this.lblCountry.Text = "CountryName:";
             // 
             // lblPhone
             // 

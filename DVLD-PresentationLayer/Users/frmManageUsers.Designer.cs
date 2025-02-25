@@ -223,6 +223,7 @@
             this.mtxtFilter.TabIndex = 11;
             this.mtxtFilter.Visible = false;
             this.mtxtFilter.TextChanged += new System.EventHandler(this.mtxtFilter_TextChanged);
+            this.mtxtFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtxtFilter_KeyPress);
             // 
             // cbIsActive
             // 

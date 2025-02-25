@@ -61,24 +61,13 @@ namespace DVLD_PresentationLayer.People
 
         public int PersonID { get; set; } = -1;
 
-        void ChangeMaskInmtxt()
-        {
-            switch(_Filter)
-            {
-                case enFilter.PersonID:
-                    mtxt.Mask = "00000";
-                    break;
-                case enFilter.NationalNo:
-                    mtxt.Mask = "";
-                    break;
-            }
-        }
+        
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             _Filter = (enFilter)cbFilter.SelectedIndex;
             mtxt.Clear();
-            ChangeMaskInmtxt();
+            
         }
 
         private void ctrlFilterPerson_Load(object sender, EventArgs e)
@@ -133,6 +122,12 @@ namespace DVLD_PresentationLayer.People
             frmAddEditPerson frm = new frmAddEditPerson(-1);
             frm.DataReceived += FindPerson;
             frm.ShowDialog();
+        }
+
+        private void mtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(_Filter == enFilter.PersonID)
+                e.Handled = (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar));
         }
     }
 }

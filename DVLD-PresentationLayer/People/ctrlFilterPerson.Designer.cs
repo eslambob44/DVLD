@@ -82,6 +82,7 @@
             this.mtxt.Name = "mtxt";
             this.mtxt.Size = new System.Drawing.Size(170, 22);
             this.mtxt.TabIndex = 1;
+            this.mtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtxt_KeyPress);
             // 
             // cbFilter
             // 

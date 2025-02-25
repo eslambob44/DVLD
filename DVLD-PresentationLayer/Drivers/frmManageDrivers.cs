@@ -71,8 +71,7 @@ namespace DVLD_PresentationLayer.Drivers
             if (_Filter == enFilter.None) mtxtFilter.Visible = false;
             else mtxtFilter.Visible = true;
 
-            if (_Filter == enFilter.DriverID || _Filter == enFilter.PersonID) mtxtFilter.Mask = "000000";
-            else mtxtFilter.Mask = "";
+            
         }
 
         private void mtxtFilter_TextChanged(object sender, EventArgs e)
@@ -100,6 +99,12 @@ namespace DVLD_PresentationLayer.Drivers
             clsDriver Driver = clsDriver.Find(DriverID);
             issueInternationalLicenseToolStripMenuItem.Enabled = (Driver.GetActiveInternationalLicenseID()==-1);
             issueInternationalLicenseToolStripMenuItem.Enabled &= Driver.IsDriverHasAnActiveLicense(clsLocalLicenseApplication.enLicenseClass.OrdinaryDriving);
+        }
+
+        private void mtxtFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (_Filter == enFilter.DriverID || _Filter == enFilter.PersonID)
+                e.Handled = (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar));
         }
     }
 }

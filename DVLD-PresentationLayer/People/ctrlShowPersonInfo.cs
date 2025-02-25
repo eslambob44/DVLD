@@ -79,7 +79,7 @@ namespace DVLD_PresentationLayer
             lblGendorval.Text = _Person.GendorString;
             lblAddressval.Text = _Person.Address;
             lblDateOfBirthval.Text = _Person.DateOfBirth.ToString("yyyy/MMMM/dd");
-            lblCountryval.Text = _Person.Country;
+            lblCountryval.Text = _Person.CountryName;
             ctrlUserImage1.SetImage(_Person.ImagePath, _Person.Gendor);
             pbGendor.Image = (_Person.Gendor == clsPerson.enGendor.Male)?Resources.Man_32:Resources.Woman_32;
 

@@ -143,20 +143,18 @@ namespace DVLD_PresentationLayer.Licenses.Local_Licenses
             else
             {
                 mtxtFilter.Visible=true;
-                if(_Filter == enFilter.DetainID || _Filter == enFilter.ReleasedApplicationID)
-                {
-                    mtxtFilter.Mask = "00000000";
-                }
-                else
-                {
-                    mtxtFilter.Mask = "";
-                }
             }
         }
 
         private void mtxtFilter_TextChanged(object sender, EventArgs e)
         {
             _ApplyFilter();
+        }
+
+        private void mtxtFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (_Filter == enFilter.DetainID || _Filter == enFilter.ReleasedApplicationID)
+                e.Handled = (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar));
         }
     }
 }

@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlFilterLocalLicenses));
             this.ctrlShowLicenseInfo1 = new DVLD_PresentationLayer.Licenses.ctrlShowLocalLicenseInfo();
             this.gbFilter = new System.Windows.Forms.GroupBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.mtxtFilter = new System.Windows.Forms.MaskedTextBox();
             this.btnFilter = new System.Windows.Forms.Button();
+            this.mtxtFilter = new System.Windows.Forms.MaskedTextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.gbFilter.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,24 +60,6 @@
             this.gbFilter.TabStop = false;
             this.gbFilter.Text = "Filter";
             // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(208, 35);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(65, 16);
-            this.label20.TabIndex = 51;
-            this.label20.Text = "License:";
-            // 
-            // mtxtFilter
-            // 
-            this.mtxtFilter.Location = new System.Drawing.Point(279, 32);
-            this.mtxtFilter.Mask = "000000000000";
-            this.mtxtFilter.Name = "mtxtFilter";
-            this.mtxtFilter.Size = new System.Drawing.Size(214, 22);
-            this.mtxtFilter.TabIndex = 52;
-            // 
             // btnFilter
             // 
             this.btnFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.Image")));
@@ -87,6 +69,24 @@
             this.btnFilter.TabIndex = 53;
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // mtxtFilter
+            // 
+            this.mtxtFilter.Location = new System.Drawing.Point(279, 32);
+            this.mtxtFilter.Name = "mtxtFilter";
+            this.mtxtFilter.Size = new System.Drawing.Size(214, 22);
+            this.mtxtFilter.TabIndex = 52;
+            this.mtxtFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtxtFilter_KeyPress);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(208, 35);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(65, 16);
+            this.label20.TabIndex = 51;
+            this.label20.Text = "License:";
             // 
             // ctrlFilterLocalLicenses
             // 

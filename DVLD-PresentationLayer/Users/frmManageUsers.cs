@@ -170,14 +170,7 @@ namespace DVLD_PresentationLayer.Users
             _Filter = (enFilter)cbFilter.SelectedIndex;
             _ShowFilterControl();
             
-            if(_Filter ==  enFilter.UserID || _Filter== enFilter.PersonID)
-            {
-                mtxtFilter.Mask = "000000";
-            }
-            else
-            {
-                mtxtFilter.Mask = "";
-            }
+            
             _FilterValue = "";
             _ApplyFilter();
         }
@@ -200,6 +193,15 @@ namespace DVLD_PresentationLayer.Users
         {
             _FilterValue = mtxtFilter.Text;
             _ApplyFilter();
+        }
+
+        
+
+        private void mtxtFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (_Filter == enFilter.UserID || _Filter == enFilter.PersonID)
+                e.Handled = (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar));
+            
         }
     }
 }

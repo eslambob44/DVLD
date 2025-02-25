@@ -104,7 +104,7 @@
             this.toolStripMenuItem6,
             this.showPersonLicenseHistoryToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(262, 366);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(262, 344);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // showApplicationDetailsToolStripMenuItem
@@ -320,6 +320,7 @@
             this.mtxtFilter.TabIndex = 16;
             this.mtxtFilter.Visible = false;
             this.mtxtFilter.TextChanged += new System.EventHandler(this.mtxtFilter_TextChanged);
+            this.mtxtFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtxtFilter_KeyPress);
             // 
             // cbFilter
             // 
