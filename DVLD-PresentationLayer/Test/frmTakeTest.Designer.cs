@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTakeTest));
             this.gbAppointment = new System.Windows.Forms.GroupBox();
+            this.lblTestID = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblAppointmentDate = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblFees = new System.Windows.Forms.Label();
@@ -49,10 +53,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblAppointmentTitle = new System.Windows.Forms.Label();
             this.pbAppointment = new System.Windows.Forms.PictureBox();
-            this.lblAppointmentDate = new System.Windows.Forms.Label();
-            this.lblTestID = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.rbPass = new System.Windows.Forms.RadioButton();
             this.ebFail = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
@@ -63,6 +63,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.gbAppointment.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -70,7 +71,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAppointment)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.SuspendLayout();
@@ -107,6 +107,46 @@
             this.gbAppointment.TabIndex = 70;
             this.gbAppointment.TabStop = false;
             this.gbAppointment.Text = "groupBox1";
+            // 
+            // lblTestID
+            // 
+            this.lblTestID.AutoSize = true;
+            this.lblTestID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTestID.Location = new System.Drawing.Point(180, 517);
+            this.lblTestID.Name = "lblTestID";
+            this.lblTestID.Size = new System.Drawing.Size(106, 16);
+            this.lblTestID.TabIndex = 114;
+            this.lblTestID.Text = "Not Taken Yet";
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(114, 511);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(28, 28);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 113;
+            this.pictureBox4.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(40, 517);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 16);
+            this.label4.TabIndex = 112;
+            this.label4.Text = "Test ID:";
+            // 
+            // lblAppointmentDate
+            // 
+            this.lblAppointmentDate.AutoSize = true;
+            this.lblAppointmentDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAppointmentDate.Location = new System.Drawing.Point(180, 429);
+            this.lblAppointmentDate.Name = "lblAppointmentDate";
+            this.lblAppointmentDate.Size = new System.Drawing.Size(23, 16);
+            this.lblAppointmentDate.TabIndex = 111;
+            this.lblAppointmentDate.Text = "??";
             // 
             // pictureBox3
             // 
@@ -299,46 +339,6 @@
             this.pbAppointment.TabIndex = 92;
             this.pbAppointment.TabStop = false;
             // 
-            // lblAppointmentDate
-            // 
-            this.lblAppointmentDate.AutoSize = true;
-            this.lblAppointmentDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAppointmentDate.Location = new System.Drawing.Point(180, 429);
-            this.lblAppointmentDate.Name = "lblAppointmentDate";
-            this.lblAppointmentDate.Size = new System.Drawing.Size(23, 16);
-            this.lblAppointmentDate.TabIndex = 111;
-            this.lblAppointmentDate.Text = "??";
-            // 
-            // lblTestID
-            // 
-            this.lblTestID.AutoSize = true;
-            this.lblTestID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTestID.Location = new System.Drawing.Point(180, 517);
-            this.lblTestID.Name = "lblTestID";
-            this.lblTestID.Size = new System.Drawing.Size(106, 16);
-            this.lblTestID.TabIndex = 114;
-            this.lblTestID.Text = "Not Taken Yet";
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(114, 511);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(28, 28);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 113;
-            this.pictureBox4.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(40, 517);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 16);
-            this.label4.TabIndex = 112;
-            this.label4.Text = "Test ID:";
-            // 
             // rbPass
             // 
             this.rbPass.AutoSize = true;
@@ -415,6 +415,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -441,9 +442,11 @@
             // 
             // frmTakeTest
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(576, 770);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
@@ -463,6 +466,7 @@
             this.Load += new System.EventHandler(this.frmTakeTest_Load);
             this.gbAppointment.ResumeLayout(false);
             this.gbAppointment.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -470,7 +474,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAppointment)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.ResumeLayout(false);

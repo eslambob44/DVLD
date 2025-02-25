@@ -38,6 +38,7 @@
             // 
             this.ctrlShowPersonInfo1.Location = new System.Drawing.Point(12, 65);
             this.ctrlShowPersonInfo1.Name = "ctrlShowPersonInfo1";
+            this.ctrlShowPersonInfo1.PersonID = -1;
             this.ctrlShowPersonInfo1.Size = new System.Drawing.Size(877, 363);
             this.ctrlShowPersonInfo1.TabIndex = 0;
             // 
@@ -54,6 +55,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
@@ -71,6 +73,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(904, 517);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label1);

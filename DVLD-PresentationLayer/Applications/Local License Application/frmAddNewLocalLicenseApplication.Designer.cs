@@ -32,10 +32,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpPersonalInfo = new System.Windows.Forms.TabPage();
             this.btnNext = new System.Windows.Forms.Button();
+            this.ctrlFilterPerson1 = new DVLD_PresentationLayer.People.ctrlFilterPerson();
             this.tpApplicationInfo = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.lblCreatedUser = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblApplicationFees = new System.Windows.Forms.Label();
+            this.cbLicenseClasses = new System.Windows.Forms.ComboBox();
+            this.lblApplicationDate = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -45,21 +49,17 @@
             this.lblD_VApplicationID = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblApplicationID = new System.Windows.Forms.Label();
-            this.lblApplicationDate = new System.Windows.Forms.Label();
-            this.cbLicenseClasses = new System.Windows.Forms.ComboBox();
-            this.lblApplicationFees = new System.Windows.Forms.Label();
-            this.lblCreatedUser = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.ctrlFilterPerson1 = new DVLD_PresentationLayer.People.ctrlFilterPerson();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpPersonalInfo.SuspendLayout();
             this.tpApplicationInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -97,6 +97,18 @@
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
+            // ctrlFilterPerson1
+            // 
+            this.ctrlFilterPerson1.BackColor = System.Drawing.Color.White;
+            this.ctrlFilterPerson1.FilterEnabled = true;
+            this.ctrlFilterPerson1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlFilterPerson1.Location = new System.Drawing.Point(4, 8);
+            this.ctrlFilterPerson1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ctrlFilterPerson1.Name = "ctrlFilterPerson1";
+            this.ctrlFilterPerson1.PersonID = -1;
+            this.ctrlFilterPerson1.Size = new System.Drawing.Size(882, 452);
+            this.ctrlFilterPerson1.TabIndex = 0;
+            // 
             // tpApplicationInfo
             // 
             this.tpApplicationInfo.BackColor = System.Drawing.Color.White;
@@ -122,42 +134,64 @@
             this.tpApplicationInfo.TabIndex = 1;
             this.tpApplicationInfo.Text = "Application Info";
             // 
-            // label1
+            // lblCreatedUser
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Modern No. 20", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(7)))), ((int)(((byte)(13)))));
-            this.label1.Location = new System.Drawing.Point(152, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(578, 36);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "New Local License Driving Application";
+            this.lblCreatedUser.AutoSize = true;
+            this.lblCreatedUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCreatedUser.Location = new System.Drawing.Point(232, 313);
+            this.lblCreatedUser.Name = "lblCreatedUser";
+            this.lblCreatedUser.Size = new System.Drawing.Size(33, 16);
+            this.lblCreatedUser.TabIndex = 51;
+            this.lblCreatedUser.Text = "N/A";
             // 
-            // btnClose
+            // pictureBox5
             // 
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnClose.Location = new System.Drawing.Point(630, 635);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(136, 34);
-            this.btnClose.TabIndex = 14;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
+            this.pictureBox5.Location = new System.Drawing.Point(187, 307);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(28, 28);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 50;
+            this.pictureBox5.TabStop = false;
             // 
-            // btnSave
+            // label6
             // 
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.Location = new System.Drawing.Point(772, 635);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(136, 34);
-            this.btnSave.TabIndex = 13;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(37, 313);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(88, 16);
+            this.label6.TabIndex = 49;
+            this.label6.Text = "Created By:";
+            // 
+            // lblApplicationFees
+            // 
+            this.lblApplicationFees.AutoSize = true;
+            this.lblApplicationFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApplicationFees.Location = new System.Drawing.Point(234, 258);
+            this.lblApplicationFees.Name = "lblApplicationFees";
+            this.lblApplicationFees.Size = new System.Drawing.Size(33, 16);
+            this.lblApplicationFees.TabIndex = 48;
+            this.lblApplicationFees.Text = "N/A";
+            // 
+            // cbLicenseClasses
+            // 
+            this.cbLicenseClasses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLicenseClasses.FormattingEnabled = true;
+            this.cbLicenseClasses.Location = new System.Drawing.Point(237, 193);
+            this.cbLicenseClasses.Name = "cbLicenseClasses";
+            this.cbLicenseClasses.Size = new System.Drawing.Size(273, 28);
+            this.cbLicenseClasses.TabIndex = 47;
+            // 
+            // lblApplicationDate
+            // 
+            this.lblApplicationDate.AutoSize = true;
+            this.lblApplicationDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApplicationDate.Location = new System.Drawing.Point(234, 134);
+            this.lblApplicationDate.Name = "lblApplicationDate";
+            this.lblApplicationDate.Size = new System.Drawing.Size(33, 16);
+            this.lblApplicationDate.TabIndex = 46;
+            this.lblApplicationDate.Text = "N/A";
             // 
             // pictureBox4
             // 
@@ -249,82 +283,51 @@
             this.lblApplicationID.TabIndex = 34;
             this.lblApplicationID.Text = "D.L Application ID:";
             // 
-            // lblApplicationDate
+            // label1
             // 
-            this.lblApplicationDate.AutoSize = true;
-            this.lblApplicationDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblApplicationDate.Location = new System.Drawing.Point(234, 134);
-            this.lblApplicationDate.Name = "lblApplicationDate";
-            this.lblApplicationDate.Size = new System.Drawing.Size(33, 16);
-            this.lblApplicationDate.TabIndex = 46;
-            this.lblApplicationDate.Text = "N/A";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Modern No. 20", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(7)))), ((int)(((byte)(13)))));
+            this.label1.Location = new System.Drawing.Point(152, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(578, 36);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "New Local License Driving Application";
             // 
-            // cbLicenseClasses
+            // btnClose
             // 
-            this.cbLicenseClasses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLicenseClasses.FormattingEnabled = true;
-            this.cbLicenseClasses.Location = new System.Drawing.Point(237, 193);
-            this.cbLicenseClasses.Name = "cbLicenseClasses";
-            this.cbLicenseClasses.Size = new System.Drawing.Size(273, 28);
-            this.cbLicenseClasses.TabIndex = 47;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
+            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnClose.Location = new System.Drawing.Point(630, 635);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(136, 34);
+            this.btnClose.TabIndex = 14;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // lblApplicationFees
+            // btnSave
             // 
-            this.lblApplicationFees.AutoSize = true;
-            this.lblApplicationFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblApplicationFees.Location = new System.Drawing.Point(234, 258);
-            this.lblApplicationFees.Name = "lblApplicationFees";
-            this.lblApplicationFees.Size = new System.Drawing.Size(33, 16);
-            this.lblApplicationFees.TabIndex = 48;
-            this.lblApplicationFees.Text = "N/A";
-            // 
-            // lblCreatedUser
-            // 
-            this.lblCreatedUser.AutoSize = true;
-            this.lblCreatedUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreatedUser.Location = new System.Drawing.Point(232, 313);
-            this.lblCreatedUser.Name = "lblCreatedUser";
-            this.lblCreatedUser.Size = new System.Drawing.Size(33, 16);
-            this.lblCreatedUser.TabIndex = 51;
-            this.lblCreatedUser.Text = "N/A";
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(187, 307);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(28, 28);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 50;
-            this.pictureBox5.TabStop = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(37, 313);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(88, 16);
-            this.label6.TabIndex = 49;
-            this.label6.Text = "Created By:";
-            // 
-            // ctrlFilterPerson1
-            // 
-            this.ctrlFilterPerson1.BackColor = System.Drawing.Color.White;
-            this.ctrlFilterPerson1.FilterEnabled = true;
-            this.ctrlFilterPerson1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlFilterPerson1.Location = new System.Drawing.Point(4, 8);
-            this.ctrlFilterPerson1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ctrlFilterPerson1.Name = "ctrlFilterPerson1";
-            this.ctrlFilterPerson1.PersonID = -1;
-            this.ctrlFilterPerson1.Size = new System.Drawing.Size(882, 452);
-            this.ctrlFilterPerson1.TabIndex = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.Location = new System.Drawing.Point(772, 635);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(136, 34);
+            this.btnSave.TabIndex = 13;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // frmAddNewLocalLicenseApplication
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(920, 692);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
@@ -340,11 +343,11 @@
             this.tpPersonalInfo.ResumeLayout(false);
             this.tpApplicationInfo.ResumeLayout(false);
             this.tpApplicationInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

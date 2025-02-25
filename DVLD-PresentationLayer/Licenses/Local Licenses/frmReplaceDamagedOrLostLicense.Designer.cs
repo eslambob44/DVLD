@@ -315,10 +315,9 @@
             this.btnReplace.Enabled = false;
             this.btnReplace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReplace.Image = ((System.Drawing.Image)(resources.GetObject("btnRelease.Image")));
             this.btnReplace.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnReplace.Location = new System.Drawing.Point(693, 797);
-            this.btnReplace.Name = "btnRelease";
+            this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(193, 43);
             this.btnReplace.TabIndex = 56;
             this.btnReplace.Text = "Issue Replacement";
@@ -328,6 +327,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
@@ -377,9 +377,11 @@
             // 
             // frmReplaceDamagedOrLostLicense
             // 
+            this.AcceptButton = this.btnReplace;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(901, 854);
             this.Controls.Add(this.btnReplace);
             this.Controls.Add(this.btnClose);

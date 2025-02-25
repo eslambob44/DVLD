@@ -114,10 +114,9 @@
             // 
             this.btnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIssue.Image = ((System.Drawing.Image)(resources.GetObject("btnRelease.Image")));
             this.btnIssue.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnIssue.Location = new System.Drawing.Point(712, 568);
-            this.btnIssue.Name = "btnRelease";
+            this.btnIssue.Name = "btnIssue";
             this.btnIssue.Size = new System.Drawing.Size(127, 43);
             this.btnIssue.TabIndex = 39;
             this.btnIssue.Text = "Issue";
@@ -126,6 +125,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
@@ -138,11 +138,13 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // frmAddLicense_FirstTime
+            // frmIssueLicense
             // 
+            this.AcceptButton = this.btnIssue;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(853, 623);
             this.Controls.Add(this.btnIssue);
             this.Controls.Add(this.btnClose);
@@ -156,7 +158,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "frmAddLicense_FirstTime";
+            this.Name = "frmIssueLicense";
             this.Text = "frmAddLicense_FirstTime";
             this.Load += new System.EventHandler(this.frmAddLicense_FirstTime_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
