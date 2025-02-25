@@ -50,20 +50,22 @@ namespace DVLD_BusinessLayer
         
         }
         public enum enApplicationStatus { New = 1 ,Completed = 3 , Canceled =2}
-        private enApplicationStatus __ApplicationStatus;
-        private enApplicationStatus _OriginalStatus;
-        
-        private enApplicationStatus _ApplicationStatus 
-        { 
-            get { return __ApplicationStatus; }
-            set
-            {
-                __ApplicationStatus = value;
-                 _LastStatusDate = DateTime.Now;
-            }
-        }
 
-        public enApplicationStatus ApplicationStatus { get { return __ApplicationStatus; } }
+        private enApplicationStatus _OriginalStatus;
+
+        private enApplicationStatus _ApplicationStatus;
+
+
+        public enApplicationStatus ApplicationStatus {
+
+            get { return _ApplicationStatus; }
+            private set
+            {
+                _ApplicationStatus = value;
+                _LastStatusDate = DateTime.Now;
+            }
+
+        }
 
         private DateTime _LastStatusDate;
         public DateTime LastStatusDate { get { return _LastStatusDate; } }
@@ -87,7 +89,7 @@ namespace DVLD_BusinessLayer
             _PersonID = -1;
             _ApplicationDate = DateTime.Now;
             this.ApplicationType = enApplicationType.NewInternationalLicense;
-            this._ApplicationStatus = enApplicationStatus.New;
+            this.ApplicationStatus = enApplicationStatus.New;
             _CreatedUserID = -1;
         }
 
@@ -99,7 +101,7 @@ namespace DVLD_BusinessLayer
             _PersonID = PersonID;
             this._ApplicationDate = ApplicationDate;
             this._ApplicationType = ApplicationType;
-            this.__ApplicationStatus = ApplicationStatus;
+            this._ApplicationStatus = ApplicationStatus;
             this._CreatedUserID = CreatedUserID;
             _PaidFees = PaidFees;
             this._LastStatusDate = LastStatusDate;
@@ -131,7 +133,7 @@ namespace DVLD_BusinessLayer
         virtual protected bool _AddNewApplication()
         {
             int AppID = clsApplicationDataAccessLayer.AddApplication(_PersonID , ApplicationDate,(int)_ApplicationType
-                         ,(short)__ApplicationStatus , _LastStatusDate , _PaidFees , _CreatedUserID);
+                         ,(short)_ApplicationStatus , _LastStatusDate , _PaidFees , _CreatedUserID);
             if(AppID != -1)
             {
                 this._ID = AppID;
@@ -163,7 +165,7 @@ namespace DVLD_BusinessLayer
                 case enMode.Update:
                     if (_Update())
                     {
-                        _OriginalStatus = __ApplicationStatus;
+                        _OriginalStatus = _ApplicationStatus;
                         return true;
                     }
                     else return false;

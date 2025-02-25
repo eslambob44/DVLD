@@ -32,16 +32,15 @@ namespace DVLD_BusinessLayer
             set 
             { 
                 _Gendor = value;
-                _shortGendor =Convert.ToByte (Gendor == enGendor.Female);
             } 
         }
-        private byte _shortGendor;
+
         public string GendorString { get { return (Gendor == enGendor.Male) ? "Male" : "Female"; } }
         public string Address { get; set; }
         public string Phone {  get; set; }
         public string Email { get; set; }
         public int NationalityCountryID { get; set; }
-        public string Country { get { return clsCountryDataAccessLayer.FindCountry(NationalityCountryID); } }
+        public string CountryName { get { return clsCountryDataAccessLayer.FindCountry(NationalityCountryID); } }
         public string ImagePath {  get; set; }
         private string _OriginalImagePath;
 
@@ -175,7 +174,7 @@ namespace DVLD_BusinessLayer
         bool _AddNew()
         {
             if (_OriginalImagePath != ImagePath) ImagePath = _SetImage(ImagePath);
-            _ID = clsPersonDataAccess.AddNewPerson(NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, _shortGendor, Address, Phone, Email, NationalityCountryID, ImagePath);
+            _ID = clsPersonDataAccess.AddNewPerson(NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, (byte)_Gendor, Address, Phone, Email, NationalityCountryID, ImagePath);
             if(_ID != -1)
             {
                 _Mode = enMode.Update;
@@ -193,7 +192,7 @@ namespace DVLD_BusinessLayer
         bool _Update()
         {
             if (_OriginalImagePath != ImagePath) ImagePath = _SetImage(ImagePath);
-             if(clsPersonDataAccess.UpdatePerson(_ID, NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, _shortGendor, Address, Phone, Email, NationalityCountryID, ImagePath))
+             if(clsPersonDataAccess.UpdatePerson(_ID, NationalNumber, FirstName, SecondName, ThirdName, LastName, DateOfBirth, (byte)_Gendor, Address, Phone, Email, NationalityCountryID, ImagePath))
             {
                 if (_OriginalImagePath != ImagePath)
                 {
