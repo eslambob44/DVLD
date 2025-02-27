@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace DVLD_PresentationLayer.People
 {
@@ -157,7 +158,8 @@ namespace DVLD_PresentationLayer.People
 
         bool IsValidEmail(string Email)
         {
-            return (Email.IndexOf("@") != -1 && Email.IndexOf(".com") != -1);
+            Regex CheckEmail = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            return CheckEmail.IsMatch(Email);
         }
 
         private void txtEmail_Validating(object sender, CancelEventArgs e)
@@ -211,7 +213,7 @@ namespace DVLD_PresentationLayer.People
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if( this.ValidateChildren() ) 
+            if( !this.ValidateChildren() ) 
             {
                 MessageBox.Show("Some field are invalid", "cant save", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

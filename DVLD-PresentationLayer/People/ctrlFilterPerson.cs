@@ -30,34 +30,11 @@ namespace DVLD_PresentationLayer.People
             set
             {
                 _FilterEnable = value;
-                if(_FilterEnable )
-                {
-                    EnableFilter();
-                }
-                else
-                {
-                    DisableFilter();
-                }
+                gbFilter.Enabled = value;
             }
         }
 
-        void EnableFilter()
-        {
-            mtxt.Enabled = true;
-            cbFilter.Enabled = true;
-            btnFind.Enabled = true;
-            btnAddNew.Enabled = true;
-
-        }
-
-        void DisableFilter()
-        {
-            mtxt.Enabled = false;
-            cbFilter.Enabled = false;
-            btnFind.Enabled = false;
-            btnAddNew.Enabled = false;
-
-        }
+        
 
         public int PersonID { get; set; } = -1;
 

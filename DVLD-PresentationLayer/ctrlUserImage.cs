@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,14 @@ namespace DVLD_PresentationLayer
         
         public void SetImage(string imageLocation , clsPerson.enGendor Gendor)
         {
-            pbImage.ImageLocation = imageLocation;
+            if (File.Exists(imageLocation))
+            {
+                pbImage.ImageLocation = imageLocation;
+            }
+            else
+            {
+                pbImage.ImageLocation = null;
+            }
             if(pbImage.ImageLocation != null)
             {
                 _ImageLocation = imageLocation;

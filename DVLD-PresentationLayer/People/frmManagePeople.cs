@@ -61,7 +61,7 @@ namespace DVLD_PresentationLayer.People
             }
             else
             {
-                _dtPeople.DefaultView.RowFilter = $"{_Filter} LIKE '%{mtxtFilter.Text}%'";
+                _dtPeople.DefaultView.RowFilter = $"{_Filter} LIKE '{mtxtFilter.Text}%'";
             }
         }
 

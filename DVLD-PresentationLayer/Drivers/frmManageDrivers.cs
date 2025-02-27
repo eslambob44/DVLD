@@ -43,9 +43,9 @@ namespace DVLD_PresentationLayer.Drivers
             string Filter;
             if (_Filter == enFilter.None) Filter = "";
             else if (_Filter == enFilter.DriverID || _Filter == enFilter.PersonID)
-                Filter = $"Convert([{cbFilter.Text}],System.String) LIKE '%{mtxtFilter.Text}%'";
+                Filter = $"Convert([{cbFilter.Text}],System.String) LIKE '{mtxtFilter.Text}%'";
             else
-                Filter = $"[{cbFilter.Text}] LIKE '%{mtxtFilter.Text}%'";
+                Filter = $"[{cbFilter.Text}] LIKE '{mtxtFilter.Text}%'";
             dtDrivers.DefaultView.RowFilter = Filter;   
         }
         public frmManageDrivers()
