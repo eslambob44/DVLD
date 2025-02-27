@@ -156,17 +156,38 @@ namespace DVLD_BusinessLayer
             }
         }
 
+        bool _CreatePeopleImagesFileIfNotExists()
+        {
+            if(!Directory.Exists(clsGlobalSettings.PeopleImagesLocation))
+            {
+                try
+                {
+                    Directory.CreateDirectory(clsGlobalSettings.PeopleImagesLocation);
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         string _SetImage(string ImagePath)
         {
 
-
-            if (File.Exists(ImagePath))
+            if (_CreatePeopleImagesFileIfNotExists())
             {
+                if (File.Exists(ImagePath))
+                {
 
-                Guid ImageName = Guid.NewGuid();
-                string DestinationImagePath = "C:\\DVLD-Images\\" + ImageName.ToString() + ".png";
-                File.Copy(ImagePath, DestinationImagePath);
-                return DestinationImagePath;
+                    Guid ImageName = Guid.NewGuid();
+                    string FileExtension = Path.GetExtension(ImagePath);
+                    string DestinationImagePath = clsGlobalSettings.PeopleImagesLocation + ImageName.ToString() + FileExtension;
+                    File.Copy(ImagePath, DestinationImagePath);
+                    return DestinationImagePath;
+                }
             }
             return null;
         }
