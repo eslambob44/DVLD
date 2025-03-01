@@ -10,26 +10,29 @@ namespace DVLD_BusinessLayer
 {
     public class clsTestType
     {
-        private int _ID;
-        public int ID { get { return _ID; } }
+
+        public enum enTestType { Vision = 1, Written, Street };
+
+        private enTestType _ID;
+        public enTestType ID { get { return _ID; } }
         public string Title { get;set; }
         public string Description {  get; set; }
         public float Fees { get; set; } 
 
-        private clsTestType(int ID , string Title , string Description , float Fees)
+        private clsTestType(enTestType ID , string Title , string Description , float Fees)
         {
             _ID = ID;
             this.Title = Title;
             this.Description = Description;
             this.Fees = Fees;
         }
-        static public clsTestType Find(int TestTypeID)
+        static public clsTestType Find(enTestType TestTypeID)
         {
             
             string Title= string.Empty;
             string Description = string.Empty;
             float Fees=-1;
-            if(clsTestTypeDataAccessLayer.Find(TestTypeID , ref Title , ref Description , ref Fees))
+            if(clsTestTypeDataAccessLayer.Find((int)TestTypeID , ref Title , ref Description , ref Fees))
             {
                 return new clsTestType(TestTypeID , Title , Description , Fees);
             }
@@ -41,7 +44,7 @@ namespace DVLD_BusinessLayer
 
         private bool _Update()
         {
-            return clsTestTypeDataAccessLayer.Update(_ID, Title, Description, Fees);
+            return clsTestTypeDataAccessLayer.Update((int)_ID, Title, Description, Fees);
         }
 
         public bool Save()
@@ -59,6 +62,6 @@ namespace DVLD_BusinessLayer
             return clsTestTypeDataAccessLayer.GetFees(TestTypeID);
         }
 
-        public enum enTestType { Vision = 1, Written, Street };
+        
     }
 }

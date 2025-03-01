@@ -14,9 +14,9 @@ namespace DVLD_PresentationLayer.Test_Types
 {
     public partial class frmUpdateTestType : Form
     {
-        int TestTypeID;
+        clsTestType.enTestType TestTypeID;
         clsTestType TestType;
-        public frmUpdateTestType(int TestTypeID)
+        public frmUpdateTestType(clsTestType.enTestType TestTypeID)
         {
             InitializeComponent();
             this.TestTypeID = TestTypeID;
@@ -31,7 +31,7 @@ namespace DVLD_PresentationLayer.Test_Types
         
         void _LoadForm()
         {
-            lblTestTypeID.Text = TestType.ID.ToString();
+            lblTestTypeID.Text = Convert.ToInt32(TestType.ID).ToString();
             txtTestTypeTitle.Text = TestType.Title.ToString();
             txtTestTypeDescription.Text = TestType.Description.ToString();
             mtxtFees.Text = TestType.Fees.ToString();
