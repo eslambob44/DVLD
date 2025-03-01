@@ -75,6 +75,7 @@ namespace DVLD_PresentationLayer.Users
 
         private void frmAddEditUser_Load(object sender, EventArgs e)
         {
+            tpLoginInfo.Enabled = false;
             _LoadUser();
             if (_Mode == enMode.Update) _LoadUpdateForm();
         }
@@ -84,7 +85,13 @@ namespace DVLD_PresentationLayer.Users
             if(obj != -1 && clsUser.IsPersonAUser(obj) && _Mode == enMode.AddNew)
             {
                 MessageBox.Show("This person is already a user!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tpLoginInfo.Enabled = false;
             }
+            else
+            {
+                tpLoginInfo.Enabled = true;
+            }
+            
         }
 
         private void txtUserName_Validating(object sender, CancelEventArgs e)
@@ -92,30 +99,46 @@ namespace DVLD_PresentationLayer.Users
             if(string.IsNullOrEmpty(txtUserName.Text))
             {
                 errorProvider1.SetError(txtUserName, "user name cannot by empty");
+                e.Cancel = true;
             }
             else if(_Mode == enMode.AddNew && clsUser.IsUserNameUsed(txtUserName.Text))
             {
                 errorProvider1.SetError(txtUserName, "user name already exists");
+                e.Cancel = true;
             }
             else if(_Mode == enMode.Update && clsUser.IsUserNameUsed(txtUserName.Text) && _User.UserName != txtUserName.Text)
             {
                 errorProvider1.SetError(txtUserName, "user name already exists");
+                e.Cancel = true;
+            }
+            else if (!txtUserName.Enabled)
+            {
+                errorProvider1.SetError(txtUserName, "Person is already exists");
+                e.Cancel = true;
             }
             else
             {
                 errorProvider1.SetError(txtUserName, "");
+                e.Cancel = false;
             }
         }
 
         private void txtPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtPassword.Text))
+            if (string.IsNullOrEmpty(txtPassword.Text) && _Mode == enMode.AddNew)
             {
-                errorProvider1.SetError(txtPassword, "user name cannot by empty");
+                errorProvider1.SetError(txtPassword, "password cannot by empty");
+                e.Cancel = true;
+            }
+            else if(!txtPassword.Enabled && _Mode == enMode.AddNew)
+            {
+                errorProvider1.SetError(txtPassword, "Person is already exists");
+                e.Cancel=true;
             }
             else
             {
                 errorProvider1.SetError(txtPassword, "");
+                e.Cancel = false;
             }
         }
 
@@ -124,41 +147,26 @@ namespace DVLD_PresentationLayer.Users
             if(txtConfirmPassword.Text != txtPassword.Text)
             {
                 errorProvider1.SetError(txtConfirmPassword,"the password should be the same");
+                e.Cancel = true;
+            }
+            else if (!txtConfirmPassword.Enabled && _Mode == enMode.AddNew)
+            {
+                errorProvider1.SetError(txtConfirmPassword, "Person is already exists");
+                e.Cancel = true;
             }
             else
             {
                 errorProvider1.SetError(txtConfirmPassword, "");
+                e.Cancel = false;
             }
         }
 
-        bool _ValidateInputs()
-            {
-            if(ctrlFilterPerson1.PersonID == -1)
-            {
-                return false;
-            }
-            if (clsUser.IsPersonAUser(ctrlFilterPerson1.PersonID) && _Mode == enMode.AddNew) return false;
-            if (string.IsNullOrEmpty(txtUserName.Text)) return false;
-            else if (_Mode == enMode.Update && clsUser.IsUserNameUsed(txtUserName.Text) && _User.UserName != txtUserName.Text)
-                return false; 
-            if (_Mode == enMode.AddNew)
-            {
-                if(string.IsNullOrEmpty(txtPassword.Text) || txtConfirmPassword.Text != txtPassword.Text)
-                {
-                    return false;
-                }
-                if(clsUser.IsUserNameUsed(txtUserName.Text))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        
 
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(!_ValidateInputs())
+            if(!this.ValidateChildren())
             {
                 MessageBox.Show("Some input are invalid!" , "" , MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

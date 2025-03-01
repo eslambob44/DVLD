@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace DVLD_BusinessLayer
 {
+
+    
     static public class clsLicenseClass
     {
+        public enum enLicenseClass
+        {
+            SmallMotorcycle = 1, HeavyMotorcycle = 2, OrdinaryDriving = 3,
+            Commercial = 4, Agricultural = 5, SmallAndMediumBus = 6, TruckAndHeavyVehicle = 7
+        }
         static public float GetLicenseClassFees(int LicenseClassID)
         {
             return clsLicenseClassDataAccessLayer.GetLicenseClassFees(LicenseClassID);

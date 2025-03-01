@@ -123,7 +123,7 @@ namespace DVLD_BusinessLayer
             return clsDriverDataAccessLayer.IsPersonADriver(PersonID);
         }
 
-        public bool IsDriverHasAnActiveLicense(clsLocalLicenseApplication.enLicenseClass LicenseClass)
+        public bool IsDriverHasAnActiveLicense(clsLicenseClass.enLicenseClass LicenseClass)
         {
             return clsLicenseDataAccessLayer.IsDriverHasLicenseFromLicenseClass(_DriverID, (int)LicenseClass);
         }

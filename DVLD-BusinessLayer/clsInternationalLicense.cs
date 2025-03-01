@@ -135,8 +135,8 @@ namespace DVLD_BusinessLayer
                 if (!LocalLicense.IsActive) return false;
                 if (LocalLicense.ExpirationDate < DateTime.Now) return false;
                 if(LocalLicense.IsDetained) return false;
-                if(LocalLicense.LicenseClass != 
-                    clsLocalLicenseApplication.enLicenseClass.OrdinaryDriving) return false;
+                if(LocalLicense.LicenseClass !=
+                    clsLicenseClass.enLicenseClass.OrdinaryDriving) return false;
                 
             }
             else return false;

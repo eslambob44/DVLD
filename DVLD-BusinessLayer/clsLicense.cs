@@ -35,8 +35,8 @@ namespace DVLD_BusinessLayer
         }
 
 
-        private clsLocalLicenseApplication.enLicenseClass _LicenseClass;
-        public clsLocalLicenseApplication.enLicenseClass LicenseClass
+        private clsLicenseClass.enLicenseClass _LicenseClass;
+        public clsLicenseClass.enLicenseClass LicenseClass
         {
             get { return _LicenseClass; }
             set
@@ -91,7 +91,7 @@ namespace DVLD_BusinessLayer
         }
 
 
-        private clsLicense(int licenseID, int applicationID, int driverID, clsLocalLicenseApplication.enLicenseClass licenseClass, 
+        private clsLicense(int licenseID, int applicationID, int driverID, clsLicenseClass.enLicenseClass licenseClass, 
             DateTime issueDate, DateTime expirationDate, string notes, float paidFees,  enIssueReason issueReason, int createdUserID , bool isActive)
         {
             _LicenseID = licenseID;
@@ -114,7 +114,7 @@ namespace DVLD_BusinessLayer
             _ApplicationID = -1;
             _DriverID = -1;
             _IssueDate = DateTime.Now;
-            LicenseClass = clsLocalLicenseApplication.enLicenseClass.OrdinaryDriving;
+            LicenseClass = clsLicenseClass.enLicenseClass.OrdinaryDriving;
             Notes = string.Empty;
             _IsActive = true;
             _IssueReason = enIssueReason.FirstTime;
@@ -137,7 +137,7 @@ namespace DVLD_BusinessLayer
                 ref issueDate, ref expirationDate, ref notes, ref paidFees, ref isActive,
                 ref issueReason, ref createdUserID))
             {
-                return new clsLicense(LicenseID, applicationID, driverID, (clsLocalLicenseApplication.enLicenseClass)licenseClass,
+                return new clsLicense(LicenseID, applicationID, driverID, (clsLicenseClass.enLicenseClass)licenseClass,
                     issueDate, expirationDate, notes, paidFees, (enIssueReason)issueReason, createdUserID, isActive);
             }
             else return null;
@@ -159,7 +159,7 @@ namespace DVLD_BusinessLayer
                 ref issueDate, ref expirationDate, ref notes, ref paidFees, ref isActive,
                 ref issueReason, ref createdUserID))
             {
-                return new clsLicense(licenseID, ApplicationID, driverID, (clsLocalLicenseApplication.enLicenseClass)licenseClass,
+                return new clsLicense(licenseID, ApplicationID, driverID, (clsLicenseClass.enLicenseClass)licenseClass,
                     issueDate, expirationDate, notes, paidFees, (enIssueReason)issueReason, createdUserID, isActive);
             }
             else return null;

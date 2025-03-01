@@ -71,7 +71,7 @@ namespace DVLD_PresentationLayer.Users
             }
             else
             {
-                MessageBox.Show("_User name or password is incorrect!", "Cannot login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("User name or password is incorrect!", "Cannot login", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             

@@ -70,7 +70,7 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             clsDriver Driver;
             if ((Driver = clsDriver.FindByPersonID(ctrlFilterPerson1.PersonID)) != null)
             {
-                if (Driver.IsDriverHasAnActiveLicense((clsLocalLicenseApplication.enLicenseClass)(cbLicenseClasses.SelectedIndex + 1)))
+                if (Driver.IsDriverHasAnActiveLicense((clsLicenseClass.enLicenseClass)(cbLicenseClasses.SelectedIndex + 1)))
                 {
                     MessageBox.Show(@"Person already have an active license with the same class"
                                     , "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -119,7 +119,7 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             }
             Application.PersonID = ctrlFilterPerson1.PersonID;
             Application.CreateUserID = clsGlobalSettings.UserID;
-            Application.LicenseClass = (clsLocalLicenseApplication.enLicenseClass)(cbLicenseClasses.SelectedIndex + 1);
+            Application.LicenseClass = (clsLicenseClass.enLicenseClass)(cbLicenseClasses.SelectedIndex + 1);
 
             if (!_Validate()) return;
 

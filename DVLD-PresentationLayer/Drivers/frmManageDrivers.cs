@@ -98,7 +98,7 @@ namespace DVLD_PresentationLayer.Drivers
             int DriverID = (int)dgvDrivers.SelectedRows[0].Cells["Driver ID"].Value;
             clsDriver Driver = clsDriver.Find(DriverID);
             issueInternationalLicenseToolStripMenuItem.Enabled = (Driver.GetActiveInternationalLicenseID()==-1);
-            issueInternationalLicenseToolStripMenuItem.Enabled &= Driver.IsDriverHasAnActiveLicense(clsLocalLicenseApplication.enLicenseClass.OrdinaryDriving);
+            issueInternationalLicenseToolStripMenuItem.Enabled &= Driver.IsDriverHasAnActiveLicense(clsLicenseClass.enLicenseClass.OrdinaryDriving);
         }
 
         private void mtxtFilter_KeyPress(object sender, KeyPressEventArgs e)

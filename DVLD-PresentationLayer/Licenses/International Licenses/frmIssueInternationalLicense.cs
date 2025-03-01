@@ -92,7 +92,7 @@ namespace DVLD_PresentationLayer.Licenses.International_Licenses
                         , MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if(_LocalLicense.LicenseClass != clsLocalLicenseApplication.enLicenseClass.OrdinaryDriving)
+            if(_LocalLicense.LicenseClass != clsLicenseClass.enLicenseClass.OrdinaryDriving)
             {
                 MessageBox.Show("Cannot issue an international license with non ordinary license", "Error"
                         , MessageBoxButtons.OK, MessageBoxIcon.Error);
