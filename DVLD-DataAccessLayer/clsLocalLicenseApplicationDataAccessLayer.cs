@@ -40,6 +40,28 @@ namespace DVLD_DataAccessLayer
             return ID;
         }
 
+        static public bool DeleteApplication(int LocalDrivingLicenseApplicationID)
+        {
+            SqlConnection Connection = new SqlConnection (clsDataAccessLayerSettings.ConnectionString);
+            bool IsDeleted = false;
+            string Query = @"Delete From LocalDrivingLicenseApplications 
+                            Where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID";
+            SqlCommand Command = new SqlCommand (Query, Connection);
+            Command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            try
+            {
+                Connection.Open();
+                int RowsAffected = Command.ExecuteNonQuery();
+                IsDeleted = RowsAffected > 0;
+            }
+            catch
+            {
+
+            }
+            finally { Connection.Close(); }
+            return IsDeleted;
+        }
+
         static public DataTable ListLicenseClasses()
         {
             DataTable dtLicenseClasses = new DataTable();
@@ -145,10 +167,7 @@ namespace DVLD_DataAccessLayer
             return dtLicenseApplications;
         }
 
-        static public bool FindLocalLicenseApplication(int ldlApplication , ref int ApplicationID , ref int LicenseClassID,
-                                    ref int PersonID, ref DateTime ApplicationDate,
-                                    ref int ApplicationTypeID, ref short ApplicationStatus, ref DateTime LastStatusDate,
-                                    ref float PaidFees, ref int CreatedUserID)
+        static public bool FindLocalLicenseApplication(int ldlApplication , ref int ApplicationID , ref int LicenseClassID)
         {
             bool IsFound = false;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
@@ -165,12 +184,7 @@ namespace DVLD_DataAccessLayer
                 {
                     ApplicationID = (int)Reader["ApplicationID"];
                     LicenseClassID = (int)Reader["LicenseClassID"];
-                    if(clsApplicationDataAccessLayer.FindApplication(ApplicationID,ref PersonID, ref ApplicationDate,
-                        ref ApplicationTypeID, ref ApplicationStatus, ref LastStatusDate,
-                        ref PaidFees, ref CreatedUserID))
-                    {
-                        IsFound = true;
-                    }
+                    IsFound = true;
                 }
 
                 Reader.Close ();

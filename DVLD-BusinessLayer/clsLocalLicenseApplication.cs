@@ -43,20 +43,18 @@ namespace DVLD_BusinessLayer
 
         new static public clsLocalLicenseApplication Find(int LocalDrivingLicenseID)
         {
-            int  ApplicationId = -1, PersonID = -1, CreatedUserID = -1;
+            int ApplicationId = -1;
             int LicenseClass=-1;
             
-            DateTime ApplicationDate = DateTime.Now , LastStatusDate=DateTime.Now;
-            int ApplicationType=-1;
-            float PaidFees = -1;
-            short ApplicationStatus=-1;
-
+            
             if (clsLocalLicenseApplicationDataAccessLayer.FindLocalLicenseApplication(LocalDrivingLicenseID,
-                ref ApplicationId, ref LicenseClass, ref PersonID, ref ApplicationDate, ref ApplicationType,
-                ref ApplicationStatus, ref LastStatusDate, ref PaidFees, ref CreatedUserID))
+                ref ApplicationId, ref LicenseClass))
             {
-                return new clsLocalLicenseApplication(LocalDrivingLicenseID, (clsLicenseClass.enLicenseClass)LicenseClass, ApplicationId, PersonID, ApplicationDate, (enApplicationType)ApplicationType,
-                    PaidFees, (enApplicationStatus)ApplicationStatus, CreatedUserID, LastStatusDate);
+                clsApplication Application = clsApplication.Find(ApplicationId);
+                return new clsLocalLicenseApplication(LocalDrivingLicenseID,(clsLicenseClass.enLicenseClass)LicenseClass,
+                    ApplicationId,Application.PersonID,Application.ApplicationDate , Application.ApplicationType,
+                    Application.PaidFees,Application.ApplicationStatus,Application.CreateUserID,Application.LastStatusDate);
+                
             }
             else return null;
             
