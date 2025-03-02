@@ -205,23 +205,8 @@ namespace DVLD_BusinessLayer
 
         static public string GetApplicationTypeString(enApplicationType ApplicationType)
         {
-            switch(ApplicationType)
-            {
-                case enApplicationType.NewLocalDrivingLicenseService:
-                    return "New Local Driving License Service";
-                case enApplicationType.RenewDrivingLicenseService:
-                    return "Renew Driving License Service";
-                case enApplicationType.ReplacementForaLostDrivingLicense:
-                    return "Replacement For a Lost Driving License";
-                case enApplicationType.ReplacementForADamagedDrivingLicense:
-                    return "Replacement For A Damaged Driving License";
-                case enApplicationType.ReleaseDetainedDrivingLicense:
-                    return "Release Detained Driving License";
-                case enApplicationType.NewInternationalLicense:
-                    return "New International License";
-                default:
-                    return null;
-            }
+            clsApplicationType cApplicationType = clsApplicationType.Find((int)ApplicationType);
+            return cApplicationType.Title;
         }
 
         public string GetApplicationTypeString()

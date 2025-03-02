@@ -140,7 +140,6 @@
             // 
             // btnAddTestAppointment
             // 
-            this.btnAddTestAppointment.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAddTestAppointment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddTestAppointment.Image = ((System.Drawing.Image)(resources.GetObject("btnAddTestAppointment.Image")));
             this.btnAddTestAppointment.Location = new System.Drawing.Point(794, 548);
