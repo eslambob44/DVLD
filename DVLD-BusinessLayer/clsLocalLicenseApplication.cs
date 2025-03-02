@@ -1,6 +1,7 @@
 ﻿using DVLD_DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -174,5 +175,39 @@ namespace DVLD_BusinessLayer
         {
             return clsTestAppointmentDataAccessLayer.ListAppointmentsByTestType(LocalDrivingLicenseApplicationID,(int)TestType);
         }
+
+        public int IssueLicenseFirstTime(string Notes  , int CreatedUserID)
+        {
+            if (IsHaveLicense()) return -1;
+            clsDriver Driver;
+            if (clsDriver.IsPersonADriver(PersonID))
+            {
+                Driver = clsDriver.FindByPersonID(PersonID);
+                if (Driver == null) return -1;
+            }
+            else
+            {
+                Driver = clsDriver.GetAddNewObject();
+                Driver.CreatedUserID = CreatedUserID;
+                Driver.PersonID = PersonID;
+                if (!Driver.Save()) return -1;
+            }
+
+            clsLicense License = clsLicense.GetAddNewObject();
+            License.ApplicationID = ID;
+            License.CreatedUserID = CreatedUserID;
+            License.DriverID = Driver.DriverID;
+            License.IssueReason = clsLicense.enIssueReason.FirstTime;
+            License.LicenseClass = LicenseClass;
+            License.Notes = Notes;
+            if (License.Save()) return License.LicenseID;
+            else return -1;
+        }
+        public bool IsHaveLicense()
+        {
+            return clsLicense.FindLicenseByApplication(this.ID) != null;
+        }
     }
+
+    
 }
