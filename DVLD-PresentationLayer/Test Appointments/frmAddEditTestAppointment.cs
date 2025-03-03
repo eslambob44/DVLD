@@ -189,7 +189,8 @@ namespace DVLD_PresentationLayer.Test_Appointments
             switch(_Mode)
             {
                 case enMode.Update:
-                    if (_TestAppointment.Save()) MessageBox.Show("Appointment updated successfully");
+                    if (_TestAppointment.Save()) MessageBox.Show("Appointment updated successfully" , "Update" 
+                        , MessageBoxButtons.OK,MessageBoxIcon.Information);
                     else
                     {
                         MessageBox.Show("Cannot update appointment",
@@ -208,13 +209,15 @@ namespace DVLD_PresentationLayer.Test_Appointments
                         else
                         {
                             _TestAppointment.RetakeTestApplicationID = _RetakeTestApplication.ID;
+                            _RetakeTestApplication.CompleteApplication();
                         }
                     }
                     if(_TestAppointment.Save())
                     {
                         if(_RetakeTestApplication!= null)
                             ctrlShowRetakeTestApplicationInfo1.Find(_RetakeTestApplication.ID);
-                        MessageBox.Show("Appointment Added successfully");
+                        MessageBox.Show("Appointment Added successfully", "Added"
+                        , MessageBoxButtons.OK, MessageBoxIcon.Information);
                         _Mode = enMode.Update;
                     }
                     else

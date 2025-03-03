@@ -117,8 +117,10 @@ namespace DVLD_PresentationLayer.Test
                 _Test.Notes = txtNotes.Text;
                 if(_Test.Save())
                 {
-                    _TestAppointment.Lock();
                     btnSave.Enabled = false;
+                    rbPass.Enabled = false;
+                    rbFail.Enabled = false;
+                    txtNotes.Enabled = false;
                     lblTestID.Text = _Test.TestID.ToString();
                     MessageBox.Show("Data saved successfully","",MessageBoxButtons.OK, MessageBoxIcon.Information);
                     PassTest?.Invoke();

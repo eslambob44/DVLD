@@ -54,7 +54,7 @@
             this.lblAppointmentTitle = new System.Windows.Forms.Label();
             this.pbAppointment = new System.Windows.Forms.PictureBox();
             this.rbPass = new System.Windows.Forms.RadioButton();
-            this.ebFail = new System.Windows.Forms.RadioButton();
+            this.rbFail = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
@@ -352,18 +352,18 @@
             this.rbPass.UseVisualStyleBackColor = true;
             this.rbPass.Click += new System.EventHandler(this.rbPass_Click);
             // 
-            // ebFail
+            // rbFail
             // 
-            this.ebFail.AutoSize = true;
-            this.ebFail.Location = new System.Drawing.Point(221, 574);
-            this.ebFail.Name = "ebFail";
-            this.ebFail.Size = new System.Drawing.Size(52, 24);
-            this.ebFail.TabIndex = 118;
-            this.ebFail.TabStop = true;
-            this.ebFail.Tag = "0";
-            this.ebFail.Text = "Fail";
-            this.ebFail.UseVisualStyleBackColor = true;
-            this.ebFail.Click += new System.EventHandler(this.rbPass_Click);
+            this.rbFail.AutoSize = true;
+            this.rbFail.Location = new System.Drawing.Point(221, 574);
+            this.rbFail.Name = "rbFail";
+            this.rbFail.Size = new System.Drawing.Size(52, 24);
+            this.rbFail.TabIndex = 118;
+            this.rbFail.TabStop = true;
+            this.rbFail.Tag = "0";
+            this.rbFail.Text = "Fail";
+            this.rbFail.UseVisualStyleBackColor = true;
+            this.rbFail.Click += new System.EventHandler(this.rbPass_Click);
             // 
             // label2
             // 
@@ -453,7 +453,7 @@
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.ebFail);
+            this.Controls.Add(this.rbFail);
             this.Controls.Add(this.rbPass);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.gbAppointment);
@@ -508,7 +508,7 @@
         private System.Windows.Forms.Label lblAppointmentTitle;
         private System.Windows.Forms.PictureBox pbAppointment;
         private System.Windows.Forms.RadioButton rbPass;
-        private System.Windows.Forms.RadioButton ebFail;
+        private System.Windows.Forms.RadioButton rbFail;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox9;

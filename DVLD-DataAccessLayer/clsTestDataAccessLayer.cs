@@ -16,6 +16,11 @@ namespace DVLD_DataAccessLayer
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
             string Query = @"Insert into Tests values
                             (@TestAppointmentID , @TestResult , @Notes , @CreatedUserID);
+                                
+                            Update TestAppointments
+                            Set IsLocked = 1
+                            Where TestAppointmentID = @TestAppointmentID;
+
                             SELECT SCOPE_IDENTITY();";
             SqlCommand Command = new SqlCommand(Query, Connection);
             Command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
