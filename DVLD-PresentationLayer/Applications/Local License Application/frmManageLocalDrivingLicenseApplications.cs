@@ -271,5 +271,24 @@ namespace DVLD_PresentationLayer.Applications.Local_License_Application
             if(_Filter == enFilter.ldlAppID)
                 e.Handled = (!char.IsDigit(e.KeyChar) && ! char.IsControl(e.KeyChar));
         }
+
+        private void deleteApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure you want to delete this application?" , "Confirm",
+                MessageBoxButtons.YesNo , MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                int LocalDrivingApplicationID = int.Parse(dgvApplications.SelectedRows[0].Cells[0].Value.ToString());
+                if(clsLocalLicenseApplication.DeleteApplication(LocalDrivingApplicationID))
+                {
+                    MessageBox.Show("Application Deleted Successfully");
+                    dtLocalDrivingLicenseApplications = clsLocalLicenseApplication.ListLocalLicenseApplications();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to delete application , Try to cancel it instead" , "Error" 
+                        , MessageBoxButtons.OK , MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

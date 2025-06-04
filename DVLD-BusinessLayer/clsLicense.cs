@@ -62,11 +62,7 @@ namespace DVLD_BusinessLayer
         public bool IsActive
         {
             get { return _IsActive; }
-            set 
-            {
-                if(clsLicenseDataAccessLayer.UpdateLicenseActiveStatus(_LicenseID, value))
-                    _IsActive = value; 
-            }
+            
         }
 
         public enum enIssueReason { FirstTime = 1 , Renew = 2 , ReplacementForDamaged = 3 , ReplacementForLost = 4}
@@ -169,7 +165,7 @@ namespace DVLD_BusinessLayer
 
 
 
-        static public clsLicense GetAddNewObject()
+        static internal clsLicense GetAddNewObject()
         {
             return new clsLicense();
         }
@@ -186,7 +182,7 @@ namespace DVLD_BusinessLayer
             else return false;
         }
 
-        public bool Save()
+        internal bool Save()
         {
             if (_Mode == enMode.ReadOnly) return false;
             if(_IssueReason == enIssueReason.FirstTime)
@@ -248,7 +244,7 @@ namespace DVLD_BusinessLayer
                 RenewedLicense.Notes = Notes;
                 if (RenewedLicense.Save())
                 {
-                    this.IsActive = false;
+                    DeActivateLicense();
                     clsApplication.CompleteApplication(ApplicationID);
                     return RenewedLicense.LicenseID;
                 }
@@ -293,7 +289,7 @@ namespace DVLD_BusinessLayer
             NewLicense._PaidFees = 0;
             if(NewLicense.Save())
             {
-                this.IsActive = false;
+                DeActivateLicense();
                 clsApplication.CompleteApplication(ApplicationID);
                 return NewLicense.LicenseID;
             }
@@ -311,7 +307,6 @@ namespace DVLD_BusinessLayer
             if (_Mode == enMode.AddNew) return false;
             if(!_IsActive) return false;
             if (IsDetained) return false;
-            if(IsLicenseExpired()) return false;
 
             return true;
         }
@@ -338,7 +333,6 @@ namespace DVLD_BusinessLayer
             if (_Mode == enMode.AddNew) return false;
             if (!_IsActive) return false;
             if (!IsDetained) return false;
-            if (IsLicenseExpired()) return false;
 
             return true;
         }
@@ -350,6 +344,17 @@ namespace DVLD_BusinessLayer
                 return clsDetainedLicense.ReleaseDetainedLicense(_LicenseID,ReleasedUserID , ApplicationID);
             }
             return false;
+        }
+
+        private bool DeActivateLicense()
+        {
+            if (clsLicenseDataAccessLayer.UpdateLicenseActiveStatus(LicenseID, false))
+            {
+                _IsActive = false;
+                return true;
+            }
+            return false;
+            
         }
 
         

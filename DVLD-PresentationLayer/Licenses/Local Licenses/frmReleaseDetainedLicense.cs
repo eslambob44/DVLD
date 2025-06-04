@@ -65,13 +65,6 @@ namespace DVLD_PresentationLayer.Licenses.Local_Licenses
                 return false;
             }
 
-            if (_License.IsLicenseExpired())
-            {
-                MessageBox.Show("License is expired choose another one", "Not allowed",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
             return true;
             
         }

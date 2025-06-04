@@ -109,7 +109,8 @@ namespace DVLD_DataAccessLayer
                             ,[IssuedUsingLocalLicenseID] as [L.License ID]
                             ,[IssueDate] as [Issue Date],[ExpirationDate] as [Expiration Date]
                             ,[IsActive] as [Is Active] FROM [InternationalLicenses]
-                            Where DriverID = @DriverID";
+                            Where DriverID = @DriverID
+                            Order By IsActive DESC";
             SqlCommand Command = new SqlCommand(Query, Connection);
             Command.Parameters.AddWithValue("@DriverID" , DriverID);
             try

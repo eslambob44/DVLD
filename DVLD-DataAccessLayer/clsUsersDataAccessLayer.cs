@@ -14,18 +14,22 @@ namespace DVLD_DataAccessLayer
         {
             int UserID = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = "Select UserID From Users Where UserName = @UserName and Password = @Password";
-            SqlCommand Command = new SqlCommand(Query, Connection);
+            SqlCommand Command = new SqlCommand("SP_GetUserIDByUserNameAndPassword", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
             Command.Parameters.AddWithValue("@UserName", UserName);
             Command.Parameters.AddWithValue("@Password", Password);
+            SqlParameter OutPutParam = new SqlParameter("@UserID", SqlDbType.Int);
+            OutPutParam.Direction = ParameterDirection.Output;
+            Command.Parameters.Add(OutPutParam);
             try
             {
                 Connection.Open();
-                object Result = Command.ExecuteScalar();
-                if (Result != null && int.TryParse(Result.ToString() , out int Temp))
+                object Result = Command.ExecuteNonQuery();
+                if (Command.Parameters["@UserID"].Value != DBNull.Value)
                 {
-                    UserID = Temp;
+                    UserID = (int)Command.Parameters["@UserID"].Value;
                 }
+                
             }
             catch
             {
@@ -70,12 +74,9 @@ namespace DVLD_DataAccessLayer
             DataTable dtUsers = new DataTable();
 
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Select UserID , Users.PersonID ,
-                            FullName = (FirstName + ' ' + SecondName + ' ' + ThirdName + ' ' + LastName) ,
-                            UserName , IsActive   From Users
-                            inner join People 
-                            on Users.PersonID = People.PersonID;";
-            SqlCommand Command = new SqlCommand(Query,Connection);
+            
+            SqlCommand Command = new SqlCommand("SP_GetAllUsers",Connection);
+            Command.CommandType = CommandType.StoredProcedure;
             try
             {
                 Connection.Open();
@@ -101,21 +102,23 @@ namespace DVLD_DataAccessLayer
         {
             int UserID = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Insert into Users( UserName , Password , IsActive , PersonID)
-                            values( @UserName , @Password , @IsActive , @PersonID);
-                            Select SCOPE_IDENTITY(); ";
-            SqlCommand Command = new SqlCommand(Query,Connection);
+
+            SqlCommand Command = new SqlCommand("sp_AddNewUser",Connection);
+            Command.CommandType = CommandType.StoredProcedure;
             Command.Parameters.AddWithValue("@UserName", UserName);
             Command.Parameters.AddWithValue("@Password", Password);
             Command.Parameters.AddWithValue("@IsActive", IsActive);
             Command.Parameters.AddWithValue("@PersonID", PersonID);
+            SqlParameter OutputParam = new SqlParameter("@UserID", SqlDbType.Int);
+            OutputParam.Direction = ParameterDirection.Output;
+            Command.Parameters.Add(OutputParam);
             try
             {
                 Connection.Open();
-                object Result = Command.ExecuteScalar();
-                if(Result != null && int.TryParse(Result.ToString() , out int Temp)) 
+                Command.ExecuteNonQuery();
+                if (Command.Parameters["@UserID"].Value != DBNull.Value)
                 {
-                    UserID = Temp;
+                    UserID = (int)Command.Parameters["@UserID"].Value;
                 }
             }
             catch
@@ -160,11 +163,9 @@ namespace DVLD_DataAccessLayer
         {
             int RowsAffected = 0;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Update Users
-                            set UserName = @UserName,
-	                        IsActive = @IsActive 
-	                        where UserID = @UserID ";
-            SqlCommand Command = new SqlCommand(Query ,Connection);
+
+            SqlCommand Command = new SqlCommand("SP_UpdateUser" ,Connection);
+            Command.CommandType = CommandType.StoredProcedure;
             Command.Parameters.AddWithValue("@UserID", UserID);
             Command.Parameters.AddWithValue("@UserName", UserName);
             Command.Parameters.AddWithValue("@IsActive" , IsActive);
@@ -190,8 +191,8 @@ namespace DVLD_DataAccessLayer
         {
             int RowsAffected = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Delete From Users Where UserID = @UserID";
-            SqlCommand Command = new SqlCommand (Query ,Connection);
+            SqlCommand Command = new SqlCommand ("SP_DeleteUser" ,Connection);
+            Command.CommandType = CommandType.StoredProcedure;
             Command.Parameters.AddWithValue("@UserID", UserID);
             try
             {
@@ -269,8 +270,9 @@ namespace DVLD_DataAccessLayer
         {
             bool IsFound = false;
             SqlConnection Connection  =new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Select UserName , IsActive , PersonID From Users Where UserID = @UserID";
-            SqlCommand Command = new SqlCommand(Query, Connection);
+            
+            SqlCommand Command = new SqlCommand("SP_GetUserByID", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
             Command.Parameters.AddWithValue("@UserID", UserID);
             try
             {
@@ -300,17 +302,18 @@ namespace DVLD_DataAccessLayer
         {
             bool IsUsed = false;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Select COUNT(UserName) From Users Where UserName = @UserName";
-            SqlCommand Command = new SqlCommand(Query, Connection);
+            
+            SqlCommand Command = new SqlCommand("SP_IsUserNameUsed", Connection);
+            Command.CommandType = CommandType.StoredProcedure ;
+            SqlParameter returnParam = Command.Parameters.Add("@ReturnValue", SqlDbType.Int);
+            returnParam.Direction = ParameterDirection.ReturnValue;
             Command.Parameters.AddWithValue("@UserName", UserName);
             try
             {
                 Connection.Open();
-                object Result = Command.ExecuteScalar();
-                if (Result != null && int.TryParse(Result.ToString() , out int Temp))
-                {
-                    IsUsed = (Temp != 0);
-                }
+                Command.ExecuteNonQuery();
+                IsUsed = (int)returnParam.Value == 1;
+                
             }
             catch
             {

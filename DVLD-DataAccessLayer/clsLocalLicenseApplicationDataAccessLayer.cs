@@ -44,14 +44,13 @@ namespace DVLD_DataAccessLayer
         {
             SqlConnection Connection = new SqlConnection (clsDataAccessLayerSettings.ConnectionString);
             bool IsDeleted = false;
-            string Query = @"Delete From LocalDrivingLicenseApplications 
-                            Where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID";
-            SqlCommand Command = new SqlCommand (Query, Connection);
+            SqlCommand Command = new SqlCommand ("SP_DeleteLocalDrivingLicenseApplication", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
             Command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
             try
             {
                 Connection.Open();
-                int RowsAffected = Command.ExecuteNonQuery();
+                int RowsAffected = (int)Command.ExecuteScalar();
                 IsDeleted = RowsAffected > 0;
             }
             catch
@@ -121,31 +120,8 @@ namespace DVLD_DataAccessLayer
         {
             DataTable dtLicenseApplications = new DataTable();
             SqlConnection Connection = new SqlConnection (clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Select [L.D.L.AppID] = LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID ,[Driving Class] = ClassName ,NationalNo 
-                            , FullName = (FirstName + ' '+SecondName + ' ' + ThirdName + ' '+LastName ) , ApplicationDate ,
-                            [Passed Tests] = 
-                            (
-                            	Select Count(Tests.TestResult) from Tests inner join TestAppointments 
-                            	on TestAppointments.TestAppointmentID = Tests.TestAppointmentID 
-                            	Where Tests.TestResult = 1 
-                            	and TestAppointments.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID
-                            ) ,
-                            Status = 
-                            case
-                            	when ApplicationStatus = 1 then 'New'
-                            	when ApplicationStatus = 3 then 'Completed'
-                            	when ApplicationStatus = 2 then 'Canceled'
-                            END
-                            From Applications
-                            inner join 
-                            (
-                            	LocalDrivingLicenseApplications inner join LicenseClasses 
-                            	on LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID
-                            )
-                            on Applications.ApplicationID = LocalDrivingLicenseApplications.ApplicationID
-                            inner join People on Applications.ApplicantPersonID = People.PersonID
-                            ";
-            SqlCommand Command = new SqlCommand(Query, Connection);
+            SqlCommand Command = new SqlCommand("SP_GetLocalDrivingLicenseApplications", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
             try
             {
                 Connection.Open();

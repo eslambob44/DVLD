@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,14 +34,26 @@ namespace DVLD_BusinessLayer
         public string UserName { get;set; }
         public bool IsActive { get; set; }
         private string _Password;
-        public string Password 
+         public string Password 
         { set 
             {
                 if(_Mode == enMode.AddNew)
-                    this._Password = value; 
+                    this._Password = _Hash(value); 
             } 
         }
-        
+
+        static private string _Hash(string S1)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                // Compute hash
+                byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(S1));
+
+                // Convert byte array to hex string (lowercase, no dashes)
+                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+            }
+        }
+
 
         public clsUser(int UserID , int PersonID , string UserName , bool IsActive) 
         {
@@ -115,6 +128,7 @@ namespace DVLD_BusinessLayer
 
         static public int GetUserID(string UserName , string Password)
         {
+            Password = _Hash(Password);
             return clsUsersDataAccessLayer.GetUserID(UserName , Password);
         }
         static public bool IsUserActive(int UserId) 
@@ -124,11 +138,14 @@ namespace DVLD_BusinessLayer
 
         public bool IsCorrectPassword(string Password)
         {
+            Password = _Hash(Password);
             return clsUsersDataAccessLayer.IsCorrectPassword(_UserID , Password);
         }
 
         public bool ChangePassword(string OldPassword , string NewPassword)
         {
+            OldPassword = _Hash(OldPassword);
+            NewPassword = _Hash(NewPassword);
             return clsUsersDataAccessLayer.ChangePassword(_UserID , OldPassword , NewPassword);
         }
 

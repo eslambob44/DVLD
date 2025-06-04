@@ -57,11 +57,11 @@ namespace DVLD_PresentationLayer.People
             if (_Filter == enFilter.None) _dtPeople.DefaultView.RowFilter = null;
             else if (_Filter == enFilter.PersonID)
             {
-                _dtPeople.DefaultView.RowFilter = $"Convert(PersonID , 'System.String') LIKE '%{mtxtFilter.Text}%'";
+                _dtPeople.DefaultView.RowFilter = $"Convert(PersonID , 'System.String') LIKE '%{Filter}%'";
             }
             else
             {
-                _dtPeople.DefaultView.RowFilter = $"{_Filter} LIKE '{mtxtFilter.Text}%'";
+                _dtPeople.DefaultView.RowFilter = $"{_Filter} LIKE '{Filter}%'";
             }
         }
 
@@ -143,8 +143,31 @@ namespace DVLD_PresentationLayer.People
             
         }
 
+        string Filter = null;
+
+        private string GetProperStringFilter(string filter)
+        {
+            StringBuilder st = new StringBuilder(filter);
+            char[] InvalidChars = { '[', ']', '%', '-', '_', '\\' };
+            for (int i = 0; i < st.Length; i++)
+            {
+                for (int j = 0; j < InvalidChars.Length; j++)
+                {
+                    if (st[i] == InvalidChars[j])
+                    {
+                        st = st.Replace(InvalidChars[j].ToString(), $"[{InvalidChars[j]}]", i, 1);
+                        i += 2;
+                        break;
+                    }
+                }
+            }
+            return st.ToString();       
+        }
         private void mtxtFilter_TextChanged(object sender, EventArgs e)
         {
+            
+            
+            Filter = GetProperStringFilter(mtxtFilter.Text);
             _ApplyFilter();
         }
 

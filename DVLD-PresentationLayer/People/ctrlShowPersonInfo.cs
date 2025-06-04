@@ -30,6 +30,7 @@ namespace DVLD_PresentationLayer
             if (_Person == null)
             {
                 LoadEmptyForm();
+                this.PersonID = -1;
                 MessageBox.Show("The person not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else

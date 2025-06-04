@@ -17,38 +17,34 @@ namespace DVLD_DataAccessLayer
         static public DataTable ListPeople(string Filter , string Value)
         {
             DataTable dtPeople = new DataTable();
-            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Select PersonID , NationalNo , FirstName , SecondName , ThirdName ,LastName , Gendor = 
-                            case
-                            	when Gendor = 0 then 'Male'
-                            	else 'Female'
-                            end
-                            , DateOfBirth , CountryName as Nationality , Phone , Email
-                            From People
-                            inner join Countries
-                            on Countries.CountryID = People.NationalityCountryID";
-            if (!string.IsNullOrEmpty(Filter)) Query += " Where " + Filter + " like '%'+Value+'%'";
-            SqlCommand Command = new SqlCommand(Query, Connection);
-            if(!string.IsNullOrEmpty(Filter)) Command.Parameters.AddWithValue("@Value" , Value);
-            try
-            {
-                Connection.Open();
-                SqlDataReader Reader = Command.ExecuteReader();
-                if (Reader.HasRows)
-                {
-                    dtPeople.Load(Reader);
-                }
-                Reader.Close();
-            }
-            catch 
-            {
 
-            }
-            finally
+            using (SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString)) 
             {
-                Connection.Close();
-                
+                try
+                {
+                    
+                    using (SqlCommand Command = new SqlCommand("SP_GetAllPeople", Connection))
+                    {
+                        Command.CommandType = CommandType.StoredProcedure;
+                        Command.Parameters.AddWithValue("@Filter" , Filter );
+                        Command.Parameters.AddWithValue("@Value", Value);
+
+                        Connection.Open();
+                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        {
+                            if (Reader.HasRows)
+                            {
+                                dtPeople.Load(Reader);
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
             }
+
             return dtPeople;
         }
 
@@ -63,55 +59,58 @@ namespace DVLD_DataAccessLayer
                                             , out string Email , out int NationalityCountryID , out string ImagePath)
         {
             bool IsFound = false;
-            SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Select * From People
-                             Where PersonID = @PersonID";
-            
-            SqlCommand Command = new SqlCommand(Query, Connection);
-            Command.Parameters.AddWithValue("@PersonID" , PersonID );
-            NationalityNumberID = "";
-            FirstName = "";
-            SecondName = "";
-            ThirdName = "";
-            LastName = "";
-            DateOfBirth = DateTime.MinValue;
-            Gendor = 0;
-            Address = "";
-            Phone = "";
-            Email = "";
-            NationalityCountryID = -1;
-            ImagePath = "";
-            try
+            using (SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString))
             {
-                Connection.Open();
-                SqlDataReader Reader = Command.ExecuteReader();
-                if (Reader.Read())
+
+                
+
+                using (SqlCommand Command = new SqlCommand("SP_GetPersonByID", Connection))
                 {
-                    IsFound = true;
-                    NationalityNumberID = (string)Reader["NationalNo"];
-                    FirstName = (string)Reader["FirstName"];
-                    SecondName = (string)Reader["SecondName"];
-                    ThirdName = (string)Reader["ThirdName"];
-                    LastName = (string)Reader["LastName"];
-                    DateOfBirth = (DateTime)Reader["DateOfBirth"];
-                    Gendor = (byte)Reader["Gendor"];
-                    Address = (string)Reader["Address"];
-                    Phone = (string)Reader["Phone"];
-                    Email = (Reader["Email"] != DBNull.Value)?(string)Reader["Email"]:null;
-                    NationalityCountryID = (int)Reader["NationalityCountryID"];
-                    ImagePath = (Reader["ImagePath"] != DBNull.Value)?(string)Reader["ImagePath"]:null;
+                    Command.CommandType = CommandType.StoredProcedure;
+                    
+                    Command.Parameters.AddWithValue("@PersonID", PersonID);
+                    NationalityNumberID = "";
+                    FirstName = "";
+                    SecondName = "";
+                    ThirdName = "";
+                    LastName = "";
+                    DateOfBirth = DateTime.MinValue;
+                    Gendor = 0;
+                    Address = "";
+                    Phone = "";
+                    Email = "";
+                    NationalityCountryID = -1;
+                    ImagePath = "";
+                    try
+                    {
+                        Connection.Open();
+                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        {
+                            if (Reader.Read())
+                            {
+                                IsFound = true;
+                                NationalityNumberID = (string)Reader["NationalNo"];
+                                FirstName = (string)Reader["FirstName"];
+                                SecondName = (string)Reader["SecondName"];
+                                ThirdName = (string)Reader["ThirdName"];
+                                LastName = (string)Reader["LastName"];
+                                DateOfBirth = (DateTime)Reader["DateOfBirth"];
+                                Gendor = (byte)Reader["Gendor"];
+                                Address = (string)Reader["Address"];
+                                Phone = (string)Reader["Phone"];
+                                Email = (Reader["Email"] != DBNull.Value) ? (string)Reader["Email"] : null;
+                                NationalityCountryID = (int)Reader["NationalityCountryID"];
+                                ImagePath = (Reader["ImagePath"] != DBNull.Value) ? (string)Reader["ImagePath"] : null;
+                            }
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                 }
-                Reader.Close();
             }
-            catch
-            {
-
-            }
-            finally
-            {
-                Connection.Close();
-
-            }
+            
             return IsFound;
         }
 
@@ -122,11 +121,10 @@ namespace DVLD_DataAccessLayer
         {
             bool IsFound = false;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Select * From People
-                             Where NationalNo = @NationalityNumberID";
 
-            SqlCommand Command = new SqlCommand(Query, Connection);
-            Command.Parameters.AddWithValue("@NationalityNumberID", NationalityNumberID);
+            SqlCommand Command = new SqlCommand("SP_GetPersonByNationalNumber", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
+            Command.Parameters.AddWithValue("@NationalNo", NationalityNumberID);
             PersonID = -1;
             FirstName = "";
             SecondName = "";
@@ -183,16 +181,10 @@ namespace DVLD_DataAccessLayer
 
             int PersonID = -1;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Insert Into People(NationalNo , FirstName , SecondName , ThirdName , LastName
-                            , DateOfBirth , Gendor , Address , Phone , Email 
-                            , NationalityCountryID , ImagePath)
-                            Values (@NationalNumber , @FirstName , @SecondName , @ThirdName , @LastName 
-                            , @DateOfBirth , @Gendor , @Address , @Phone , @Email , @NationalityCountryID 
-                            , @ImagePath)
-
-                            Select SCOPE_IDENTITY(); ";
-            SqlCommand Command = new SqlCommand(Query, Connection);
-            Command.Parameters.AddWithValue("@NationalNumber", NationalNumber);
+            
+            SqlCommand Command = new SqlCommand("sp_AddNewPerson", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
+            Command.Parameters.AddWithValue("@NationalNo", NationalNumber);
             Command.Parameters.AddWithValue("@FirstName", FirstName);
             Command.Parameters.AddWithValue("@SecondName", SecondName);
             Command.Parameters.AddWithValue("@ThirdName", ThirdName);
@@ -207,13 +199,16 @@ namespace DVLD_DataAccessLayer
             if(!string.IsNullOrEmpty(ImagePath)) Command.Parameters.AddWithValue("@ImagePath", ImagePath);
             else Command.Parameters.AddWithValue("@ImagePath", DBNull.Value);
 
+            SqlParameter OutputParam = new SqlParameter("@PersonID", SqlDbType.Int);
+            OutputParam.Direction = ParameterDirection.Output;
+            Command.Parameters.Add(OutputParam);
             try
             {
                 Connection.Open();
-                object Result = Command.ExecuteScalar();
-                if (Result != null && int.TryParse(Result.ToString() , out int TempID))
+                Command.ExecuteNonQuery();
+                if (Command.Parameters["@PersonID"].Value != DBNull.Value)
                 {
-                    PersonID = TempID;
+                    PersonID = (int)Command.Parameters["@PersonID"].Value;
                 }
             }
             catch
@@ -232,8 +227,8 @@ namespace DVLD_DataAccessLayer
         {
             bool IsDeleted = false;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = "Delete From People Where PersonID = @PersonID";
-            SqlCommand Command = new SqlCommand(Query, Connection); 
+            SqlCommand Command = new SqlCommand("SP_DeletePerson", Connection); 
+            Command.CommandType = CommandType.StoredProcedure;
             Command.Parameters.AddWithValue("@PersonID" , PersonID);
             try
             {
@@ -263,21 +258,9 @@ namespace DVLD_DataAccessLayer
         {
             bool IsUpdated = false;
             SqlConnection Connection = new SqlConnection(clsDataAccessLayerSettings.ConnectionString);
-            string Query = @"Update People
-                            set NationalNo = @NationalNumber,
-                                FirstName = @FirstName,
-                                SecondName = @SecondName,
-                                ThirdName = @ThirdName,
-                                LastName = @LastName,
-                                DateOfBirth = @DateOfBirth,
-                                Gendor = @Gendor,
-                                Address = @Address,
-                                Phone = @Phone,
-                                Email = @Email,
-                                NationalityCountryID = @NationalityCountryID,
-                                ImagePath = @ImagePath
-                                Where PersonID = @PersonID"; ;
-            SqlCommand Command = new SqlCommand(Query, Connection);
+
+            SqlCommand Command = new SqlCommand("SP_UpdatePerson", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
             Command.Parameters.AddWithValue("@PersonID" , PersonID );
             Command.Parameters.AddWithValue("@NationalNumber", NationalNumber);
             Command.Parameters.AddWithValue("@FirstName", FirstName);

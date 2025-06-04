@@ -113,6 +113,11 @@ namespace DVLD_BusinessLayer
             return false;
         }
 
+        static public bool DeleteApplication (int LocalDrivingLicenseApplicationID)
+        {
+            return clsLocalLicenseApplicationDataAccessLayer.DeleteApplication(LocalDrivingLicenseApplicationID);
+        }
+
         static public enActiveTest GetActiveTest(int LocalDrivingLicenseID)
         {
             return (enActiveTest)clsLocalLicenseApplicationDataAccessLayer.GetActiveTest(LocalDrivingLicenseID);

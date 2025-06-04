@@ -53,12 +53,7 @@ namespace DVLD_PresentationLayer.Licenses.Local_Licenses
                 return false;
             }
 
-            if(_License.IsLicenseExpired())
-            {
-                MessageBox.Show("License is expired choose another one", "Not allowed",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+            
 
             return true;
         }
@@ -84,14 +79,9 @@ namespace DVLD_PresentationLayer.Licenses.Local_Licenses
 
         private void btnDetain_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(mtxtFees.Text))
+            if(!this.ValidateChildren())
             {
-                errorProvider1.SetError(mtxtFees,"Must enter fine fees");
                 return;
-            }
-            else
-            {
-                errorProvider1.SetError(mtxtFees, "");
             }
             if(MessageBox.Show("Are you sure you want to detain this license" , "Confirm" , MessageBoxButtons.YesNo
                 ,MessageBoxIcon.Question) == DialogResult.Yes)
@@ -126,6 +116,18 @@ namespace DVLD_PresentationLayer.Licenses.Local_Licenses
         {
             frmLocalLicenseInfo frm = new frmLocalLicenseInfo(_License.LicenseID);
             frm.ShowDialog();
+        }
+
+        private void mtxtFees_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(mtxtFees.Text))
+            {
+                errorProvider1.SetError(mtxtFees, "Must enter fine fees");
+            }
+            else
+            {
+                errorProvider1.SetError(mtxtFees, "");
+            }
         }
     }
 }

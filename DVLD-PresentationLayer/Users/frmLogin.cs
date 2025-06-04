@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace DVLD_PresentationLayer.Users
 {
@@ -77,65 +78,53 @@ namespace DVLD_PresentationLayer.Users
             
         }
 
-        void RememberUser(string FilePath = @"D:\RememberedUser.txt", string Delim = "#//#")
+        string UserNameValueName = "UserName";
+        string PasswordValueName = "Password";
+        string keyPath = @"SOFTWARE\DVLD\Login";
+        void RememberUser()
         {
-            string Content = txtUserName.Text + Delim + txtPassword.Text;
             try
             {
-                StreamWriter Writer = new StreamWriter(FilePath);
-                Writer.Write(Content);
-                Writer.Close();
+                Registry.SetValue(Registry.CurrentUser.Name+"\\" + keyPath ,UserNameValueName, txtUserName.Text, RegistryValueKind.String);
+                Registry.SetValue(Registry.CurrentUser.Name + "\\" + keyPath, PasswordValueName, txtPassword.Text, RegistryValueKind.String);
+            }
+            catch { }
+
+        }
+        void ForgetUser()
+        {
+            using(RegistryKey Key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\DVLD\\Login" , true))
+            {
+                if(Key != null)
+                {
+                    Key.DeleteValue(UserNameValueName, false);
+                    Key.DeleteValue(PasswordValueName, false);
+                }
+            }
+        }
+
+        
+
+        void LoadRememberedUser( )
+        {
+            string UserName, Password;
+            try
+            {
+                UserName = (string)Registry.GetValue(Registry.CurrentUser.Name+"\\" + keyPath, UserNameValueName, null);
+                Password = (string)Registry.GetValue(Registry.CurrentUser.Name + "\\" + keyPath, PasswordValueName, null);
             }
             catch
             {
-
+                return;
             }
+            
+            if(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
+            { return; }
 
-        }
-        void ForgetUser(string FilePath = @"D:\RememberedUser.txt", string Delim = "#//#")
-        {
-            string Content = "";
-            try
+            else
             {
-                StreamWriter Writer = new StreamWriter(FilePath);
-                Writer.Write(Content);
-                Writer.Close();
-            }
-            catch
-            {
-
-            }
-        }
-
-        string OpenRememberedUserFile(string FilePath = @"D:\RememberedUser.txt")
-        {
-            string Content = null;
-            if (File.Exists(FilePath))
-            {
-                try
-                {
-                    StreamReader Reader = new StreamReader(FilePath);
-                    Content = Reader.ReadToEnd();
-                    Reader.Close();
-                }
-                catch(Exception e)
-                {
-                    return null;
-                }
-                return Content;
-            }
-            return null;
-        }
-
-        void LoadRememberedUser( string Delim = "#//#")
-        {
-            string Content = OpenRememberedUserFile();
-            if(!string.IsNullOrEmpty(Content))
-            {
-                string[] Delims = {Delim};
-                string[] UserDate = Content.Split(Delims , StringSplitOptions.RemoveEmptyEntries);
-                txtUserName.Text = UserDate[0];
-                txtPassword.Text = UserDate[1];
+                txtUserName.Text = UserName;
+                txtPassword.Text = Password;
                 chkRemember.Checked = true;
                 btnLogin.Focus();
             }

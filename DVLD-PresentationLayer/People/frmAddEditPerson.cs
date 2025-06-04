@@ -108,10 +108,12 @@ namespace DVLD_PresentationLayer.People
             if(_ValidateIsEmpty(txt.Text))
             {
                 errorProvider1.SetError(txt, "Must enter a value");
+                e.Cancel = true;
             }
             else
             {
                 errorProvider1.SetError(txt, "");
+                e.Cancel = false;
             }
         }
 
@@ -121,14 +123,17 @@ namespace DVLD_PresentationLayer.People
             if (string.IsNullOrEmpty(txtNationalNumber.Text))
             {
                 errorProvider1.SetError(txtNationalNumber, "Must enter a National number");
+                e.Cancel = true;
             }
             else if(_ValidateNationalNumber(txtNationalNumber.Text))
             {
                 errorProvider1.SetError(txtNationalNumber, "person with this national number already exists in this system");
+                e.Cancel = true;
             }
             else
             {
                 errorProvider1.SetError(txtNationalNumber, "");
+                e.Cancel = false;
             }
         }
 
@@ -167,10 +172,12 @@ namespace DVLD_PresentationLayer.People
             if (!IsValidEmail(txtEmail.Text) && !string.IsNullOrEmpty(txtEmail.Text))
             {
                 errorProvider1.SetError(txtEmail, "the email is not valid ");
+                e.Cancel = true;
             }
             else
             {
                 errorProvider1.SetError(txtEmail, "");
+                e.Cancel = false;
             }
         }
 
@@ -241,6 +248,17 @@ namespace DVLD_PresentationLayer.People
                 {
                     DataReceived.Invoke(_Person.ID);
                 }
+            }
+        }
+
+        private void txtFirstName_Leave(object sender, EventArgs e)
+        {
+            
+            TextBox txt = sender as TextBox;
+            if (!string.IsNullOrEmpty(txt.Text))
+            {
+                txt.Text = txt.Text.Trim();
+                txt.Text = char.ToUpper(txt.Text[0]) + txt.Text.Substring(1);
             }
         }
     }

@@ -209,6 +209,8 @@ namespace DVLD_BusinessLayer
             return cApplicationType.Title;
         }
 
+        
+
         public string GetApplicationTypeString()
         {
             return GetApplicationTypeString(_ApplicationType);

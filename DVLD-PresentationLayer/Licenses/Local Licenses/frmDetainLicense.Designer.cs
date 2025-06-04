@@ -134,6 +134,7 @@
             this.mtxtFees.Size = new System.Drawing.Size(100, 22);
             this.mtxtFees.TabIndex = 95;
             this.mtxtFees.ValidatingType = typeof(int);
+            this.mtxtFees.Validating += new System.ComponentModel.CancelEventHandler(this.mtxtFees_Validating);
             // 
             // pictureBox5
             // 

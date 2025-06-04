@@ -517,6 +517,7 @@
             this.txtThirdName.Name = "txtThirdName";
             this.txtThirdName.Size = new System.Drawing.Size(150, 22);
             this.txtThirdName.TabIndex = 2;
+            this.txtThirdName.Leave += new System.EventHandler(this.txtFirstName_Leave);
             this.txtThirdName.Validating += new System.ComponentModel.CancelEventHandler(this.txt_ValidatingNotEmpty);
             // 
             // txtLastName
@@ -526,6 +527,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(150, 22);
             this.txtLastName.TabIndex = 3;
+            this.txtLastName.Leave += new System.EventHandler(this.txtFirstName_Leave);
             this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txt_ValidatingNotEmpty);
             // 
             // txtSecondName
@@ -535,6 +537,7 @@
             this.txtSecondName.Name = "txtSecondName";
             this.txtSecondName.Size = new System.Drawing.Size(150, 22);
             this.txtSecondName.TabIndex = 1;
+            this.txtSecondName.Leave += new System.EventHandler(this.txtFirstName_Leave);
             this.txtSecondName.Validating += new System.ComponentModel.CancelEventHandler(this.txt_ValidatingNotEmpty);
             // 
             // txtFirstName
@@ -544,6 +547,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(150, 22);
             this.txtFirstName.TabIndex = 0;
+            this.txtFirstName.Leave += new System.EventHandler(this.txtFirstName_Leave);
             this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txt_ValidatingNotEmpty);
             // 
             // pictureBox3
@@ -580,6 +584,7 @@
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(899, 461);
