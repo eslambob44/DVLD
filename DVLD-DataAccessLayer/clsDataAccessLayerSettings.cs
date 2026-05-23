@@ -8,6 +8,6 @@ namespace DVLD_DataAccessLayer
 {
     static internal class clsDataAccessLayerSettings
     {
-        public static string ConnectionString { get; } = "Server =.;Database = DVLD;User Id = sa ; Password = Eslamyasse1";
+        public static string ConnectionString { get; } = "Enter your database connection string here";
     }
 }
