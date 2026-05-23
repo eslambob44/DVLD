@@ -1,4 +1,4 @@
-# 🪪DVLD
+# 🪪 DVLD
 DVLD is a desktop application designed to manage driving licenses, from taking tests to issuing, renewing, replacing lost or damaged licenses, revoking them, and paying fines.
 
 ## :technologist:Technologies
