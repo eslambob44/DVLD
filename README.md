@@ -30,8 +30,9 @@ When you open the repo for the first time,you will face this
 <img width="634" height="279" alt="image" src="https://github.com/user-attachments/assets/641b2a3f-0329-4cb1-8f1d-992f97f883eb" />
 
 First, let's initialize the database:
-1. Open `Create tables and views script.sql` and run it. This creates all the tables needed to make the application work.
-2. Next, we need to populate the database with initial data. Open `Data script.sql` and run it
+1. Create database called DVLD
+2. Open `Create tables and views script.sql` and run it. This creates all the tables needed to make the application work.
+3. Next, we need to populate the database with initial data. Open `Data script.sql` and run it
 
 Now you have the necessary data to start.
 
