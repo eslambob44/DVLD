@@ -1,6 +1,95 @@
 USE [DVLD]
 GO
-/****** Object:  Table [dbo].[People]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetAge]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Function [dbo].[GetAge](@BirthDate Date)
+returns int
+AS
+BEGIN
+	Declare @Age INT =DateDiff(Year , @BirthDate, DATE_BUCKET(Year,1,Cast(GetDate() AS Date) , @BirthDate));
+	Return @Age;
+END
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetApplicationStatus]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Function [dbo].[GetApplicationStatus](@ApplicationStatus INT)
+returns varchar(10)
+AS
+BEGIN
+	DECLARE @Status varchar(10);
+	set @Status = 
+	case
+		when @ApplicationStatus = 1 then 'New'
+		when @ApplicationStatus = 3 then 'Completed'
+		when @ApplicationStatus = 2 then 'Canceled'
+	END
+	return @Status;
+END
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetDriverName]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Function [dbo].[GetDriverName] (@DriverID INT)
+Returns nvarchar(100)
+As
+BEGIN
+	DECLARE @DriverName nvarchar(100);
+
+	Select @DriverName = dbo.GetFullName(FirstName , SecondName , ThirdName , LastName)
+	From People
+	inner join Drivers
+	on People.PersonID = Drivers.PersonID
+	Where DriverID = @DriverID
+
+	return @DriverName;
+END
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetFullName]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Function [dbo].[GetFullName](@FirstName varchar(20) , @SecondName varchar(20) null , @ThirdName varchar(20) null , @LastName varchar(20))
+returns varchar(100)
+AS
+BEGIN
+	DECLARE @FullName varchar(100);
+	SET @FullName = @FirstName;
+	if(@SecondName is not null)
+		SET @FullName = @FullName + ' ' + @SecondName;
+	if(@ThirdName is not null)
+		SET @FullName = @FullName + ' ' + @ThirdName;
+	SET @FullName = @FullName + ' ' + @LastName;
+
+	return @FullName;
+END
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetNumberOfPassedTest]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Function [dbo].[GetNumberOfPassedTest](@LocalDrivingLicenseApplicationID INT)
+returns int
+AS
+BEGIN
+DECLARE @NumberOfPassedTests INT;
+	Select @NumberOfPassedTests =  Count(Tests.TestResult) from Tests inner join TestAppointments 
+    on TestAppointments.TestAppointmentID = Tests.TestAppointmentID 
+    Where Tests.TestResult = 1 
+    and TestAppointments.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID;
+	return @NumberOfPassedTests;
+END
+GO
+/****** Object:  Table [dbo].[People]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -25,7 +114,7 @@ CREATE TABLE [dbo].[People](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TestAppointments]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[TestAppointments]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -45,7 +134,7 @@ CREATE TABLE [dbo].[TestAppointments](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Tests]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[Tests]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -62,7 +151,7 @@ CREATE TABLE [dbo].[Tests](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Applications]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[Applications]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -82,7 +171,7 @@ CREATE TABLE [dbo].[Applications](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LicenseClasses]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[LicenseClasses]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -100,7 +189,7 @@ CREATE TABLE [dbo].[LicenseClasses](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LocalDrivingLicenseApplications]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[LocalDrivingLicenseApplications]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -115,7 +204,7 @@ CREATE TABLE [dbo].[LocalDrivingLicenseApplications](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[LocalDrivingLicenseApplications_View]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  View [dbo].[LocalDrivingLicenseApplications_View]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -134,7 +223,7 @@ FROM            dbo.LocalDrivingLicenseApplications INNER JOIN
                          dbo.LicenseClasses ON dbo.LocalDrivingLicenseApplications.LicenseClassID = dbo.LicenseClasses.LicenseClassID INNER JOIN
                          dbo.People ON dbo.Applications.ApplicantPersonID = dbo.People.PersonID
 GO
-/****** Object:  Table [dbo].[TestTypes]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[TestTypes]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -150,7 +239,7 @@ CREATE TABLE [dbo].[TestTypes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[TestAppointments_View]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  View [dbo].[TestAppointments_View]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -166,7 +255,7 @@ FROM            dbo.TestAppointments INNER JOIN
                          dbo.People ON dbo.Applications.ApplicantPersonID = dbo.People.PersonID INNER JOIN
                          dbo.LicenseClasses ON dbo.LocalDrivingLicenseApplications.LicenseClassID = dbo.LicenseClasses.LicenseClassID
 GO
-/****** Object:  Table [dbo].[Licenses]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[Licenses]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -189,7 +278,7 @@ CREATE TABLE [dbo].[Licenses](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Drivers]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[Drivers]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -205,7 +294,7 @@ CREATE TABLE [dbo].[Drivers](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[Drivers_View]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  View [dbo].[Drivers_View]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -220,7 +309,7 @@ SELECT        dbo.Drivers.DriverID, dbo.Drivers.PersonID, dbo.People.NationalNo,
 FROM            dbo.Drivers INNER JOIN
                          dbo.People ON dbo.Drivers.PersonID = dbo.People.PersonID
 GO
-/****** Object:  Table [dbo].[ApplicationTypes]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[ApplicationTypes]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -235,7 +324,7 @@ CREATE TABLE [dbo].[ApplicationTypes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Countries]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[Countries]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -249,7 +338,7 @@ CREATE TABLE [dbo].[Countries](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DetainedLicenses]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[DetainedLicenses]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -270,7 +359,7 @@ CREATE TABLE [dbo].[DetainedLicenses](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InternationalLicenses]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[InternationalLicenses]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -290,7 +379,7 @@ CREATE TABLE [dbo].[InternationalLicenses](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PasswordLogging]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[PasswordLogging]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -307,7 +396,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 5/23/2026 1:52:37 PM ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 5/30/2026 7:06:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -483,6 +572,773 @@ ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [FK_Users_People] FOREIGN 
 REFERENCES [dbo].[People] ([PersonID])
 GO
 ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [FK_Users_People]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_AddNewApplication]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_AddNewApplication] (@ApplicantPersonID int,@ApplicationDate datetime,@ApplicationTypeID int,@ApplicationStatus tinyint,@LastStatusDate datetime,@PaidFees smallmoney,@CreatedByUserID int)
+
+As
+BEGIN
+	Insert Into [Applications](ApplicantPersonID,ApplicationDate,ApplicationTypeID,ApplicationStatus,LastStatusDate,PaidFees,CreatedByUserID)
+	Values (@ApplicantPersonID,@ApplicationDate,@ApplicationTypeID,@ApplicationStatus,@LastStatusDate,@PaidFees,@CreatedByUserID);
+
+	SELECT SCOPE_IDENTITY()
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_AddNewApplicationType]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_AddNewApplicationType] (@ApplicationTypeTitle nvarchar(max),@ApplicationFees smallmoney)
+
+As
+BEGIN
+	Insert Into [ApplicationTypes](ApplicationTypeTitle,ApplicationFees)
+	Values (@ApplicationTypeTitle,@ApplicationFees);
+
+	SELECT SCOPE_IDENTITY()
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_AddNewDetainLicense]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_AddNewDetainLicense] (@LicenseID int,@DetainDate smalldatetime,@FineFees smallmoney,@CreatedByUserID int,@IsReleased bit,@ReleaseDate smalldatetime,@ReleasedByUserID int,@ReleaseApplicationID int)
+
+As
+BEGIN
+	Insert Into [DetainedLicenses](LicenseID,DetainDate,FineFees,CreatedByUserID,IsReleased,ReleaseDate,ReleasedByUserID,ReleaseApplicationID)
+	Values (@LicenseID,@DetainDate,@FineFees,@CreatedByUserID,@IsReleased,@ReleaseDate,@ReleasedByUserID,@ReleaseApplicationID);
+
+	SELECT SCOPE_IDENTITY()
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_AddNewDriver]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_AddNewDriver] (@PersonID int,@CreatedByUserID int,@CreatedDate smalldatetime)
+
+As
+BEGIN
+	Insert Into [Drivers](PersonID,CreatedByUserID,CreatedDate)
+	Values (@PersonID,@CreatedByUserID,@CreatedDate);
+
+	SELECT SCOPE_IDENTITY()
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_AddNewLicense]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_AddNewLicense] (@ApplicationID int,@DriverID int,@LicenseClass int,@IssueDate datetime,@ExpirationDate datetime,@Notes nvarchar,@PaidFees smallmoney,@IsActive bit,@IssueReason tinyint,@CreatedByUserID int)
+
+As
+BEGIN
+	Insert Into Licenses(ApplicationID,DriverID,LicenseClass,IssueDate,ExpirationDate,Notes,PaidFees,IsActive,IssueReason,CreatedByUserID)
+	Values (@ApplicationID,@DriverID,@LicenseClass,@IssueDate,@ExpirationDate,@Notes,@PaidFees,@IsActive,@IssueReason,@CreatedByUserID);
+
+	SELECT SCOPE_IDENTITY()
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AddNewPerson]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[sp_AddNewPerson]
+@NationalNo nvarchar(20) ,
+@FirstName  nvarchar(20),
+@SecondName nvarchar(20), 
+@ThirdName nvarchar(20) null,
+@LastName nvarchar(20),
+@DateOfBirth datetime,
+@Gendor tinyint,
+@Address nvarchar(500),
+@Phone nvarchar(20),
+@Email nvarchar(50) null,
+@NationalityCountryID int,
+@ImagePath nvarchar(250) null,
+@PersonID INT null Output
+
+as 
+BEGIN
+	INSERT INTO [dbo].[People]
+	           ([NationalNo]
+	           ,[FirstName]
+	           ,[SecondName]
+	           ,[ThirdName]
+	           ,[LastName]
+	           ,[DateOfBirth]
+	           ,[Gendor]
+	           ,[Address]
+	           ,[Phone]
+	           ,[Email]
+	           ,[NationalityCountryID]
+	           ,[ImagePath])
+	     VALUES
+	           (@NationalNo , TRIM(@FirstName),TRIM(@SecondName),TRIM(@ThirdName),TRIM(@LastName),@DateOfBirth,@Gendor,@Address,@Phone , @Email , @NationalityCountryID
+			   ,@ImagePath);
+
+	Set @PersonID =  SCOPE_IDENTITY();
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_AddNewTestAppointment]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_AddNewTestAppointment] (@TestTypeID int,@LocalDrivingLicenseApplicationID int,@AppointmentDate smalldatetime,@PaidFees smallmoney,@CreatedByUserID int,@IsLocked bit,@RetakeTestApplicationID int)
+
+As
+BEGIN
+	Insert Into [TestAppointments](TestTypeID,LocalDrivingLicenseApplicationID,AppointmentDate,PaidFees,CreatedByUserID,IsLocked,RetakeTestApplicationID)
+	Values (@TestTypeID,@LocalDrivingLicenseApplicationID,@AppointmentDate,@PaidFees,@CreatedByUserID,@IsLocked,@RetakeTestApplicationID);
+
+	SELECT SCOPE_IDENTITY()
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AddNewUser]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[sp_AddNewUser]
+@PersonID INT,
+@UserName nvarchar(20),
+@Password nvarchar(64),
+@IsActive bit , 
+@UserID INT null Output
+
+As
+BEGIN
+	INSERT INTO [dbo].[Users]
+	           ([PersonID]
+	           ,[UserName]
+	           ,[Password]
+	           ,[IsActive])
+	     VALUES
+	           (@PersonID,@UserName,@Password,@IsActive);
+
+		SET @UserID =  SCOPE_IDENTITY();
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeleteApplicationByApplicationID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_DeleteApplicationByApplicationID]
+(@ApplicationID int) AS
+BEGIN
+	Delete From [Applications] Where ApplicationID = @ApplicationID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeleteApplicationTypeByApplicationTypeID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_DeleteApplicationTypeByApplicationTypeID]
+(@ApplicationTypeID int) AS
+BEGIN
+	Delete From [ApplicationTypes] Where ApplicationTypeID = @ApplicationTypeID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeleteDetainLicenseByDetainID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_DeleteDetainLicenseByDetainID]
+(@DetainID int) AS
+BEGIN
+	Delete From [DetainedLicenses] Where DetainID = @DetainID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeleteDriverByDriverID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_DeleteDriverByDriverID]
+(@DriverID int) AS
+BEGIN
+	Delete From [Drivers] Where DriverID = @DriverID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeleteLocalDrivingLicenseApplication]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE Procedure  [dbo].[SP_DeleteLocalDrivingLicenseApplication]
+@LocalDrivingLicenseApplicationID INT
+AS
+BEGIN
+	DECLARE @ApplicationID INT;
+    
+    
+    BEGIN Transaction;
+    
+    	BEGIN TRY
+			select @ApplicationID = ApplicationID from LocalDrivingLicenseApplications 
+			where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID; 
+			if @@ROWCOUNT = 0 
+			BEGIN
+				Throw 50001 , 'No Application ID Found', 1;
+			END
+
+			DELETE From LocalDrivingLicenseApplications 
+			      Where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID;
+			DELETE From Applications WHERE ApplicationID = @ApplicationID
+			COMMIT;
+			return 1;
+    	END TRY
+    	
+    	BEGIN CATCH
+    		ROLLBACK;
+			return 0;
+    	END CATCH
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeletePerson]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_DeletePerson]
+@PersonID INT
+AS
+BEGIN
+	Delete From People Where PersonID = @PersonID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeletePersonByPersonID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_DeletePersonByPersonID]
+(@PersonID int) AS
+BEGIN
+	Delete From [People] Where PersonID = @PersonID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeleteUser]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_DeleteUser]
+@UserID INT
+AS
+BEGIN
+	Delete From Users Where UserID = @UserID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeleteUserByUserID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_DeleteUserByUserID]
+(@UserID int) AS
+BEGIN
+	Delete From [Users] Where UserID = @UserID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_FindApplicationByApplicationID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_FindApplicationByApplicationID]
+(@ApplicationID int) AS
+BEGIN
+	SELECT * FROM [Applications] Where ApplicationID = @ApplicationID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_FindApplicationTypeByApplicationTypeID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_FindApplicationTypeByApplicationTypeID]
+(@ApplicationTypeID int) AS
+BEGIN
+	SELECT * FROM [ApplicationTypes] Where ApplicationTypeID = @ApplicationTypeID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_FindDetainLicenseByDetainID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_FindDetainLicenseByDetainID]
+(@DetainID int) AS
+BEGIN
+	SELECT * FROM [DetainedLicenses] Where DetainID = @DetainID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_FindDriverByDriverID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_FindDriverByDriverID]
+(@DriverID int) AS
+BEGIN
+	SELECT * FROM [Drivers] Where DriverID = @DriverID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_FindPersonByPersonID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_FindPersonByPersonID]
+(@PersonID int) AS
+BEGIN
+	SELECT * FROM [People] Where PersonID = @PersonID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_FindUserByUserID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_FindUserByUserID]
+(@UserID int) AS
+BEGIN
+	SELECT * FROM [Users] Where UserID = @UserID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetAllPeople]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE Procedure  [dbo].[SP_GetAllPeople]
+@Filter nvarchar(max),
+@Value nvarchar(max)
+AS
+BEGIN
+	Select PersonID , NationalNo , FirstName , SecondName , ThirdName ,LastName , Gendor = 
+    case
+    	when Gendor = 0 then 'Male'
+    	else 'Female'
+    end
+    , DateOfBirth , CountryName as Nationality , Phone , Email
+    From People
+    inner join Countries
+    on Countries.CountryID = People.NationalityCountryID
+	WHERE @Filter LIKE '%'+@Value+'%';
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetAllUsers]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_GetAllUsers]
+
+AS
+BEGIN
+	Select UserID , Users.PersonID ,
+    FullName = (FirstName + ' ' + SecondName + ' ' + ThirdName + ' ' + LastName) ,
+    UserName , IsActive   From Users
+    inner join People 
+    on Users.PersonID = People.PersonID;
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetApplicationsForPage]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[SP_GetApplicationsForPage]
+@ApplicationsForPage INT , @ApplicationTypeID INT , @PageNumber INT
+
+AS
+BEGIN
+
+Select ApplicationID From Applications
+Where ApplicationTypeID = @ApplicationTypeID
+ORDER BY ApplicationID
+OFFSET (@PageNumber - 1) * @ApplicationsForPage ROWS
+Fetch Next @ApplicationsForPage ROWS ONLY
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetLocalDrivingLicenseApplications]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_GetLocalDrivingLicenseApplications]
+
+AS
+BEGIN
+	
+Select [L.D.L.AppID] = LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID ,[Driving Class] = ClassName ,NationalNo 
+, FullName = dbo.GetFullName(FirstName , SecondName , ThirdName , LastName) , ApplicationDate ,
+[Passed Tests] = dbo.GetNumberOfPassedTest( LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID),
+Status = dbo.GetApplicationStatus(ApplicationStatus)
+From Applications
+inner join 
+(
+	LocalDrivingLicenseApplications inner join LicenseClasses 
+	on LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID
+)
+on Applications.ApplicationID = LocalDrivingLicenseApplications.ApplicationID
+inner join People on Applications.ApplicantPersonID = People.PersonID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetNumberOfPagesForApplications]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[SP_GetNumberOfPagesForApplications]
+@ApplicationsForPage INT , @ApplicationTypeID Float , @NumberOfPages INT OUTPUT
+
+AS
+BEGIN
+
+Select @NumberOfPages = CEILING(Count(*) / Cast (@ApplicationsForPage AS float) ) From Applications
+Where ApplicationTypeID = @ApplicationTypeID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetPersonByID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_GetPersonByID]
+@PersonID INT
+AS
+BEGIN
+	SELECT * FROM People Where PersonID = @PersonID;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetPersonByNationalNumber]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE Procedure  [dbo].[SP_GetPersonByNationalNumber]
+@NationalNo nvarchar(20)
+AS
+BEGIN
+	Select * From People Where NationalNo = @NationalNo
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetUserByID]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_GetUserByID]
+@UserID INT
+AS
+BEGIN
+	Select UserName , IsActive , PersonID From Users Where UserID = @UserID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetUserIDByUserNameAndPassword]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE Procedure  [dbo].[SP_GetUserIDByUserNameAndPassword]
+@UserName nvarchar(20),
+@Password varchar(64),
+@UserID INT OUTPUT
+AS
+BEGIN
+	Select @UserID=UserID From Users Where UserName = @UserName and Password = @Password;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_IsUserNameUsed]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE Procedure  [dbo].[SP_IsUserNameUsed]
+@UserName nvarchar(20)
+AS
+BEGIN
+	IF ((Select COUNT(UserName) From Users Where UserName = @UserName) > 0)
+		RETURN 1;
+	ELSE 
+		RETURN 0;
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_ListApplicationTypes]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_ListApplicationTypes]
+AS
+BEGIN
+	SELECT * From [ApplicationTypes]
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_ListDetainedLicenses]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_ListDetainedLicenses]
+AS
+BEGIN
+	SELECT * From [DetainedLicenses]
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_ListDrivers]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_ListDrivers]
+AS
+BEGIN
+	SELECT * From [Drivers]
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_ListPeople]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_ListPeople]
+AS
+BEGIN
+	SELECT * From [People]
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_ListUsers]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[SP_ListUsers]
+AS
+BEGIN
+	SELECT * From [Users]
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_UpdateApplication]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[SP_UpdateApplication] (@ApplicationID int,@ApplicantPersonID int,@ApplicationDate datetime,@ApplicationTypeID int,@ApplicationStatus tinyint,@LastStatusDate datetime,@PaidFees smallmoney,@CreatedByUserID int)
+
+AS
+
+BEGIN 
+	
+UPDATE [dbo].[Applications]
+   SET [ApplicantPersonID] = @ApplicantPersonID
+,[ApplicationDate] = @ApplicationDate
+,[ApplicationTypeID] = @ApplicationTypeID
+,[ApplicationStatus] = @ApplicationStatus
+,[LastStatusDate] = @LastStatusDate
+,[PaidFees] = @PaidFees
+,[CreatedByUserID] = @CreatedByUserID
+
+		WHERE [ApplicationID] = @ApplicationID;
+END 
+GO
+/****** Object:  StoredProcedure [dbo].[SP_UpdateApplicationType]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[SP_UpdateApplicationType] (@ApplicationTypeID int,@ApplicationTypeTitle nvarchar(max),@ApplicationFees smallmoney)
+
+AS
+
+BEGIN 
+	
+UPDATE [dbo].[ApplicationTypes]
+   SET [ApplicationTypeTitle] = @ApplicationTypeTitle
+,[ApplicationFees] = @ApplicationFees
+
+		WHERE [ApplicationTypeID] = @ApplicationTypeID;
+END 
+GO
+/****** Object:  StoredProcedure [dbo].[SP_UpdateDetainLicense]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[SP_UpdateDetainLicense] (@DetainID int,@LicenseID int,@DetainDate smalldatetime,@FineFees smallmoney,@CreatedByUserID int,@IsReleased bit,@ReleaseDate smalldatetime,@ReleasedByUserID int,@ReleaseApplicationID int)
+
+AS
+
+BEGIN 
+	
+UPDATE [dbo].[DetainedLicenses]
+   SET [LicenseID] = @LicenseID
+,[DetainDate] = @DetainDate
+,[FineFees] = @FineFees
+,[CreatedByUserID] = @CreatedByUserID
+,[IsReleased] = @IsReleased
+,[ReleaseDate] = @ReleaseDate
+,[ReleasedByUserID] = @ReleasedByUserID
+,[ReleaseApplicationID] = @ReleaseApplicationID
+
+		WHERE [DetainID] = @DetainID;
+END 
+GO
+/****** Object:  StoredProcedure [dbo].[SP_UpdateDriver]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[SP_UpdateDriver] (@DriverID int,@PersonID int,@CreatedByUserID int,@CreatedDate smalldatetime)
+
+AS
+
+BEGIN 
+	
+UPDATE [dbo].[Drivers]
+   SET [PersonID] = @PersonID
+,[CreatedByUserID] = @CreatedByUserID
+,[CreatedDate] = @CreatedDate
+
+		WHERE [DriverID] = @DriverID;
+END 
+GO
+/****** Object:  StoredProcedure [dbo].[SP_UpdateLicense]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[SP_UpdateLicense] (@LicenseID int,@ApplicationID int,@DriverID int,@LicenseClass int,@IssueDate datetime,@ExpirationDate datetime,@Notes nvarchar,@PaidFees smallmoney,@IsActive bit,@IssueReason tinyint,@CreatedByUserID int)
+
+AS
+
+BEGIN 
+	
+UPDATE [dbo].[Licenses]
+   SET [ApplicationID] = @ApplicationID
+,[DriverID] = @DriverID
+,[LicenseClass] = @LicenseClass
+,[IssueDate] = @IssueDate
+,[ExpirationDate] = @ExpirationDate
+,[Notes] = @Notes
+,[PaidFees] = @PaidFees
+,[IsActive] = @IsActive
+,[IssueReason] = @IssueReason
+,[CreatedByUserID] = @CreatedByUserID
+
+		WHERE [LicenseID] = @LicenseID;
+END 
+GO
+/****** Object:  StoredProcedure [dbo].[SP_UpdatePerson]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure  [dbo].[SP_UpdatePerson]
+
+@NationalNumber nvarchar(20),
+@FirstName nvarchar(20),
+@SecondName nvarchar(20),
+@ThirdName nvarchar(20) null,
+@LastName nvarchar(20),
+@DateOfBirth datetime,
+@Gendor tinyint,
+@Address nvarchar(500),
+@Phone nvarchar(20),
+@Email nvarchar(50) null,
+@NationalityCountryID INT,
+@ImagePath nvarchar(250) null,
+@PersonID INT
+AS
+BEGIN
+	Update People
+                            set NationalNo = @NationalNumber,
+                                FirstName = @FirstName,
+                                SecondName = @SecondName,
+                                ThirdName = @ThirdName,
+                                LastName = @LastName,
+                                DateOfBirth = @DateOfBirth,
+                                Gendor = @Gendor,
+                                Address = @Address,
+                                Phone = @Phone,
+                                Email = @Email,
+                                NationalityCountryID = @NationalityCountryID,
+                                ImagePath = @ImagePath
+                                Where PersonID = @PersonID;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_UpdateTestAppointment]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[SP_UpdateTestAppointment] (@TestAppointmentID int,@AppointmentDate smalldatetime)
+
+AS
+
+BEGIN 
+	
+UPDATE [dbo].[TestAppointments]
+   SET 
+[AppointmentDate] = @AppointmentDate
+
+
+		WHERE [TestAppointmentID] = @TestAppointmentID;
+END 
+GO
+/****** Object:  StoredProcedure [dbo].[SP_UpdateUser]    Script Date: 5/30/2026 7:06:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create Procedure  [dbo].[SP_UpdateUser]
+
+@UserName nvarchar(20),
+@IsActive bit,
+@UserID INT
+AS
+BEGIN
+	Update Users
+    set UserName = @UserName,
+	IsActive = @IsActive 
+	where UserID = @UserID
+END
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1-New 2-Cancelled 3-Completed' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Applications', @level2type=N'COLUMN',@level2name=N'ApplicationStatus'
 GO
