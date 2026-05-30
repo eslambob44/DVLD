@@ -51,7 +51,7 @@ Replace the string here with your own local connection string.
 Now that you have everything ready, you can launch the app from `DVLD-PresentationLayer -> DVLD-PresentationLayer.sln`.
 
 You can log in using these credentials:  
-UserName = Admin, Password = Hello
+UserName = Admin, Password = 1234
 
 
 
